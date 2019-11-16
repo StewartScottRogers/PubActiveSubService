@@ -1,6 +1,3 @@
-C:\Repos\PubActiveSubService\PubActiveSubService\bin\Release\netcoreapp2.2\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
-C:\Repos\PubActiveSubService\PubActiveSubService\bin\Release\netcoreapp2.2\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
-C:\Repos\PubActiveSubService\PubActiveSubService\bin\Release\netcoreapp2.2\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
 C:\Repos\PubActiveSubService\PubActiveSubService\bin\Release\netcoreapp2.2\appsettings.Development.json
 C:\Repos\PubActiveSubService\PubActiveSubService\bin\Release\netcoreapp2.2\appsettings.json
 C:\Repos\PubActiveSubService\PubActiveSubService\bin\Release\netcoreapp2.2\Properties\launchSettings.json
@@ -9,8 +6,8 @@ C:\Repos\PubActiveSubService\PubActiveSubService\bin\Release\netcoreapp2.2\PubAc
 C:\Repos\PubActiveSubService\PubActiveSubService\bin\Release\netcoreapp2.2\PubActiveSubService.runtimeconfig.dev.json
 C:\Repos\PubActiveSubService\PubActiveSubService\bin\Release\netcoreapp2.2\PubActiveSubService.dll
 C:\Repos\PubActiveSubService\PubActiveSubService\bin\Release\netcoreapp2.2\PubActiveSubService.pdb
-C:\Repos\PubActiveSubService\PubActiveSubService\bin\Release\netcoreapp2.2\PubActiveSubService.UnitTests.dll
-C:\Repos\PubActiveSubService\PubActiveSubService\bin\Release\netcoreapp2.2\PubActiveSubService.UnitTests.pdb
+C:\Repos\PubActiveSubService\PubActiveSubService\bin\Release\netcoreapp2.2\PubActiveSubService.Core.dll
+C:\Repos\PubActiveSubService\PubActiveSubService\bin\Release\netcoreapp2.2\PubActiveSubService.Core.pdb
 C:\Repos\PubActiveSubService\PubActiveSubService\obj\Release\netcoreapp2.2\PubActiveSubService.csprojAssemblyReference.cache
 C:\Repos\PubActiveSubService\PubActiveSubService\obj\Release\netcoreapp2.2\PubActiveSubService.RazorAssemblyInfo.cache
 C:\Repos\PubActiveSubService\PubActiveSubService\obj\Release\netcoreapp2.2\PubActiveSubService.RazorAssemblyInfo.cs

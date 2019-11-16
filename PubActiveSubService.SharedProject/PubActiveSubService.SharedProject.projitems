@@ -9,7 +9,19 @@
     <Import_RootNamespace>PubActiveSubService</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)Interfaces\IQueuePersisitance.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\QueuePersisitance.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Interfaces\IPubActiveSubServiceProcessors.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internals\Interfaces\IQueuePersisitance.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internals\Services\QueuePersisitance.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\StatusV1.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\TracedChannelV1.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\TraceChannelsV1.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\ListChannelsV1.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\ListedChannelV1.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\PublishPackageV1.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\SubscriberStatusV1.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\PubActiveSubServiceProcessors.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Internals\" />
   </ItemGroup>
 </Project>

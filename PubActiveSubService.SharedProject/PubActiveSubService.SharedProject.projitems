@@ -6,7 +6,7 @@
     <SharedGUID>6c8e5622-9215-4175-a9e2-61ec0ab9348f</SharedGUID>
   </PropertyGroup>
   <PropertyGroup Label="Configuration">
-    <Import_RootNamespace>PubActiveSubService.SharedProject</Import_RootNamespace>
+    <Import_RootNamespace>PubActiveSubService</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
   </ItemGroup>

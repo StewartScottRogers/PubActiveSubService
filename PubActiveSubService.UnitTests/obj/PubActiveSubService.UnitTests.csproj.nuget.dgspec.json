@@ -21,14 +21,14 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "netcoreapp3.0"
+          "netcoreapp2.2"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "netcoreapp3.0": {
+          "netcoreapp2.2": {
             "projectReferences": {}
           }
         },
@@ -39,23 +39,31 @@
         }
       },
       "frameworks": {
-        "netcoreapp3.0": {
+        "netcoreapp2.2": {
           "dependencies": {
             "MSTest.TestAdapter": {
               "target": "Package",
-              "version": "[1.4.0, )"
+              "version": "[2.0.0, )"
             },
             "MSTest.TestFramework": {
               "target": "Package",
-              "version": "[1.4.0, )"
+              "version": "[2.0.0, )"
             },
             "Microsoft.NET.Test.Sdk": {
               "target": "Package",
-              "version": "[16.2.0, )"
+              "version": "[16.4.0, )"
+            },
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )",
+              "autoReferenced": true
             },
             "coverlet.collector": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
               "target": "Package",
-              "version": "[1.0.1, )"
+              "version": "[1.1.0, )"
             }
           },
           "imports": [
@@ -68,11 +76,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "frameworkReferences": {
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            }
-          },
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
         }
       }

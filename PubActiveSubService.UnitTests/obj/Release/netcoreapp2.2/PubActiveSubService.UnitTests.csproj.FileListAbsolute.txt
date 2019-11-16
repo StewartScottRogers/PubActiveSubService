@@ -1,0 +1,13 @@
+C:\Repos\PubActiveSubService\PubActiveSubService.UnitTests\bin\Release\netcoreapp2.2\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+C:\Repos\PubActiveSubService\PubActiveSubService.UnitTests\bin\Release\netcoreapp2.2\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+C:\Repos\PubActiveSubService\PubActiveSubService.UnitTests\bin\Release\netcoreapp2.2\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+C:\Repos\PubActiveSubService\PubActiveSubService.UnitTests\bin\Release\netcoreapp2.2\PubActiveSubService.UnitTests.deps.json
+C:\Repos\PubActiveSubService\PubActiveSubService.UnitTests\bin\Release\netcoreapp2.2\PubActiveSubService.UnitTests.runtimeconfig.json
+C:\Repos\PubActiveSubService\PubActiveSubService.UnitTests\bin\Release\netcoreapp2.2\PubActiveSubService.UnitTests.runtimeconfig.dev.json
+C:\Repos\PubActiveSubService\PubActiveSubService.UnitTests\bin\Release\netcoreapp2.2\PubActiveSubService.UnitTests.dll
+C:\Repos\PubActiveSubService\PubActiveSubService.UnitTests\bin\Release\netcoreapp2.2\PubActiveSubService.UnitTests.pdb
+C:\Repos\PubActiveSubService\PubActiveSubService.UnitTests\obj\Release\netcoreapp2.2\PubActiveSubService.UnitTests.AssemblyInfoInputs.cache
+C:\Repos\PubActiveSubService\PubActiveSubService.UnitTests\obj\Release\netcoreapp2.2\PubActiveSubService.UnitTests.AssemblyInfo.cs
+C:\Repos\PubActiveSubService\PubActiveSubService.UnitTests\obj\Release\netcoreapp2.2\PubActiveSubService.UnitTests.dll
+C:\Repos\PubActiveSubService\PubActiveSubService.UnitTests\obj\Release\netcoreapp2.2\PubActiveSubService.UnitTests.pdb
+C:\Repos\PubActiveSubService\PubActiveSubService.UnitTests\obj\Release\netcoreapp2.2\PubActiveSubService.UnitTests.csprojAssemblyReference.cache

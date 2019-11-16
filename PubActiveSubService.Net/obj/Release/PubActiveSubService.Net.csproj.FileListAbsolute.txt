@@ -1,0 +1,10 @@
+C:\Repos\PubActiveSubService\PubActiveSubService.Net\bin\Release\PubActiveSubService.Net.dll
+C:\Repos\PubActiveSubService\PubActiveSubService.Net\bin\Release\PubActiveSubService.Net.pdb
+C:\Repos\PubActiveSubService\PubActiveSubService.Net\obj\Release\PubActiveSubService.Net.dll
+C:\Repos\PubActiveSubService\PubActiveSubService.Net\obj\Release\PubActiveSubService.Net.pdb
+C:\Repos\PubActiveSubService\PubActiveSubService.Net\bin\Release\FluentScheduler.dll
+C:\Repos\PubActiveSubService\PubActiveSubService.Net\bin\Release\PubSub.dll
+C:\Repos\PubActiveSubService\PubActiveSubService.Net\bin\Release\FluentScheduler.pdb
+C:\Repos\PubActiveSubService\PubActiveSubService.Net\bin\Release\FluentScheduler.xml
+C:\Repos\PubActiveSubService\PubActiveSubService.Net\obj\Release\PubActiveSubService.Net.csprojAssemblyReference.cache
+C:\Repos\PubActiveSubService\PubActiveSubService.Net\obj\Release\PubActiveSubService.Net.csproj.CopyComplete

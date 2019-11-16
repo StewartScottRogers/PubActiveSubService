@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <RootNamespace>PubActiveSubService</RootNamespace>
+  </PropertyGroup>
+
+  <Import Project="..\PubActiveSubService.SharedProject\PubActiveSubService.SharedProject.projitems" Label="Shared" />
+
+  <ItemGroup>
+    <PackageReference Include="FluentScheduler" Version="5.3.0" />
+    <PackageReference Include="PubSub" Version="4.0.0" />
+  </ItemGroup>
+
+</Project>

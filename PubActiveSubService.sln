@@ -5,13 +5,18 @@ VisualStudioVersion = 16.0.29509.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "PubActiveSubService.SharedProject", "PubActiveSubService.SharedProject\PubActiveSubService.SharedProject.shproj", "{6C8E5622-9215-4175-A9E2-61EC0AB9348F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PubActiveSubService", "PubActiveSubService\PubActiveSubService.csproj", "{B0DD16B1-6A21-4842-AD13-E2DF5E33B034}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PubActiveSubService", "PubActiveSubService\PubActiveSubService.csproj", "{B0DD16B1-6A21-4842-AD13-E2DF5E33B034}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PubActiveSubService.UnitTests", "PubActiveSubService.UnitTests\PubActiveSubService.UnitTests.csproj", "{649BCABD-5133-4B63-928F-5558B35AD772}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PubActiveSubService.UnitTests", "PubActiveSubService.UnitTests\PubActiveSubService.UnitTests.csproj", "{649BCABD-5133-4B63-928F-5558B35AD772}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PubActiveSubService.Core", "PubActiveSubService.Core\PubActiveSubService.Core.csproj", "{49B38A91-B4EA-4840-99DA-4FF1AAA6D86D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PubActiveSubService.Net", "PubActiveSubService.Net\PubActiveSubService.Net.csproj", "{E1AD62AF-2D6E-406C-A3AB-EA1391CF10E5}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		PubActiveSubService.SharedProject\PubActiveSubService.SharedProject.projitems*{6c8e5622-9215-4175-a9e2-61ec0ab9348f}*SharedItemsImports = 13
+		PubActiveSubService.SharedProject\PubActiveSubService.SharedProject.projitems*{e1ad62af-2d6e-406c-a3ab-ea1391cf10e5}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,6 +31,14 @@ Global
 		{649BCABD-5133-4B63-928F-5558B35AD772}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{649BCABD-5133-4B63-928F-5558B35AD772}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{649BCABD-5133-4B63-928F-5558B35AD772}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49B38A91-B4EA-4840-99DA-4FF1AAA6D86D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49B38A91-B4EA-4840-99DA-4FF1AAA6D86D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49B38A91-B4EA-4840-99DA-4FF1AAA6D86D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49B38A91-B4EA-4840-99DA-4FF1AAA6D86D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1AD62AF-2D6E-406C-A3AB-EA1391CF10E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1AD62AF-2D6E-406C-A3AB-EA1391CF10E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1AD62AF-2D6E-406C-A3AB-EA1391CF10E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1AD62AF-2D6E-406C-A3AB-EA1391CF10E5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

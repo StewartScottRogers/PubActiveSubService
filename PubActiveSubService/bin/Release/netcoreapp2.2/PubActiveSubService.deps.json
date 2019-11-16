@@ -37,6 +37,17 @@
           "PubActiveSubService.dll": {}
         }
       },
+      "BadNetworkAttachedStorage.Standard/1.0.2": {
+        "runtime": {
+          "lib/netstandard2.0/BadNetworkAttachedStorage.Standard.dll": {
+            "assemblyVersion": "1.0.2.0",
+            "fileVersion": "1.0.2.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/BadNetworkAttachedStorage.Standard.dll": {}
+        }
+      },
       "Microsoft.CodeCoverage/16.4.0": {
         "runtime": {
           "lib/netcoreapp1.0/Microsoft.VisualStudio.CodeCoverage.Shim.dll": {
@@ -435,6 +446,7 @@
       },
       "PubActiveSubService.UnitTests/1.0.0": {
         "dependencies": {
+          "BadNetworkAttachedStorage.Standard": "1.0.2",
           "MSTest.TestAdapter": "2.0.0",
           "MSTest.TestFramework": "2.0.0",
           "Microsoft.NET.Test.Sdk": "16.4.0"
@@ -3647,6 +3659,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "BadNetworkAttachedStorage.Standard/1.0.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-AURBUO64Pz9Am6vv0vxHRRgdxJ1zj+24pXXM/V77Bs+6l4M3IQLt8Psi17Bwh0kCMj8tL1ExWqKjmZ4I0+fdjg==",
+      "path": "badnetworkattachedstorage.standard/1.0.2",
+      "hashPath": "badnetworkattachedstorage.standard.1.0.2.nupkg.sha512"
     },
     "Microsoft.CodeCoverage/16.4.0": {
       "type": "package",

@@ -9,5 +9,7 @@
     <Import_RootNamespace>PubActiveSubService</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Interfaces\IQueuePersisitance.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\QueuePersisitance.cs" />
   </ItemGroup>
 </Project>

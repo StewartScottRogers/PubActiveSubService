@@ -5,4 +5,3 @@ C:\Repos\PubActiveSubService\PubActiveSubService.Core\obj\Release\netcoreapp2.2\
 C:\Repos\PubActiveSubService\PubActiveSubService.Core\obj\Release\netcoreapp2.2\PubActiveSubService.Core.AssemblyInfo.cs
 C:\Repos\PubActiveSubService\PubActiveSubService.Core\obj\Release\netcoreapp2.2\PubActiveSubService.Core.dll
 C:\Repos\PubActiveSubService\PubActiveSubService.Core\obj\Release\netcoreapp2.2\PubActiveSubService.Core.pdb
-C:\Repos\PubActiveSubService\PubActiveSubService.Core\obj\Release\netcoreapp2.2\PubActiveSubService.Core.csprojAssemblyReference.cache

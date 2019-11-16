@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v2.2": {
       "PubActiveSubService.UnitTests/1.0.0": {
         "dependencies": {
+          "BadNetworkAttachedStorage.Standard": "1.0.2",
           "MSTest.TestAdapter": "2.0.0",
           "MSTest.TestFramework": "2.0.0",
           "Microsoft.NET.Test.Sdk": "16.4.0",
@@ -15,6 +16,14 @@
         },
         "runtime": {
           "PubActiveSubService.UnitTests.dll": {}
+        }
+      },
+      "BadNetworkAttachedStorage.Standard/1.0.2": {
+        "runtime": {
+          "lib/netstandard2.0/BadNetworkAttachedStorage.Standard.dll": {
+            "assemblyVersion": "1.0.2.0",
+            "fileVersion": "1.0.2.0"
+          }
         }
       },
       "coverlet.collector/1.1.0": {},
@@ -639,6 +648,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "BadNetworkAttachedStorage.Standard/1.0.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-AURBUO64Pz9Am6vv0vxHRRgdxJ1zj+24pXXM/V77Bs+6l4M3IQLt8Psi17Bwh0kCMj8tL1ExWqKjmZ4I0+fdjg==",
+      "path": "badnetworkattachedstorage.standard/1.0.2",
+      "hashPath": "badnetworkattachedstorage.standard.1.0.2.nupkg.sha512"
     },
     "coverlet.collector/1.1.0": {
       "type": "package",

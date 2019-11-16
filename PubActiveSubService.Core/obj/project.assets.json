@@ -2,6 +2,15 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v2.2": {
+      "BadNetworkAttachedStorage.Standard/1.0.2": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/BadNetworkAttachedStorage.Standard.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/BadNetworkAttachedStorage.Standard.dll": {}
+        }
+      },
       "FluentScheduler/5.3.0": {
         "type": "package",
         "compile": {
@@ -229,6 +238,18 @@
     }
   },
   "libraries": {
+    "BadNetworkAttachedStorage.Standard/1.0.2": {
+      "sha512": "AURBUO64Pz9Am6vv0vxHRRgdxJ1zj+24pXXM/V77Bs+6l4M3IQLt8Psi17Bwh0kCMj8tL1ExWqKjmZ4I0+fdjg==",
+      "type": "package",
+      "path": "badnetworkattachedstorage.standard/1.0.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "badnetworkattachedstorage.standard.1.0.2.nupkg.sha512",
+        "badnetworkattachedstorage.standard.nuspec",
+        "lib/netstandard2.0/BadNetworkAttachedStorage.Standard.dll"
+      ]
+    },
     "FluentScheduler/5.3.0": {
       "sha512": "XBLwqw3FFdkG6qIrxg7M9mIsigZje+qKTinWZWfyr47IN6O/0z6fFUoQCVEBvY0lk1puf4hU0VnVhN/kPNZL+A==",
       "type": "package",
@@ -731,6 +752,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.2": [
+      "BadNetworkAttachedStorage.Standard >= 1.0.2",
       "FluentScheduler >= 5.3.0",
       "Microsoft.NETCore.App >= 2.2.0",
       "PubSub >= 4.0.0"
@@ -777,6 +799,10 @@
     "frameworks": {
       "netcoreapp2.2": {
         "dependencies": {
+          "BadNetworkAttachedStorage.Standard": {
+            "target": "Package",
+            "version": "[1.0.2, )"
+          },
           "FluentScheduler": {
             "target": "Package",
             "version": "[5.3.0, )"

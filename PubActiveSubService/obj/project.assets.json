@@ -2,6 +2,15 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v2.2": {
+      "BadNetworkAttachedStorage.Standard/1.0.2": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/BadNetworkAttachedStorage.Standard.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/BadNetworkAttachedStorage.Standard.dll": {}
+        }
+      },
       "Microsoft.AspNet.WebApi.Client/5.2.6": {
         "type": "package",
         "dependencies": {
@@ -4838,6 +4847,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.2",
         "dependencies": {
+          "BadNetworkAttachedStorage.Standard": "1.0.2",
           "MSTest.TestAdapter": "2.0.0",
           "MSTest.TestFramework": "2.0.0",
           "Microsoft.NET.Test.Sdk": "16.4.0"
@@ -4852,6 +4862,18 @@
     }
   },
   "libraries": {
+    "BadNetworkAttachedStorage.Standard/1.0.2": {
+      "sha512": "AURBUO64Pz9Am6vv0vxHRRgdxJ1zj+24pXXM/V77Bs+6l4M3IQLt8Psi17Bwh0kCMj8tL1ExWqKjmZ4I0+fdjg==",
+      "type": "package",
+      "path": "badnetworkattachedstorage.standard/1.0.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "badnetworkattachedstorage.standard.1.0.2.nupkg.sha512",
+        "badnetworkattachedstorage.standard.nuspec",
+        "lib/netstandard2.0/BadNetworkAttachedStorage.Standard.dll"
+      ]
+    },
     "Microsoft.AspNet.WebApi.Client/5.2.6": {
       "sha512": "owAlEIUZXWSnkK8Z1c+zR47A0X6ykF4XjbPok4lQKNuciUfHLGPd6QnI+rt/8KlQ17PmF+I4S3f+m+Qe4IvViw==",
       "type": "package",

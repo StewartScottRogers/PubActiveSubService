@@ -14,9 +14,7 @@ namespace PubActiveSubService.Controllers {
         // POST api/Publish
         [Route("api/[controller]")]
         [HttpPost]
-        public void Post([FromBody] Models.PublishPackageV1 publishPackageV1) {
-
-        }
-
+        public void Post([FromBody] Models.PublishPackageV1 publishPackageV1) =>
+            PubActiveSubServiceProcessors.Publish(publishPackageV1);
     }
 }

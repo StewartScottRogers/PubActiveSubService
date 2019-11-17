@@ -12,6 +12,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Interfaces\IPubActiveSubServiceProcessors.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internals\Interfaces\IQueuePersisitance.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internals\Services\QueuePersisitance.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\PingThroughV1.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\StatusV1.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\UnsubscribeV1.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\SubscribeV1.cs" />

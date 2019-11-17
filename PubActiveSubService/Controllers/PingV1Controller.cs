@@ -13,9 +13,8 @@ namespace PubActiveSubService.Controllers {
             PubActiveSubServiceProcessors = pubActiveSubServiceProcessors;
         }
 
-        // GET: api/Ping
         [HttpGet]
-        public string Get() =>
-             DateTimeOffset.UtcNow.ToString();
+        public string Get()
+            => PubActiveSubServiceProcessors.Ping();
     }
 }

@@ -1,13 +1,23 @@
-﻿using PubActiveSubService.Models;
+﻿using PubActiveSubService.Internals.Interfaces;
+using PubActiveSubService.Models;
 
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 
-namespace PubActiveSubService.Services {
+namespace PubActiveSubService {
     public class PubActiveSubServiceProcessors : IPubActiveSubServiceProcessors {
-        public PubActiveSubServiceProcessors() { }
+        private readonly IActivePublisher ActivePublisher;
+        private readonly IQueuePersisitance QueuePersisitance;
+
+        public PubActiveSubServiceProcessors(IActivePublisher activePublisher, IQueuePersisitance queuePersisitance) {
+            if (null == activePublisher) throw new ArgumentNullException(nameof(activePublisher));
+            if (null == queuePersisitance) throw new ArgumentNullException(nameof(queuePersisitance));
+
+            ActivePublisher = activePublisher;
+            QueuePersisitance = queuePersisitance;
+        }
 
         public string Ping() => DateTimeOffset.UtcNow.ToString();
 
@@ -29,8 +39,8 @@ namespace PubActiveSubService.Services {
 
         public IEnumerable<TracedChannelV1> Trace(TraceChannelsV1 traceChannelsV1) {
             yield return new TracedChannelV1() { ChannelName = "Channel/One", Subscribers = new SubscriberStatusV1[] { new SubscriberStatusV1() { Subscriber = "SubscriberOne", Status = new StatusV1[] { new StatusV1() { Name = "Connected.", Value = "OK" } } } } };
-            yield return new TracedChannelV1() { ChannelName = "Channel/Two" };
-            yield return new TracedChannelV1() { ChannelName = "Channel/Three" };
+            yield return new TracedChannelV1() { ChannelName = "Channel/Two", Subscribers = new SubscriberStatusV1[] { new SubscriberStatusV1() { Subscriber = "SubscriberTwo", Status = new StatusV1[] { new StatusV1() { Name = "Connected.", Value = "OK" } } } } };
+            yield return new TracedChannelV1() { ChannelName = "Channel/Three", Subscribers = new SubscriberStatusV1[] { new SubscriberStatusV1() { Subscriber = "SubscriberThree", Status = new StatusV1[] { new StatusV1() { Name = "Connected.", Value = "OK" } } } } };
         }
 
         public IEnumerable<ListedChannelV1> ListChanerls(ListChannelsV1 listChannelsV1) {

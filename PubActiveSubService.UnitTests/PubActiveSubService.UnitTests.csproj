@@ -17,4 +17,6 @@
     </PackageReference>
   </ItemGroup>
 
+  <Import Project="..\PubActiveSubService.SharedProject\PubActiveSubService.SharedProject.projitems" Label="Shared" />
+
 </Project>

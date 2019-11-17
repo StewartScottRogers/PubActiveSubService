@@ -1,6 +1,4 @@
 ﻿namespace PubActiveSubService.Internals.Interfaces {
-    public interface IQueuePersisitance {
-
-
+    public interface IActivePublisher {
     }
 }

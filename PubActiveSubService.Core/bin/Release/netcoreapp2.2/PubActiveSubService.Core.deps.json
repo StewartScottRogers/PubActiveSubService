@@ -11,7 +11,9 @@
           "BadNetworkAttachedStorage.Standard": "1.0.2",
           "FluentScheduler": "5.3.0",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "2.2.0",
-          "PubSub": "4.0.0"
+          "Newtonsoft.Json": "12.0.3",
+          "PubSub": "4.0.0",
+          "System.Diagnostics.Debug": "4.3.0"
         },
         "runtime": {
           "PubActiveSubService.Core.dll": {}
@@ -41,6 +43,14 @@
           }
         }
       },
+      "Newtonsoft.Json/12.0.3": {
+        "runtime": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
+            "assemblyVersion": "12.0.0.0",
+            "fileVersion": "12.0.3.23909"
+          }
+        }
+      },
       "PubSub/4.0.0": {
         "runtime": {
           "lib/netstandard2.0/PubSub.dll": {
@@ -48,7 +58,13 @@
             "fileVersion": "3.0.0.0"
           }
         }
-      }
+      },
+      "System.Diagnostics.Debug/4.3.0": {
+        "dependencies": {
+          "System.Runtime": "4.3.0"
+        }
+      },
+      "System.Runtime/4.3.0": {}
     }
   },
   "libraries": {
@@ -78,12 +94,33 @@
       "path": "microsoft.extensions.dependencyinjection.abstractions/2.2.0",
       "hashPath": "microsoft.extensions.dependencyinjection.abstractions.2.2.0.nupkg.sha512"
     },
+    "Newtonsoft.Json/12.0.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-6mgjfnRB4jKMlzHSl+VD+oUc1IebOZabkbyWj2RiTgWwYPPuaK1H97G1sHqGwPlS5npiF5Q0OrxN1wni2n5QWg==",
+      "path": "newtonsoft.json/12.0.3",
+      "hashPath": "newtonsoft.json.12.0.3.nupkg.sha512"
+    },
     "PubSub/4.0.0": {
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-Tj9D3bMjrPaLTSBkrRBr+tEuCMxwJ4oq0tAid0PTy+3+ejsITYIB3lKsFIZ/vA7WyyrWo6ZzBU0IaFGmk2BGlQ==",
       "path": "pubsub/4.0.0",
       "hashPath": "pubsub.4.0.0.nupkg.sha512"
+    },
+    "System.Diagnostics.Debug/4.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Jj0Twm0tP3UfOnltdn6JEe2tOIO5B65cWeM6WACuROByGYIlJaa4Pv7MfqkUVwO7NhPj/TJPMZXjAS93oiDn2Q==",
+      "path": "system.diagnostics.debug/4.3.0",
+      "hashPath": "system.diagnostics.debug.4.3.0.nupkg.sha512"
+    },
+    "System.Runtime/4.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-cDSsIpkAzkUKg6eWN+qzdd1APaV64ejo/kif4ErqqtZ5ctV1dE5eC9jZXlU7rSHaNlDViEYmiyeGesJMD5zbAw==",
+      "path": "system.runtime/4.3.0",
+      "hashPath": "system.runtime.4.3.0.nupkg.sha512"
     }
   }
 }

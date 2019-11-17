@@ -1,8 +1,8 @@
-C:\Repos\PubActiveSubService\PubActiveSubService\obj\Debug\netcoreapp2.2\PubActiveSubService.csprojAssemblyReference.cache
 C:\Repos\PubActiveSubService\PubActiveSubService\obj\Debug\netcoreapp2.2\PubActiveSubService.RazorAssemblyInfo.cache
 C:\Repos\PubActiveSubService\PubActiveSubService\obj\Debug\netcoreapp2.2\PubActiveSubService.RazorAssemblyInfo.cs
 C:\Repos\PubActiveSubService\PubActiveSubService\obj\Debug\netcoreapp2.2\PubActiveSubService.AssemblyInfoInputs.cache
 C:\Repos\PubActiveSubService\PubActiveSubService\obj\Debug\netcoreapp2.2\PubActiveSubService.AssemblyInfo.cs
+C:\Repos\PubActiveSubService\PubActiveSubService\obj\Debug\netcoreapp2.2\PubActiveSubService.csprojAssemblyReference.cache
 C:\Repos\PubActiveSubService\PubActiveSubService\bin\Debug\netcoreapp2.2\appsettings.Development.json
 C:\Repos\PubActiveSubService\PubActiveSubService\bin\Debug\netcoreapp2.2\appsettings.json
 C:\Repos\PubActiveSubService\PubActiveSubService\bin\Debug\netcoreapp2.2\Properties\launchSettings.json

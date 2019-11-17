@@ -3,38 +3,30 @@ using PubActiveSubService.Models;
 
 using System;
 using System.Collections.Generic;
-using System.Net.Http;
-using System.Text;
 
 namespace PubActiveSubService {
     public class PubActiveSubServiceProcessors : IPubActiveSubServiceProcessors {
         private readonly IActivePublisher ActivePublisher;
         private readonly IQueuePersisitance QueuePersisitance;
+        private readonly ISubscriberPersisitance SubscriberPersisitance;
 
-        public PubActiveSubServiceProcessors(IActivePublisher activePublisher, IQueuePersisitance queuePersisitance) {
+        private string ArchiveUrl = string.Empty;
+
+        public PubActiveSubServiceProcessors(IActivePublisher activePublisher, IQueuePersisitance queuePersisitance, ISubscriberPersisitance subscriberPersisitance) {
             if (null == activePublisher) throw new ArgumentNullException(nameof(activePublisher));
             if (null == queuePersisitance) throw new ArgumentNullException(nameof(queuePersisitance));
+            if (null == subscriberPersisitance) throw new ArgumentNullException(nameof(subscriberPersisitance));
 
             ActivePublisher = activePublisher;
             QueuePersisitance = queuePersisitance;
+            SubscriberPersisitance = subscriberPersisitance;
         }
+
+        public void SaveArchiveHost(string url) => ArchiveUrl = $"{url}/api/PublishArchiveV1";
 
         public string Ping() => DateTimeOffset.UtcNow.ToString();
 
-        public string Pingthrough(string url) {
-            var stringBuilder = new StringBuilder();
-            using (var httpClient = new HttpClient()) {
-                try {
-                    var httpResponseMessage = httpClient.GetAsync(url).Result;
-                    httpResponseMessage.EnsureSuccessStatusCode();
-                    var responseBody = httpResponseMessage.Content.ReadAsStringAsync().Result;
-                    stringBuilder.AppendLine(responseBody);
-                } catch (HttpRequestException httpRequestException) {
-                    stringBuilder.AppendLine($"Message :{httpRequestException.Message}");
-                }
-            }
-            return stringBuilder.ToString();
-        }
+        public string Pingthrough(string url) => ActivePublisher.Get(url);
 
 
         public IEnumerable<TracedChannelV1> Trace(TraceChannelsV1 traceChannelsV1) {
@@ -55,6 +47,11 @@ namespace PubActiveSubService {
         public void Unsubscribe(UnsubscribeV1 unsubscribeV1) { }
 
 
-        public void Publish(PublishPackageV1 publishPackageV1) { }
+        public string Publish(PublishPackageV1 publishPackageV1) => ActivePublisher.Post(publishPackageV1, SubscriberPersisitance.SubscriberUrls(publishPackageV1.Channel, ArchiveUrl));
+
+        public string PublishArchive(PublishPackageV1 publishPackageV1) {
+            return "";
+        }
     }
+
 }

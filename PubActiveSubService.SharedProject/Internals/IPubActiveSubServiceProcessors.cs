@@ -2,6 +2,8 @@
 
 namespace PubActiveSubService {
     public interface IPubActiveSubServiceProcessors {
+        void SaveArchiveHost(string url);
+
         string Ping();
         string Pingthrough(string url);
 
@@ -11,6 +13,8 @@ namespace PubActiveSubService {
         void Subscribe(Models.SubscribeV1 subscribeV1);
         void Unsubscribe(Models.UnsubscribeV1 unsubscribeV1);
 
-        void Publish(Models.PublishPackageV1 publishPackageV1);
+        string Publish(Models.PublishPackageV1 publishPackageV1);
+
+        string PublishArchive(Models.PublishPackageV1 publishPackageV1);
     }
 }

@@ -10,10 +10,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Internals\Interfaces\IActivePublisher.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internals\Interfaces\ISubscriberPersisitance.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internals\Services\ActivePublisher.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)IPubActiveSubServiceProcessors.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internals\IPubActiveSubServiceProcessors.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internals\Interfaces\IQueuePersisitance.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internals\Services\QueuePersisitance.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internals\Services\SubscriberPersisitance.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\PingThroughV1.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\StatusV1.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\UnsubscribeV1.cs" />
@@ -24,6 +26,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\ListedChannelV1.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\PublishPackageV1.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\SubscriberStatusV1.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)PubActiveSubServiceProcessors.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PubActiveSubServiceConfigurations.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internals\PubActiveSubServiceProcessors.cs" />
   </ItemGroup>
 </Project>

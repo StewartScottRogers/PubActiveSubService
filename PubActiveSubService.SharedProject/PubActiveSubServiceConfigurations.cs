@@ -6,9 +6,9 @@ namespace PubActiveSubService {
     public static class PubActiveSubServiceConfigurations {
         public static void AddPubActiveSubServices(this IServiceCollection services) {
             services.AddSingleton<IPubActiveSubServiceProcessors, PubActiveSubServiceProcessors>();
-            services.AddSingleton<IActivePublisher, ActivePublisher>();
+            services.AddSingleton<IPublisherClient, PublisherClient>();
             services.AddSingleton<IQueuePersisitance, QueuePersisitance>();
-            services.AddSingleton<ISubscriberPersisitance, SubscriberPersisitance>();
+            services.AddSingleton<IChannelPersisitance, ChannelPersisitance>();
 
             
         }

@@ -4,7 +4,7 @@ using System.Net.Http;
 using System.Text;
 
 namespace PubActiveSubService.Internals.Services {
-    public class ActivePublisher : IActivePublisher {
+    public class PublisherClient : IPublisherClient {
         public string Get(string url) {
             var stringBuilder = new StringBuilder();
             using (var httpClient = new HttpClient()) {

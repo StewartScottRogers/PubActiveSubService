@@ -6,27 +6,27 @@ using System.Collections.Generic;
 
 namespace PubActiveSubService {
     public class PubActiveSubServiceProcessors : IPubActiveSubServiceProcessors {
-        private readonly IActivePublisher ActivePublisher;
-        private readonly IQueuePersisitance QueuePersisitance;
-        private readonly ISubscriberPersisitance SubscriberPersisitance;
+        private readonly IPublisherClient PublisherClient;
+        private readonly IQueuePersisitance ChannelPersisitance;
+        private readonly IChannelPersisitance PublisherPersisitance;
 
         private string ArchiveUrl = string.Empty;
 
-        public PubActiveSubServiceProcessors(IActivePublisher activePublisher, IQueuePersisitance queuePersisitance, ISubscriberPersisitance subscriberPersisitance) {
-            if (null == activePublisher) throw new ArgumentNullException(nameof(activePublisher));
+        public PubActiveSubServiceProcessors(IPublisherClient publisherClient, IQueuePersisitance queuePersisitance, IChannelPersisitance channelPersisitance) {
+            if (null == publisherClient) throw new ArgumentNullException(nameof(publisherClient));
             if (null == queuePersisitance) throw new ArgumentNullException(nameof(queuePersisitance));
-            if (null == subscriberPersisitance) throw new ArgumentNullException(nameof(subscriberPersisitance));
+            if (null == channelPersisitance) throw new ArgumentNullException(nameof(channelPersisitance));
 
-            ActivePublisher = activePublisher;
-            QueuePersisitance = queuePersisitance;
-            SubscriberPersisitance = subscriberPersisitance;
+            PublisherClient = publisherClient;
+            ChannelPersisitance = queuePersisitance;
+            PublisherPersisitance = channelPersisitance;
         }
 
         public void SaveArchiveHost(string url) => ArchiveUrl = $"{url}/api/PublishArchiveV1";
 
         public string Ping() => DateTimeOffset.UtcNow.ToString();
 
-        public string Pingthrough(string url) => ActivePublisher.Get(url);
+        public string Pingthrough(string url) => PublisherClient.Get(url);
 
 
         public IEnumerable<TracedChannelV1> Trace(TraceChannelsV1 traceChannelsV1) {
@@ -47,7 +47,13 @@ namespace PubActiveSubService {
         public void Unsubscribe(UnsubscribeV1 unsubscribeV1) { }
 
 
-        public string Publish(PublishPackageV1 publishPackageV1) => ActivePublisher.Post(publishPackageV1, SubscriberPersisitance.SubscriberUrls(publishPackageV1.Channel, ArchiveUrl));
+        public string Publish(PublishPackageV1 publishPackageV1) => PublisherClient.Post(
+                                                                                            publishPackageV1,
+                                                                                            PublisherPersisitance.LookupSubscriberUrlsByChannel(
+                                                                                                                                                    publishPackageV1.Channel,
+                                                                                                                                                    ArchiveUrl
+                                                                                            )
+        );
 
         public string PublishArchive(PublishPackageV1 publishPackageV1) {
             return "";

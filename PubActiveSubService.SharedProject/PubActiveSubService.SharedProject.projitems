@@ -16,6 +16,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Internals\Interfaces\IQueuePersisitance.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internals\Services\QueuePersisitance.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internals\Services\ChannelPersisitance.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Library\ChannelBadNasFileInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Library\ObjectExtentions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\ChannelV1.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\PingThroughV1.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\ChannelsV1.cs" />
@@ -30,5 +32,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\SubscriberStatusV1.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PubActiveSubServiceConfigurations.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internals\PubActiveSubServiceProcessors.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Library\StringExtentions.cs" />
   </ItemGroup>
 </Project>

@@ -2,7 +2,7 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v2.2": {
-      "BadNetworkAttachedStorage.Standard/1.0.3": {
+      "BadNetworkAttachedStorage.Standard/1.0.4": {
         "type": "package",
         "compile": {
           "lib/netstandard2.0/BadNetworkAttachedStorage.Standard.dll": {}
@@ -736,14 +736,14 @@
     }
   },
   "libraries": {
-    "BadNetworkAttachedStorage.Standard/1.0.3": {
-      "sha512": "Y5tlri8kkkiHPz1iLJ+PEVk9K2MOp3TXVRpDyx2ZaZib4vmL4xJ6lHSl983K2AoNG3rESdeElj5jF4eFJqK7mw==",
+    "BadNetworkAttachedStorage.Standard/1.0.4": {
+      "sha512": "wZb0C0RKxL2hrJsCJmz7c91jO3Z16K+HedycCUiEpo/nnkeWCrPsC8Bvx26r9f3/+gdukmU5hOTyZ6VJI2AT4Q==",
       "type": "package",
-      "path": "badnetworkattachedstorage.standard/1.0.3",
+      "path": "badnetworkattachedstorage.standard/1.0.4",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "badnetworkattachedstorage.standard.1.0.3.nupkg.sha512",
+        "badnetworkattachedstorage.standard.1.0.4.nupkg.sha512",
         "badnetworkattachedstorage.standard.nuspec",
         "lib/netstandard2.0/BadNetworkAttachedStorage.Standard.dll"
       ]
@@ -2690,7 +2690,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.2": [
-      "BadNetworkAttachedStorage.Standard >= 1.0.3",
+      "BadNetworkAttachedStorage.Standard >= 1.0.4",
       "MSTest.TestAdapter >= 2.0.0",
       "MSTest.TestFramework >= 2.0.0",
       "Microsoft.Extensions.DependencyInjection.Abstractions >= 2.2.0",
@@ -2744,7 +2744,7 @@
         "dependencies": {
           "BadNetworkAttachedStorage.Standard": {
             "target": "Package",
-            "version": "[1.0.3, )"
+            "version": "[1.0.4, )"
           },
           "MSTest.TestAdapter": {
             "target": "Package",

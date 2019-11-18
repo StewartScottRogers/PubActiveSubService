@@ -16,6 +16,6 @@ namespace PubActiveSubService.Controllers {
 
         [HttpPost]
         public IEnumerable<Models.ListedChannelV1> Post([FromBody] Models.ListChannelsV1 listChannelsV1)
-            => PubActiveSubServiceProcessors.ListChanerls(listChannelsV1);
+            => PubActiveSubServiceProcessors.ListChannels(listChannelsV1);
     }
 }

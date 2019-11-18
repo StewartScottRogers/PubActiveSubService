@@ -38,11 +38,11 @@
           "PubActiveSubService.dll": {}
         }
       },
-      "BadNetworkAttachedStorage.Standard/1.0.2": {
+      "BadNetworkAttachedStorage.Standard/1.0.3": {
         "runtime": {
           "lib/netstandard2.0/BadNetworkAttachedStorage.Standard.dll": {
-            "assemblyVersion": "1.0.2.0",
-            "fileVersion": "1.0.2.0"
+            "assemblyVersion": "1.0.3.0",
+            "fileVersion": "1.0.3.0"
           }
         },
         "compile": {
@@ -455,7 +455,7 @@
       },
       "PubActiveSubService.Core/1.0.0": {
         "dependencies": {
-          "BadNetworkAttachedStorage.Standard": "1.0.2",
+          "BadNetworkAttachedStorage.Standard": "1.0.3",
           "FluentScheduler": "5.3.0",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "2.2.0",
           "Newtonsoft.Json": "12.0.3",
@@ -3665,12 +3665,12 @@
       "serviceable": false,
       "sha512": ""
     },
-    "BadNetworkAttachedStorage.Standard/1.0.2": {
+    "BadNetworkAttachedStorage.Standard/1.0.3": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-AURBUO64Pz9Am6vv0vxHRRgdxJ1zj+24pXXM/V77Bs+6l4M3IQLt8Psi17Bwh0kCMj8tL1ExWqKjmZ4I0+fdjg==",
-      "path": "badnetworkattachedstorage.standard/1.0.2",
-      "hashPath": "badnetworkattachedstorage.standard.1.0.2.nupkg.sha512"
+      "sha512": "sha512-Y5tlri8kkkiHPz1iLJ+PEVk9K2MOp3TXVRpDyx2ZaZib4vmL4xJ6lHSl983K2AoNG3rESdeElj5jF4eFJqK7mw==",
+      "path": "badnetworkattachedstorage.standard/1.0.3",
+      "hashPath": "badnetworkattachedstorage.standard.1.0.3.nupkg.sha512"
     },
     "FluentScheduler/5.3.0": {
       "type": "package",

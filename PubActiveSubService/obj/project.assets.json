@@ -2,7 +2,7 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v2.2": {
-      "BadNetworkAttachedStorage.Standard/1.0.2": {
+      "BadNetworkAttachedStorage.Standard/1.0.3": {
         "type": "package",
         "compile": {
           "lib/netstandard2.0/BadNetworkAttachedStorage.Standard.dll": {}
@@ -4809,7 +4809,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.2",
         "dependencies": {
-          "BadNetworkAttachedStorage.Standard": "1.0.2",
+          "BadNetworkAttachedStorage.Standard": "1.0.3",
           "FluentScheduler": "5.3.0",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "2.2.0",
           "Newtonsoft.Json": "12.0.3",
@@ -4826,14 +4826,14 @@
     }
   },
   "libraries": {
-    "BadNetworkAttachedStorage.Standard/1.0.2": {
-      "sha512": "AURBUO64Pz9Am6vv0vxHRRgdxJ1zj+24pXXM/V77Bs+6l4M3IQLt8Psi17Bwh0kCMj8tL1ExWqKjmZ4I0+fdjg==",
+    "BadNetworkAttachedStorage.Standard/1.0.3": {
+      "sha512": "Y5tlri8kkkiHPz1iLJ+PEVk9K2MOp3TXVRpDyx2ZaZib4vmL4xJ6lHSl983K2AoNG3rESdeElj5jF4eFJqK7mw==",
       "type": "package",
-      "path": "badnetworkattachedstorage.standard/1.0.2",
+      "path": "badnetworkattachedstorage.standard/1.0.3",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "badnetworkattachedstorage.standard.1.0.2.nupkg.sha512",
+        "badnetworkattachedstorage.standard.1.0.3.nupkg.sha512",
         "badnetworkattachedstorage.standard.nuspec",
         "lib/netstandard2.0/BadNetworkAttachedStorage.Standard.dll"
       ]

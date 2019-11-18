@@ -35,11 +35,7 @@ namespace PubActiveSubService {
             yield return new TracedChannelV1() { ChannelName = "Channel/Three", Subscribers = new SubscriberStatusV1[] { new SubscriberStatusV1() { Subscriber = "SubscriberThree", Status = new StatusV1[] { new StatusV1() { Name = "Connected.", Value = "OK" } } } } };
         }
 
-        public IEnumerable<ListedChannelV1> ListChanerls(ListChannelsV1 listChannelsV1) {
-            yield return new ListedChannelV1() { ChannelName = "Channel/One", Subscribers = new string[] { "SubscriberOne", "SubscriberTwo", "SubscriberThree" } };
-            yield return new ListedChannelV1() { ChannelName = "Channel/Two", Subscribers = new string[] { "SubscriberOne", "SubscriberTwo", "SubscriberThree" } };
-            yield return new ListedChannelV1() { ChannelName = "Channel/Three", Subscribers = new string[] { "SubscriberOne", "SubscriberTwo", "SubscriberThree" } };
-        }
+        public IEnumerable<ListedChannelV1> ListChannels(ListChannelsV1 listChannelsV1) => ChannelPersisitance.ListChannels(listChannelsV1);
 
 
         public void Subscribe(SubscribeV1 subscribeV1) { }

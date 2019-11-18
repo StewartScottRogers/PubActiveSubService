@@ -3,7 +3,7 @@
 namespace PubActiveSubService.Models {
     [System.Serializable]
     public class ChannelV1 {
-        public string Name { get; set; } = string.Empty;
+        public string ChannelName { get; set; } = string.Empty;
 
         public List<SubscribeV1> Subscribes { get; set; } = new List<SubscribeV1>();
     }

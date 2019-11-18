@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace PubActiveSubService.Internals.Services {
     public class ChannelPersisitance : IChannelPersisitance {
-        public string[] LookupSubscriberUrlsByChannel(string channelName, params string[] internalUrls) {
+        public string[] LookupSubscriberUrlsByChanneNamel(string channelName, params string[] internalUrls) {
             channelName = channelName.ToEnforceChannelNamingConventions();
 
             var collection = new Collection<string>();
@@ -24,6 +24,18 @@ namespace PubActiveSubService.Internals.Services {
                     collection.Add(internalUrl);
 
             return collection.ToArray();
+        }
+
+        public void PostChannelName(string channelName) {
+            channelName = channelName.ToEnforceChannelNamingConventions();
+
+            var channelsV1 = ChannelBadNasFileInfo.Read();
+            foreach (var channelV1 in channelsV1.Channels)
+                if (channelName == channelV1.Name)
+                    return;
+
+            channelsV1.Channels.Add(new Models.ChannelV1() { Name = channelName });
+            ChannelBadNasFileInfo.Write(channelsV1);
         }
     }
 }

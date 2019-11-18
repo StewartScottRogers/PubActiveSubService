@@ -10,7 +10,7 @@ namespace PubActiveSubService.Library {
 
         public static void Write(Models.ChannelsV1 channelsV1) {
             lock (SyncLock) {
-                ChannelsV1 = channelsV1.DeepClone(); ;
+                ChannelsV1 = channelsV1.DeepClone();
                 BadNasFileInfo.WriteAllText(JsonConvert.SerializeObject(ChannelsV1));
             }
         }

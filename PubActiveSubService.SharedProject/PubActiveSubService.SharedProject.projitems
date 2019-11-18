@@ -10,7 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Internals\Interfaces\IPublisherClient.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Internals\Interfaces\IPublisherPersisitance.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internals\Interfaces\IChannelPersisitance.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internals\Services\PublisherClient.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internals\IPubActiveSubServiceProcessors.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internals\Interfaces\IQueuePersisitance.cs" />

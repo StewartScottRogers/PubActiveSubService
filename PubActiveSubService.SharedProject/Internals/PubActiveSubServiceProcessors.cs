@@ -7,8 +7,8 @@ using System.Collections.Generic;
 namespace PubActiveSubService {
     public class PubActiveSubServiceProcessors : IPubActiveSubServiceProcessors {
         private readonly IPublisherClient PublisherClient;
-        private readonly IQueuePersisitance ChannelPersisitance;
-        private readonly IChannelPersisitance PublisherPersisitance;
+        private readonly IQueuePersisitance QueuePersisitance;
+        private readonly IChannelPersisitance ChannelPersisitance;
 
         private string ArchiveUrl = string.Empty;
 
@@ -18,8 +18,8 @@ namespace PubActiveSubService {
             if (null == channelPersisitance) throw new ArgumentNullException(nameof(channelPersisitance));
 
             PublisherClient = publisherClient;
-            ChannelPersisitance = queuePersisitance;
-            PublisherPersisitance = channelPersisitance;
+            QueuePersisitance = queuePersisitance;
+            ChannelPersisitance = channelPersisitance;
         }
 
         public void SaveArchiveHost(string url) => ArchiveUrl = $"{url}/api/PublishArchiveV1";
@@ -47,13 +47,17 @@ namespace PubActiveSubService {
         public void Unsubscribe(UnsubscribeV1 unsubscribeV1) { }
 
 
-        public string Publish(PublishPackageV1 publishPackageV1) => PublisherClient.Post(
-                                                                                            publishPackageV1,
-                                                                                            PublisherPersisitance.LookupSubscriberUrlsByChannel(
-                                                                                                                                                    publishPackageV1.Channel,
-                                                                                                                                                    ArchiveUrl
-                                                                                            )
-        );
+        public string Publish(PublishPackageV1 publishPackageV1) {
+            ChannelPersisitance.PostChannelName(publishPackageV1.ChannelName);
+            return PublisherClient.Post(
+                                          publishPackageV1,
+                                          ChannelPersisitance.LookupSubscriberUrlsByChanneNamel(
+                                                                                                  publishPackageV1.ChannelName,
+                                                                                                  ArchiveUrl
+                                      )
+
+            );
+        }
 
         public string PublishArchive(PublishPackageV1 publishPackageV1) {
             return "";

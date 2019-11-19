@@ -14,7 +14,9 @@ namespace PubActiveSubService.Controllers {
         }
 
         [HttpGet]
-        public string Get()
-            => PubActiveSubServiceProcessors.Ping();
+        public string Get() {
+            PubActiveSubServiceProcessors.SaveArchiveHostDns($"{Request.Scheme}://{Request.Host.Value}");
+            return PubActiveSubServiceProcessors.Ping();
+        }
     }
 }

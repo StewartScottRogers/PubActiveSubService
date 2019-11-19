@@ -7,8 +7,8 @@ namespace PubActiveSubService {
         string Ping();
         string Pingthrough(string url);
 
-        IEnumerable<Models.TracedChannelV1> Trace(Models.SearchV1 searchV1);
-        IEnumerable<Models.ListedChannelV1> ListChannels(Models.SearchV1 searchV1);
+        IEnumerable<Models.TracedChannelV1> Trace(Models.ChannelSearchV1 channelSearchV1);
+        IEnumerable<Models.ListedChannelV1> ListChannels(Models.ChannelSearchV1 channelSearchV1);
 
         void Subscribe(Models.SubscribeV1 subscribeV1);
         void Unsubscribe(Models.UnsubscribeV1 unsubscribeV1);

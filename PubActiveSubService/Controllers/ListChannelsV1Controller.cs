@@ -15,7 +15,9 @@ namespace PubActiveSubService.Controllers {
         }
 
         [HttpPost]
-        public IEnumerable<Models.ListedChannelV1> Post([FromBody] Models.SearchV1 searchV1)
-            => PubActiveSubServiceProcessors.ListChannels(searchV1);
+        public IEnumerable<Models.ListedChannelV1> Post([FromBody] Models.ChannelSearchV1 channelSearchV1) {
+            PubActiveSubServiceProcessors.SaveArchiveHostDns($"{Request.Scheme}://{Request.Host.Value}");
+            return PubActiveSubServiceProcessors.ListChannels(channelSearchV1);
+        }
     }
 }

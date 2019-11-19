@@ -14,7 +14,9 @@ namespace PubActiveSubService.Controllers {
 
         // POST: api/Unsubscribe
         [HttpPost]
-        public void Post([FromBody] Models.UnsubscribeV1 unsubscribeV1) =>
+        public void Post([FromBody] Models.UnsubscribeV1 unsubscribeV1) {
+            PubActiveSubServiceProcessors.SaveArchiveHostDns($"{Request.Scheme}://{Request.Host.Value}");
             PubActiveSubServiceProcessors.Unsubscribe(unsubscribeV1);
+        }
     }
 }

@@ -26,7 +26,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\UnsubscribeV1.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\SubscribeV1.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\TracedChannelV1.cs" />
-    <Compile Include="..\PubActiveSubService.SharedProject\Models\SearchV1.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\ChannelSearchV1.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\ListedChannelV1.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\PublishPackageV1.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\SubscriberStatusV1.cs" />

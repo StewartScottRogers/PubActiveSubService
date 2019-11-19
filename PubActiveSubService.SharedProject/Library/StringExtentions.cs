@@ -2,22 +2,27 @@
 
 public static class StringExtentions {
     public static string ToEnforcedChannelNamingConventions(this string channelName) {
-        return channelName.Trim().ToLower().ToAlphaNumeric();
+        return channelName.Trim().ToLower().ToValidFilePathing();
     }
-    public static string ToEnforceChannelSearchNamingConventions(this string channelName) {
-        channelName = channelName.Trim().ToLower();
-        if (channelName == "string")
-            channelName = "*";
 
-        var hasWildCard = channelName.EndsWith("*");
-        channelName = channelName.ToAlphaNumeric();
+    public static string ToEnforcedSubscriberNamingConventions(this string subscriberName) {
+        return subscriberName.Trim().ToLower().ToValidFilePathing();
+    }
+
+    public static string ToEnforceChannelSearchNamingConventions(this string channelSearch) {
+        channelSearch = channelSearch.Trim().ToLower();
+        if (channelSearch == "string")
+            channelSearch = "*";
+
+        var hasWildCard = channelSearch.EndsWith("*");
+        channelSearch = channelSearch.ToValidFilePathing();
         if (hasWildCard)
-            channelName += "*";
+            channelSearch += "*";
 
-        return channelName;
+        return channelSearch;
     }
 
-    private static string ToAlphaNumeric(this string text) =>
+    private static string ToValidFilePathing(this string text) =>
          new string(text.Where(c => char.IsLetterOrDigit(c) || c == '\\' || c == '/').ToArray()).Replace("/", @"\").Trim();
 
 }

@@ -14,7 +14,9 @@ namespace PubActiveSubService.Controllers {
         }
 
         [HttpPost]
-        public string Post([FromBody] Models.PingThroughV1 pingThroughV1) =>
-             PubActiveSubServiceProcessors.Pingthrough(pingThroughV1.Url);
+        public string Post([FromBody] Models.PingThroughV1 pingThroughV1) {
+            PubActiveSubServiceProcessors.SaveArchiveHostDns($"{Request.Scheme}://{Request.Host.Value}");
+            return PubActiveSubServiceProcessors.Pingthrough(pingThroughV1.Url);
+        }
     }
 }

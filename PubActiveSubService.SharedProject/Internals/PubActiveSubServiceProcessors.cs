@@ -29,18 +29,16 @@ namespace PubActiveSubService {
         public string Pingthrough(string url) => PublisherClient.Get(url);
 
 
-        public IEnumerable<TracedChannelV1> Trace(SearchV1 searchV1) {
+        public IEnumerable<TracedChannelV1> Trace(ChannelSearchV1 channelSearchV1) {
 
 
-            yield return new TracedChannelV1() { ChannelName = "Channel/One", Subscribers = new SubscriberStatusV1[] { new SubscriberStatusV1() { SubscriberName = "SubscriberOne", Status = new StatusV1[] { new StatusV1() { Name = "Connected.", Value = "OK" } } } } };
-            yield return new TracedChannelV1() { ChannelName = "Channel/Two", Subscribers = new SubscriberStatusV1[] { new SubscriberStatusV1() { SubscriberName = "SubscriberTwo", Status = new StatusV1[] { new StatusV1() { Name = "Connected.", Value = "OK" } } } } };
-            yield return new TracedChannelV1() { ChannelName = "Channel/Three", Subscribers = new SubscriberStatusV1[] { new SubscriberStatusV1() { SubscriberName = "SubscriberThree", Status = new StatusV1[] { new StatusV1() { Name = "Connected.", Value = "OK" } } } } };
+            yield return new TracedChannelV1() { ChannelName = "Channel/One", Subscribers = new SubscriberStatusV1[] { new SubscriberStatusV1() { SubscriberName = "SubscriberOne", Status = new StatusV1[] { new StatusV1() { Name = "Connected.", Value = "OK" } } } } };       
         }
 
-        public IEnumerable<ListedChannelV1> ListChannels(SearchV1 searchV1) => ChannelPersisitance.ListChannels(searchV1);
+        public IEnumerable<ListedChannelV1> ListChannels(ChannelSearchV1 channelSearchV1) => ChannelPersisitance.ListChannels(channelSearchV1);
 
 
-        public void Subscribe(SubscribeV1 subscribeV1) => ChannelPersisitance.Subscribe(subscribeV1);
+        public void Subscribe(SubscribeV1 subscribeV1) => ChannelPersisitance.Subscribe(subscribeV1, ArchiveUrl);
 
         public void Unsubscribe(UnsubscribeV1 unsubscribeV1) => ChannelPersisitance.Unsubscribe(unsubscribeV1);
 

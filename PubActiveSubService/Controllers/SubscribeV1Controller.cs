@@ -14,7 +14,9 @@ namespace PubActiveSubService.Controllers {
 
         // POST: api/Subscribe
         [HttpPost]
-        public void Post([FromBody] Models.SubscribeV1 subscribeV1) =>
+        public void Post([FromBody] Models.SubscribeV1 subscribeV1) {
+            PubActiveSubServiceProcessors.SaveArchiveHostDns($"{Request.Scheme}://{Request.Host.Value}");
             PubActiveSubServiceProcessors.Subscribe(subscribeV1);
+        }
     }
 }

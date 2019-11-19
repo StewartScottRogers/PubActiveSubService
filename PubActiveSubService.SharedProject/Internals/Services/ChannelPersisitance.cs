@@ -42,9 +42,13 @@ namespace PubActiveSubService.Internals.Services {
         public IEnumerable<Models.ListedChannelV1> ListChannels(Models.ListChannelsV1 listChannelsV1) {
             var channelName = listChannelsV1.ChannelSearch.ToEnforceChannelNamingConventions();
 
-            var channelsV1 = ChannelBadNasFileInfo.Read();
-            foreach (var channelV1 in channelsV1.Channels)
-                if (channelName == channelV1.ChannelName)
+            var channels = ChannelBadNasFileInfo.Read().Channels.ToArray();
+            foreach (var channelV1 in channels)
+                if (
+                        channelName == channelV1.ChannelName 
+                        || listChannelsV1.ChannelSearch.Length <= 0 
+                        || listChannelsV1.ChannelSearch.Trim() == "*"
+                   )
                     yield return new Models.ListedChannelV1() {
                         ChannelName = channelV1.ChannelName,
                         Subscribers = channelV1.Subscribes

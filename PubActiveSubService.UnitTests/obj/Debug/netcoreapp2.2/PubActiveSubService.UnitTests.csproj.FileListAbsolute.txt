@@ -10,4 +10,3 @@ C:\Repos\PubActiveSubService\PubActiveSubService.UnitTests\obj\Debug\netcoreapp2
 C:\Repos\PubActiveSubService\PubActiveSubService.UnitTests\obj\Debug\netcoreapp2.2\PubActiveSubService.UnitTests.AssemblyInfo.cs
 C:\Repos\PubActiveSubService\PubActiveSubService.UnitTests\obj\Debug\netcoreapp2.2\PubActiveSubService.UnitTests.dll
 C:\Repos\PubActiveSubService\PubActiveSubService.UnitTests\obj\Debug\netcoreapp2.2\PubActiveSubService.UnitTests.pdb
-C:\Repos\PubActiveSubService\PubActiveSubService.UnitTests\obj\Debug\netcoreapp2.2\PubActiveSubService.UnitTests.csprojAssemblyReference.cache

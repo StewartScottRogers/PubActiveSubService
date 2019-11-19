@@ -5,6 +5,6 @@ namespace PubActiveSubService.Models {
     public class ChannelV1 {
         public string ChannelName { get; set; } = string.Empty;
 
-        public List<SubscribeV1> Subscribes { get; set; } = new List<SubscribeV1>();
+        public List<SubscriberV1> Subscribers { get; set; } = new List<SubscriberV1>();
     }
 }

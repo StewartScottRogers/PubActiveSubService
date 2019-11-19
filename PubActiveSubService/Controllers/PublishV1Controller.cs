@@ -15,7 +15,7 @@ namespace PubActiveSubService.Controllers {
         [Route("api/[controller]")]
         [HttpPost]
         public string Post([FromBody] Models.PublishPackageV1 publishPackageV1) {
-            PubActiveSubServiceProcessors.SaveArchiveHost($"{Request.Scheme}://{Request.Host.Value}");
+            PubActiveSubServiceProcessors.SaveArchiveHostDns($"{Request.Scheme}://{Request.Host.Value}");
             return PubActiveSubServiceProcessors.Publish(publishPackageV1); ;
         }       
     }

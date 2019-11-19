@@ -2,9 +2,9 @@
 
 namespace PubActiveSubService.Models {
     [System.Serializable]
-    public class ChannelV1 {
+    public class Channel {
         public string ChannelName { get; set; } = string.Empty;
 
-        public List<SubscriberV1> Subscribers { get; set; } = new List<SubscriberV1>();
+        public List<Subscriber> Subscribers { get; set; } = new List<Subscriber>();
     }
 }

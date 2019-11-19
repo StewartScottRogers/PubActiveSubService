@@ -2,19 +2,19 @@
 
 namespace PubActiveSubService {
     public interface IPubActiveSubServiceProcessors {
-        void SaveArchiveHostDns(string url);
+        void SaveHostUrl(string hostUrl);
 
         string Ping();
         string Pingthrough(string url);
 
-        IEnumerable<Models.TracedChannelV1> Trace(Models.ChannelSearchV1 channelSearchV1);
-        IEnumerable<Models.ListedChannelV1> ListChannels(Models.ChannelSearchV1 channelSearchV1);
+        IEnumerable<Models.TracedChannel> Trace(Models.ChannelSearch channelSearch);
+        IEnumerable<Models.ListedChannel> ListChannels(Models.ChannelSearch channelSearch);
 
-        void Subscribe(Models.SubscribeV1 subscribeV1);
-        void Unsubscribe(Models.UnsubscribeV1 unsubscribeV1);
+        void Subscribe(Models.Subscribe subscribe);
+        void Unsubscribe(Models.Unsubscribe unsubscribe);
 
-        string Publish(Models.PublishPackageV1 publishPackageV1);
+        string Publish(Models.PublishPackage publishPackage);
 
-        string PublishArchive(Models.PublishPackageV1 publishPackageV1);
+        string PublishArchive(Models.PublishPackage publishPackage);
     }
 }

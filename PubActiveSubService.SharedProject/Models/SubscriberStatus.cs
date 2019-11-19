@@ -1,7 +1,7 @@
 ﻿namespace PubActiveSubService.Models {
     [System.Serializable]
-    public class SubscriberStatusV1 {
+    public class SubscriberStatus {
         public string SubscriberName { get; set; } = string.Empty;
-        public StatusV1[] Status { get; set; } = new StatusV1[] { };
+        public Status[] Status { get; set; } = new Status[] { };
     }
 }

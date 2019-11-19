@@ -1,8 +1,8 @@
 ﻿namespace PubActiveSubService.Models {
     [System.Serializable]
-    public class TracedChannelV1 {
+    public class TracedChannel {
         public string ChannelName { get; set; } = string.Empty;
 
-        public SubscriberStatusV1[] Subscribers { get; set; } = new SubscriberStatusV1[] { };
+        public SubscriberStatus[] Subscribers { get; set; } = new SubscriberStatus[] { };
     }
 }

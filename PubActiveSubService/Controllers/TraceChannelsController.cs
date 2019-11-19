@@ -1,22 +1,22 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
 using System;
+using System.Collections.Generic;
 
 namespace PubActiveSubService.Controllers {
     [Route("api/[controller]")]
     [ApiController]
-    public class PingV1Controller : ControllerBase {
+    public class TraceChannelsController : ControllerBase {
         private readonly IPubActiveSubServiceProcessors PubActiveSubServiceProcessors;
 
-        public PingV1Controller(IPubActiveSubServiceProcessors pubActiveSubServiceProcessors) {
+        public TraceChannelsController(IPubActiveSubServiceProcessors pubActiveSubServiceProcessors) {
             if (null == pubActiveSubServiceProcessors) throw new ArgumentNullException(nameof(pubActiveSubServiceProcessors));
             PubActiveSubServiceProcessors = pubActiveSubServiceProcessors;
         }
 
-        [HttpGet]
-        public string Get() {
-            PubActiveSubServiceProcessors.SaveArchiveHostDns($"{Request.Scheme}://{Request.Host.Value}");
-            return PubActiveSubServiceProcessors.Ping();
-        }
+        // POST: api/TraceChannels
+        [HttpPost]
+        public IEnumerable<Models.TracedChannel> Post([FromBody] Models.ChannelSearch channelSearch) =>
+            PubActiveSubServiceProcessors.Trace(channelSearch);
     }
 }

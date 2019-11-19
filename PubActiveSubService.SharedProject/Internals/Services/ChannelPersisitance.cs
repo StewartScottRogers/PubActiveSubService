@@ -13,13 +13,13 @@ namespace PubActiveSubService.Internals.Services {
 
                 var collection = new Collection<string>();
 
-                var channelsV1 = ChannelBadNasFileInfo.Read();
-                foreach (var channelV1 in channelsV1.Channels)
-                    if (channelName == channelV1.ChannelName)
-                        foreach (var subscriberV1 in channelV1.Subscribers)
-                            if (subscriberV1.Enabled)
-                                if (subscriberV1.SubscriberPostUrl.Length > 0)
-                                    collection.Add(subscriberV1.SubscriberPostUrl);
+                var channels = ChannelBadNasFileInfo.Read();
+                foreach (var channel in channels.ChannelList)
+                    if (channelName == channel.ChannelName)
+                        foreach (var subscriber in channel.Subscribers)
+                            if (subscriber.Enabled)
+                                if (subscriber.SubscriberPostUrl.Length > 0)
+                                    collection.Add(subscriber.SubscriberPostUrl);
 
                 foreach (var internalUrl in internalUrls)
                     if (internalUrl.Length > 0)
@@ -33,76 +33,76 @@ namespace PubActiveSubService.Internals.Services {
             lock (this) {
                 channelName = channelName.ToEnforcedChannelNamingConventions();
 
-                var channelsV1 = ChannelBadNasFileInfo.Read();
-                foreach (var channelV1 in channelsV1.Channels)
-                    if (channelName == channelV1.ChannelName)
+                var channels = ChannelBadNasFileInfo.Read();
+                foreach (var channel in channels.ChannelList)
+                    if (channelName == channel.ChannelName)
                         return;
 
-                channelsV1.Channels.Add(new Models.ChannelV1() { ChannelName = channelName });
-                ChannelBadNasFileInfo.Write(channelsV1);
+                channels.ChannelList.Add(new Models.Channel() { ChannelName = channelName });
+                ChannelBadNasFileInfo.Write(channels);
             }
         }
 
-        public IEnumerable<Models.ListedChannelV1> ListChannels(Models.ChannelSearchV1 channelSearchV1) {
+        public IEnumerable<Models.ListedChannel> ListChannels(Models.ChannelSearch channelSearch) {
             lock (this) {
-                var channelSearch = channelSearchV1.Search.ToEnforceChannelSearchNamingConventions();
+                var search = channelSearch.Search.ToEnforceChannelSearchNamingConventions();
 
-                var channelV1Array = ChannelBadNasFileInfo.Read().Channels.ToArray();
-                foreach (var channelV1 in channelV1Array)
+                var channelArray = ChannelBadNasFileInfo.Read().ChannelList.ToArray();
+                foreach (var channel in channelArray)
                     if (
-                            channelSearch == channelV1.ChannelName
-                            || channelSearch.Length <= 0
-                            || channelSearch.Trim() == "*"
+                            search == channel.ChannelName
+                            || search.Length <= 0
+                            || search.Trim() == "*"
                        )
-                        yield return new Models.ListedChannelV1() {
-                            ChannelName = channelV1.ChannelName,
-                            Subscribers = channelV1.Subscribers
+                        yield return new Models.ListedChannel() {
+                            ChannelName = channel.ChannelName,
+                            Subscribers = channel.Subscribers
                         };
             }
         }
 
-        public void Subscribe(Models.SubscribeV1 subscribeV1, string defaultInternalUr) {
+        public void Subscribe(Models.Subscribe subscribe, string defaultInternalUr) {
             lock (this) {
-                var channelName = subscribeV1.ChannelName.ToEnforcedChannelNamingConventions();
-                var subscriberName = subscribeV1.SubscriberName.ToEnforcedSubscriberNamingConventions();
+                var channelName = subscribe.ChannelName.ToEnforcedChannelNamingConventions();
+                var subscriberName = subscribe.SubscriberName.ToEnforcedSubscriberNamingConventions();
 
-                var channelsV1 = ChannelBadNasFileInfo.Read();
-                foreach (var channelV1 in channelsV1.Channels.ToArray())
-                    if (channelName == channelV1.ChannelName) {
-                        foreach (var subscriber in channelV1.Subscribers) {
+                var channels = ChannelBadNasFileInfo.Read();
+                foreach (var channel in channels.ChannelList.ToArray())
+                    if (channelName == channel.ChannelName) {
+                        foreach (var subscriber in channel.Subscribers) {
                             if (subscriber.SubscriberName == subscriberName) {
-                                subscriber.Enabled = subscribeV1.Enabled;
-                                subscriber.SubscriberPostUrl = subscribeV1.SubscriberPostUrl.Trim();
-                                ChannelBadNasFileInfo.Write(channelsV1);
+                                subscriber.Enabled = subscribe.Enabled;
+                                subscriber.SubscriberPostUrl = subscribe.SubscriberPostUrl.Trim();
+                                ChannelBadNasFileInfo.Write(channels);
                                 return;
                             }
                         }
 
-                        channelV1.Subscribers.Add(
-                                                    new Models.SubscriberV1() {
+                        channel.Subscribers.Add(
+                                                    new Models.Subscriber() {
                                                         SubscriberName = subscriberName,
-                                                        Enabled = subscribeV1.Enabled,
-                                                        SubscriberPostUrl = subscribeV1.SubscriberPostUrl.Length > 0 ? subscribeV1.SubscriberPostUrl.Trim() : defaultInternalUr.Trim()
+                                                        Enabled = subscribe.Enabled,
+                                                        SubscriberPostUrl = subscribe.SubscriberPostUrl.Length > 0 ? subscribe.SubscriberPostUrl.Trim() : defaultInternalUr.Trim()
                                                     }
                                                  );
-                        ChannelBadNasFileInfo.Write(channelsV1);
+                        ChannelBadNasFileInfo.Write(channels);
                         return;
                     }
             }
         }
 
-        public void Unsubscribe(Models.UnsubscribeV1 unsubscribeV1) {
+        public void Unsubscribe(Models.Unsubscribe unsubscribe) {
             lock (this) {
-                var channelName = unsubscribeV1.ChannelName.ToEnforcedChannelNamingConventions();
-                var subscriberName = unsubscribeV1.SubscriberName.ToEnforcedSubscriberNamingConventions();
+                var channelName = unsubscribe.ChannelName.ToEnforcedChannelNamingConventions();
+                var subscriberName = unsubscribe.SubscriberName.ToEnforcedSubscriberNamingConventions();
 
-                var channelsV1 = ChannelBadNasFileInfo.Read();
-                foreach (var channelV1 in channelsV1.Channels.ToArray())
-                    if (channelName == channelV1.ChannelName) {
-                        foreach (var subscriber in channelV1.Subscribers.ToArray()) {
+                var channels = ChannelBadNasFileInfo.Read();
+                foreach (var channel in channels.ChannelList.ToArray())
+                    if (channelName == channel.ChannelName) {
+                        foreach (var subscriber in channel.Subscribers.ToArray()) {
                             if (subscriber.SubscriberName == subscriberName) {
-                                channelV1.Subscribers.Remove(subscriber);
-                                ChannelBadNasFileInfo.Write(channelsV1);
+                                channel.Subscribers.Remove(subscriber);
+                                ChannelBadNasFileInfo.Write(channels);
                                 return;
                             }
                         }

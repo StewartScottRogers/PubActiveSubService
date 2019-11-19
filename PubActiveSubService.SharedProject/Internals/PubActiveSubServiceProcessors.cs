@@ -10,7 +10,7 @@ namespace PubActiveSubService {
         private readonly IQueuePersisitance QueuePersisitance;
         private readonly IChannelPersisitance ChannelPersisitance;
 
-        private string ArchiveUrl = string.Empty;
+        private string HostUrl = string.Empty;
 
         public PubActiveSubServiceProcessors(IPublisherClient publisherClient, IQueuePersisitance queuePersisitance, IChannelPersisitance channelPersisitance) {
             if (null == publisherClient) throw new ArgumentNullException(nameof(publisherClient));
@@ -22,36 +22,36 @@ namespace PubActiveSubService {
             ChannelPersisitance = channelPersisitance;
         }
 
-        public void SaveArchiveHostDns(string url) => ArchiveUrl = $"{url}/api/PublishArchiveV1";
+        public void SaveHostUrl(string hostUrl) => HostUrl = hostUrl;
 
         public string Ping() => DateTimeOffset.UtcNow.ToString();
 
         public string Pingthrough(string url) => PublisherClient.Get(url);
 
 
-        public IEnumerable<TracedChannelV1> Trace(ChannelSearchV1 channelSearchV1) {
+        public IEnumerable<TracedChannel> Trace(ChannelSearch channelSearch) {
 
 
-            yield return new TracedChannelV1() { ChannelName = "Channel/One", Subscribers = new SubscriberStatusV1[] { new SubscriberStatusV1() { SubscriberName = "SubscriberOne", Status = new StatusV1[] { new StatusV1() { Name = "Connected.", Value = "OK" } } } } };       
+            yield return new TracedChannel() { ChannelName = "Channel/One", Subscribers = new SubscriberStatus[] { new SubscriberStatus() { SubscriberName = "SubscriberOne", Status = new Status[] { new Status() { Name = "Connected.", Value = "OK" } } } } };       
         }
 
-        public IEnumerable<ListedChannelV1> ListChannels(ChannelSearchV1 channelSearchV1) => ChannelPersisitance.ListChannels(channelSearchV1);
+        public IEnumerable<ListedChannel> ListChannels(ChannelSearch channelSearch) => ChannelPersisitance.ListChannels(channelSearch);
 
 
-        public void Subscribe(SubscribeV1 subscribeV1) => ChannelPersisitance.Subscribe(subscribeV1, ArchiveUrl);
+        public void Subscribe(Subscribe subscribe) => ChannelPersisitance.Subscribe(subscribe, $"{HostUrl}/api/PublishLoopback");
 
-        public void Unsubscribe(UnsubscribeV1 unsubscribeV1) => ChannelPersisitance.Unsubscribe(unsubscribeV1);
+        public void Unsubscribe(Unsubscribe unsubscribe) => ChannelPersisitance.Unsubscribe(unsubscribe);
 
 
-        public string Publish(PublishPackageV1 publishPackageV1) {
-            ChannelPersisitance.PostChannelName(publishPackageV1.ChannelName);
+        public string Publish(PublishPackage publishPackage) {
+            ChannelPersisitance.PostChannelName(publishPackage.ChannelName);
 
-            if (publishPackageV1.Package.Length > 0)
+            if (publishPackage.Package.Length > 0)
                 return PublisherClient.Post(
-                                              publishPackageV1,
+                                              publishPackage,
                                               ChannelPersisitance.LookupSubscriberUrlsByChanneNamel(
-                                                                                                      publishPackageV1.ChannelName,
-                                                                                                      ArchiveUrl
+                                                                                                      publishPackage.ChannelName,
+                                                                                                      $"{HostUrl}/api/PublishLoopback"
                                           )
 
                 );
@@ -59,7 +59,7 @@ namespace PubActiveSubService {
             return "Empty Package! Nothing to publish.";
         }
 
-        public string PublishArchive(PublishPackageV1 publishPackageV1) {
+        public string PublishArchive(PublishPackage publishPackage) {
             return "";
         }
     }

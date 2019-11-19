@@ -1,6 +1,8 @@
 ﻿namespace PubActiveSubService.Models {
     [System.Serializable]
-    public class SubscriberV1 {
+    public class Subscribe {
+        public string ChannelName { get; set; } = string.Empty;
+
         public string SubscriberName { get; set; } = string.Empty;
 
         public bool Enabled { get; set; } = false;

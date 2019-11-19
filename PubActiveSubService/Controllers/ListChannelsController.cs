@@ -6,18 +6,18 @@ using System.Collections.Generic;
 namespace PubActiveSubService.Controllers {
     [Route("api/[controller]")]
     [ApiController]
-    public class ListChannelsV1Controller : ControllerBase {
+    public class ListChannelsController : ControllerBase {
         private readonly IPubActiveSubServiceProcessors PubActiveSubServiceProcessors;
 
-        public ListChannelsV1Controller(IPubActiveSubServiceProcessors pubActiveSubServiceProcessors) {
+        public ListChannelsController(IPubActiveSubServiceProcessors pubActiveSubServiceProcessors) {
             if (null == pubActiveSubServiceProcessors) throw new ArgumentNullException(nameof(pubActiveSubServiceProcessors));
             PubActiveSubServiceProcessors = pubActiveSubServiceProcessors;
         }
 
         [HttpPost]
-        public IEnumerable<Models.ListedChannelV1> Post([FromBody] Models.ChannelSearchV1 channelSearchV1) {
-            PubActiveSubServiceProcessors.SaveArchiveHostDns($"{Request.Scheme}://{Request.Host.Value}");
-            return PubActiveSubServiceProcessors.ListChannels(channelSearchV1);
+        public IEnumerable<Models.ListedChannel> Post([FromBody] Models.ChannelSearch channelSearch) {
+            PubActiveSubServiceProcessors.SaveHostUrl($"{Request.Scheme}://{Request.Host.Value}");
+            return PubActiveSubServiceProcessors.ListChannels(channelSearch);
         }
     }
 }

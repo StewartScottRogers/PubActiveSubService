@@ -1,22 +1,22 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-
 using System;
-using System.Collections.Generic;
 
 namespace PubActiveSubService.Controllers {
     [Route("api/[controller]")]
     [ApiController]
-    public class TraceChannelsV1Controller : ControllerBase {
+    public class SubscribeController : ControllerBase {
         private readonly IPubActiveSubServiceProcessors PubActiveSubServiceProcessors;
 
-        public TraceChannelsV1Controller(IPubActiveSubServiceProcessors pubActiveSubServiceProcessors) {
+        public SubscribeController(IPubActiveSubServiceProcessors pubActiveSubServiceProcessors) {
             if (null == pubActiveSubServiceProcessors) throw new ArgumentNullException(nameof(pubActiveSubServiceProcessors));
             PubActiveSubServiceProcessors = pubActiveSubServiceProcessors;
         }
 
-        // POST: api/TraceChannelsV1
+        // POST: api/Subscribe
         [HttpPost]
-        public IEnumerable<Models.TracedChannelV1> Post([FromBody] Models.ChannelSearchV1 channelSearchV1) =>
-            PubActiveSubServiceProcessors.Trace(channelSearchV1);
+        public void Post([FromBody] Models.Subscribe subscribe) {
+            PubActiveSubServiceProcessors.SaveHostUrl($"{Request.Scheme}://{Request.Host.Value}");
+            PubActiveSubServiceProcessors.Subscribe(subscribe);
+        }
     }
 }

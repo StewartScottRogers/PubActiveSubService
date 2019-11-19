@@ -3,10 +3,10 @@ using System;
 
 namespace PubActiveSubService.Controllers {
     [ApiController]
-    public class PublishV1Controller : ControllerBase {
+    public class PublishController : ControllerBase {
         private readonly IPubActiveSubServiceProcessors PubActiveSubServiceProcessors;
 
-        public PublishV1Controller(IPubActiveSubServiceProcessors pubActiveSubServiceProcessors) {
+        public PublishController(IPubActiveSubServiceProcessors pubActiveSubServiceProcessors) {
             if (null == pubActiveSubServiceProcessors) throw new ArgumentNullException(nameof(pubActiveSubServiceProcessors));
             PubActiveSubServiceProcessors = pubActiveSubServiceProcessors;
         }
@@ -14,9 +14,9 @@ namespace PubActiveSubService.Controllers {
         // POST api/Publish
         [Route("api/[controller]")]
         [HttpPost]
-        public string Post([FromBody] Models.PublishPackageV1 publishPackageV1) {
-            PubActiveSubServiceProcessors.SaveArchiveHostDns($"{Request.Scheme}://{Request.Host.Value}");
-            return PubActiveSubServiceProcessors.Publish(publishPackageV1); ;
+        public string Post([FromBody] Models.PublishPackage publishPackage) {
+            PubActiveSubServiceProcessors.SaveHostUrl($"{Request.Scheme}://{Request.Host.Value}");
+            return PubActiveSubServiceProcessors.Publish(publishPackage); ;
         }       
     }
 }

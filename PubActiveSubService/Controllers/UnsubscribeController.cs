@@ -4,19 +4,19 @@ using System;
 namespace PubActiveSubService.Controllers {
     [Route("api/[controller]")]
     [ApiController]
-    public class SubscribeV1Controller : ControllerBase {
+    public class UnsubscribeController : ControllerBase {
         private readonly IPubActiveSubServiceProcessors PubActiveSubServiceProcessors;
 
-        public SubscribeV1Controller(IPubActiveSubServiceProcessors pubActiveSubServiceProcessors) {
+        public UnsubscribeController(IPubActiveSubServiceProcessors pubActiveSubServiceProcessors) {
             if (null == pubActiveSubServiceProcessors) throw new ArgumentNullException(nameof(pubActiveSubServiceProcessors));
             PubActiveSubServiceProcessors = pubActiveSubServiceProcessors;
         }
 
-        // POST: api/Subscribe
+        // POST: api/Unsubscribe
         [HttpPost]
-        public void Post([FromBody] Models.SubscribeV1 subscribeV1) {
-            PubActiveSubServiceProcessors.SaveArchiveHostDns($"{Request.Scheme}://{Request.Host.Value}");
-            PubActiveSubServiceProcessors.Subscribe(subscribeV1);
+        public void Post([FromBody] Models.Unsubscribe unsubscribe) {
+            PubActiveSubServiceProcessors.SaveHostUrl($"{Request.Scheme}://{Request.Host.Value}");
+            PubActiveSubServiceProcessors.Unsubscribe(unsubscribe);
         }
     }
 }

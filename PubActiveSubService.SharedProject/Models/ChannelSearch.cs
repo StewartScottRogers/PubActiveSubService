@@ -1,6 +1,6 @@
 ﻿namespace PubActiveSubService.Models {
     [System.Serializable]
-    public class ChannelSearchV1 {
+    public class ChannelSearch {
         public string Search { get; set; } = string.Empty;
     }
 }

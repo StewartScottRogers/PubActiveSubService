@@ -8,7 +8,7 @@ namespace PubActiveSubService.Library {
     public static class ChannelBadNasFileInfo {
         private static readonly BadNasFileInfo BadNasFileInfo = null;
         private static readonly object SyncLock = new object();
-        private static Models.ChannelsV1 ChannelsV1 = null;
+        private static Models.Channels Channels = null;
 
         static ChannelBadNasFileInfo() {
             var directoryPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
@@ -17,29 +17,29 @@ namespace PubActiveSubService.Library {
             BadNasFileInfo = new BadNasFileInfo(fileInfo);
         }
 
-        public static void Write(Models.ChannelsV1 channelsV1) {
+        public static void Write(Models.Channels channels) {
             try {
                 lock (SyncLock) {
-                    ChannelsV1 = channelsV1.DeepClone();
-                    BadNasFileInfo.WriteAllText(JsonConvert.SerializeObject(ChannelsV1));
+                    Channels = channels.DeepClone();
+                    BadNasFileInfo.WriteAllText(JsonConvert.SerializeObject(Channels));
                 }
             } catch (Exception exception) {
                 throw exception;
             }
         }
 
-        public static Models.ChannelsV1 Read() {
+        public static Models.Channels Read() {
             try {
                 lock (SyncLock) {
-                    if (null != ChannelsV1)
-                        return ChannelsV1.DeepClone(); ;
+                    if (null != Channels)
+                        return Channels.DeepClone(); ;
 
                     if (BadNasFileInfo.Exists()) {
-                        var channelsV1Json = BadNasFileInfo.ReadAllText();
-                        var channelsV1 = (Models.ChannelsV1)JsonConvert.DeserializeObject<Models.ChannelsV1>(channelsV1Json);
-                        return channelsV1;
+                        var channelsJson = BadNasFileInfo.ReadAllText();
+                        var channels = (Models.Channels)JsonConvert.DeserializeObject<Models.Channels>(channelsJson);
+                        return channels;
                     }
-                    return new Models.ChannelsV1();
+                    return new Models.Channels();
                 }
             } catch (Exception exception) {
                 throw exception;

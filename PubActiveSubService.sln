@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29509.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "PubActiveSubService.SharedProject", "PubActiveSubService.SharedProject\PubActiveSubService.SharedProject.shproj", "{6C8E5622-9215-4175-A9E2-61EC0AB9348F}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PubActiveSubService", "PubActiveSubService\PubActiveSubService.csproj", "{B0DD16B1-6A21-4842-AD13-E2DF5E33B034}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PubActiveSubService.UnitTests", "PubActiveSubService.UnitTests\PubActiveSubService.UnitTests.csproj", "{649BCABD-5133-4B63-928F-5558B35AD772}"
@@ -17,11 +15,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		LICENSE = LICENSE
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PubActiveSubService.Client", "PubActiveSubService.Client\PubActiveSubService.Client.csproj", "{B649FC66-8227-4791-831C-51473534F090}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PubActiveSubService.Client", "PubActiveSubService.Client\PubActiveSubService.Client.csproj", "{B649FC66-8227-4791-831C-51473534F090}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "PubActiveSubService.Models.SharedProject", "PubActiveSubService.Models.SharedProject\PubActiveSubService.Models.SharedProject.shproj", "{A3DB76C6-7EFD-46FA-AECB-ACFD15E5BAB1}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "PubActiveSubService.Services.SharedProject", "PubActiveSubService.Services.SharedProject\PubActiveSubService.Services.SharedProject.shproj", "{065B982F-ED16-4B43-ABEB-EE32A6154F47}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		PubActiveSubService.SharedProject\PubActiveSubService.SharedProject.projitems*{6c8e5622-9215-4175-a9e2-61ec0ab9348f}*SharedItemsImports = 13
+		PubActiveSubService.Services.SharedProject\PubActiveSubService.Services.SharedProject.projitems*{065b982f-ed16-4b43-abeb-ee32a6154f47}*SharedItemsImports = 13
+		PubActiveSubService.Models.SharedProject\PubActiveSubService.Models.SharedProject.projitems*{a3db76c6-7efd-46fa-aecb-acfd15e5bab1}*SharedItemsImports = 13
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

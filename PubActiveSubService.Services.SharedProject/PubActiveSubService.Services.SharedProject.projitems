@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>065b982f-ed16-4b43-abeb-ee32a6154f47</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>PubActiveSubService</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Internals\Interfaces\IChannelPersisitance.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internals\Interfaces\IPublisherClient.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internals\Interfaces\IQueuePersisitance.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internals\IPubActiveSubServiceProcessors.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internals\PubActiveSubServiceProcessors.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internals\Services\ChannelPersisitance.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internals\Services\PublisherClient.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internals\Services\QueuePersisitance.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Library\ChannelBadNasFileInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Library\ObjectExtentions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Library\StringExtentions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PubActiveSubServiceConfigurations.cs" />
+  </ItemGroup>
+</Project>

@@ -20,4 +20,8 @@
     <PackageReference Include="System.Diagnostics.Debug" Version="4.3.0" />
   </ItemGroup>
 
+  <Import Project="..\PubActiveSubService.Models.SharedProject\PubActiveSubService.Models.SharedProject.projitems" Label="Shared" />
+
+  <Import Project="..\PubActiveSubService.Services.SharedProject\PubActiveSubService.Services.SharedProject.projitems" Label="Shared" />
+
 </Project>

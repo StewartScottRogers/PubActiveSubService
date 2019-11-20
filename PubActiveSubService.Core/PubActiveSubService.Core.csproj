@@ -1,11 +1,13 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <RootNamespace>PubActiveSubService</RootNamespace>
   </PropertyGroup>
 
-  <Import Project="..\PubActiveSubService.SharedProject\PubActiveSubService.SharedProject.projitems" Label="Shared" />
+  <Import Project="..\PubActiveSubService.Models.SharedProject\PubActiveSubService.Models.SharedProject.projitems" Label="Shared" />
+
+  <Import Project="..\PubActiveSubService.Services.SharedProject\PubActiveSubService.Services.SharedProject.projitems" Label="Shared" />
 
   <ItemGroup>
     <PackageReference Include="BadNetworkAttachedStorage.Standard" Version="1.0.4" />

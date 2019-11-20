@@ -3,6 +3,7 @@ using PubActiveSubService.Models;
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PubActiveSubService {
     public class PubActiveSubServiceProcessors : IPubActiveSubServiceProcessors {
@@ -29,10 +30,24 @@ namespace PubActiveSubService {
         public string Pingthrough(string url) => PublisherClient.Get(url);
 
 
-        public IEnumerable<TracedChannel> TraceChannels(ChannelSearch channelSearch) {  
-
-
-            yield return new TracedChannel() { ChannelName = "Channel/One", Subscribers = new SubscriberStatus[] { new SubscriberStatus() { SubscriberName = "SubscriberOne", Status = new Status[] { new Status() { Name = "Connected.", Value = "OK" } } } } };       
+        public IEnumerable<TracedChannel> TraceChannels(ChannelSearch channelSearch) {
+            var listedChannels = ChannelPersisitance.ListChannels(channelSearch).ToArray();
+            foreach(var listedChannel in listedChannels) {
+                yield return new TracedChannel() { 
+                    ChannelName = listedChannel.ChannelName, 
+                    Subscribers = new SubscriberStatus[] { 
+                        new SubscriberStatus() { 
+                            SubscriberName = "SubscriberOne", 
+                            Status = new Status[] { 
+                                new Status() {
+                                    Name = "Connected.",
+                                    Value = "OK" 
+                                } 
+                            } 
+                        } 
+                    } 
+                };
+            }
         }
 
         public IEnumerable<ListedChannel> ListChannels(ChannelSearch channelSearch) => ChannelPersisitance.ListChannels(channelSearch);

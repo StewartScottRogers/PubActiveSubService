@@ -15,7 +15,7 @@ namespace PubActiveSubService.Controllers {
         [HttpPost]
         public string Post([FromBody] Models.PublishPackage publishPackage) {
             PubActiveSubServiceProcessors.SaveHostUrl($"{Request.Scheme}://{Request.Host.Value}");
-            return PubActiveSubServiceProcessors.Publish(publishPackage); ;
+            return PubActiveSubServiceProcessors.Publish(publishPackage);
         }
 
         [HttpGet]

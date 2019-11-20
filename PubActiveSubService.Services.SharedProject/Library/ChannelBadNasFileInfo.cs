@@ -32,7 +32,7 @@ namespace PubActiveSubService.Library {
             try {
                 lock (SyncLock) {
                     if (null != Channels)
-                        return Channels.DeepClone(); ;
+                        return Channels.DeepClone(); 
 
                     if (BadNasFileInfo.Exists()) {
                         var channelsJson = BadNasFileInfo.ReadAllText();

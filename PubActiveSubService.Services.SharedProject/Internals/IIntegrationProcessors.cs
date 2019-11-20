@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 
 namespace PubActiveSubService {
-    public interface IPubActiveSubServiceProcessors {
+    public interface IIntegrationProcessors {
         void SaveHostUrl(string hostUrl);
 
         string Ping();

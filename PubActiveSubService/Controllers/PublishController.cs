@@ -5,9 +5,9 @@ namespace PubActiveSubService.Controllers {
     [Route("api/[controller]")]
     [ApiController]
     public class PublishController : ControllerBase {
-        private readonly IPubActiveSubServiceProcessors PubActiveSubServiceProcessors;
+        private readonly IIntegrationProcessors PubActiveSubServiceProcessors;
 
-        public PublishController(IPubActiveSubServiceProcessors pubActiveSubServiceProcessors) {
+        public PublishController(IIntegrationProcessors pubActiveSubServiceProcessors) {
             if (null == pubActiveSubServiceProcessors) throw new ArgumentNullException(nameof(pubActiveSubServiceProcessors));
             PubActiveSubServiceProcessors = pubActiveSubServiceProcessors;
         }

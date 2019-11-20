@@ -6,14 +6,14 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace PubActiveSubService {
-    public class PubActiveSubServiceProcessors : IPubActiveSubServiceProcessors {
+    public class IntegrationProcessors : IIntegrationProcessors {
         private readonly IPublisherClient PublisherClient;
         private readonly IQueuePersisitance QueuePersisitance;
         private readonly IChannelPersisitance ChannelPersisitance;
 
         private string HostUrl = string.Empty;
 
-        public PubActiveSubServiceProcessors(IPublisherClient publisherClient, IQueuePersisitance queuePersisitance, IChannelPersisitance channelPersisitance) {
+        public IntegrationProcessors(IPublisherClient publisherClient, IQueuePersisitance queuePersisitance, IChannelPersisitance channelPersisitance) {
             if (null == publisherClient) throw new ArgumentNullException(nameof(publisherClient));
             if (null == queuePersisitance) throw new ArgumentNullException(nameof(queuePersisitance));
             if (null == channelPersisitance) throw new ArgumentNullException(nameof(channelPersisitance));

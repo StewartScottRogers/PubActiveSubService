@@ -6,9 +6,9 @@ namespace PubActiveSubService.Controllers {
     [ApiController]
     [ApiExplorerSettings(IgnoreApi = true)]
     public class PublishLoopbackController : ControllerBase {
-        private readonly IPubActiveSubServiceProcessors PubActiveSubServiceProcessors;
+        private readonly IIntegrationProcessors PubActiveSubServiceProcessors;
 
-        public PublishLoopbackController(IPubActiveSubServiceProcessors pubActiveSubServiceProcessors) {
+        public PublishLoopbackController(IIntegrationProcessors pubActiveSubServiceProcessors) {
             if (null == pubActiveSubServiceProcessors) throw new ArgumentNullException(nameof(pubActiveSubServiceProcessors));
             PubActiveSubServiceProcessors = pubActiveSubServiceProcessors;
         }

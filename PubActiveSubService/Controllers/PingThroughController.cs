@@ -5,9 +5,9 @@ namespace PubActiveSubService.Controllers {
     [Route("api/[controller]")]
     [ApiController]
     public class PingThroughController : ControllerBase {
-        private readonly IPubActiveSubServiceProcessors PubActiveSubServiceProcessors;
+        private readonly IIntegrationProcessors PubActiveSubServiceProcessors;
 
-        public PingThroughController(IPubActiveSubServiceProcessors pubActiveSubServiceProcessors) {
+        public PingThroughController(IIntegrationProcessors pubActiveSubServiceProcessors) {
             if (null == pubActiveSubServiceProcessors) throw new ArgumentNullException(nameof(pubActiveSubServiceProcessors));
             PubActiveSubServiceProcessors = pubActiveSubServiceProcessors;
         }

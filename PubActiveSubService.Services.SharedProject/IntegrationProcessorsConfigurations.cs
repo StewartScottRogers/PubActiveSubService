@@ -3,9 +3,9 @@ using PubActiveSubService.Internals.Interfaces;
 using PubActiveSubService.Internals.Services;
 
 namespace PubActiveSubService {
-    public static class PubActiveSubServiceConfigurations {
-        public static void AddPubActiveSubServices(this IServiceCollection services) {
-            services.AddSingleton<IPubActiveSubServiceProcessors, PubActiveSubServiceProcessors>();
+    public static class IntegrationProcessorsConfigurations {
+        public static void AddIntegrationProcessors(this IServiceCollection services) {
+            services.AddSingleton<IIntegrationProcessors, IntegrationProcessors>();
             services.AddSingleton<IPublisherClient, PublisherClient>();
             services.AddSingleton<IQueuePersisitance, QueuePersisitance>();
             services.AddSingleton<IChannelPersisitance, ChannelPersisitance>();

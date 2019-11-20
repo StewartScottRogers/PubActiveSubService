@@ -5,9 +5,9 @@ namespace PubActiveSubService.Controllers {
     [Route("api/[controller]")]
     [ApiController]
     public class UnsubscribeController : ControllerBase {
-        private readonly IPubActiveSubServiceProcessors PubActiveSubServiceProcessors;
+        private readonly IIntegrationProcessors PubActiveSubServiceProcessors;
 
-        public UnsubscribeController(IPubActiveSubServiceProcessors pubActiveSubServiceProcessors) {
+        public UnsubscribeController(IIntegrationProcessors pubActiveSubServiceProcessors) {
             if (null == pubActiveSubServiceProcessors) throw new ArgumentNullException(nameof(pubActiveSubServiceProcessors));
             PubActiveSubServiceProcessors = pubActiveSubServiceProcessors;
         }

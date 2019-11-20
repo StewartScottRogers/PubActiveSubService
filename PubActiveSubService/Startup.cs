@@ -36,7 +36,7 @@ namespace PubActiveSubService {
                 });
             });
 
-            services.AddPubActiveSubServices();
+            services.AddIntegrationProcessors();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env) {

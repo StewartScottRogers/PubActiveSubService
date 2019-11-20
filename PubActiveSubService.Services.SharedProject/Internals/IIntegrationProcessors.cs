@@ -4,8 +4,8 @@ namespace PubActiveSubService {
     public interface IIntegrationProcessors {
         void SaveHostUrl(string hostUrl);
 
-        string Ping();
-        string Pingthrough(string url);
+        string Touch();
+        string TouchThrough(string url);
 
         IEnumerable<Models.TracedChannel> TraceChannels(Models.ChannelSearch channelSearch);
         IEnumerable<Models.ListedChannel> ListChannels(Models.ChannelSearch channelSearch);

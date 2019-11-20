@@ -8,11 +8,11 @@ namespace PubActiveSubService {
             throw new System.NotImplementedException();
         }
 
-        public string Ping(Uri uri) {
+        public string Touch(Uri uri) {
             throw new System.NotImplementedException();
         }
 
-        public string PingThrough(Uri uri, string urlTarget) {
+        public string TouchThrough(Uri uri, string urlTarget) {
             throw new System.NotImplementedException();
         }
 

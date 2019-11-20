@@ -4,18 +4,18 @@ using System;
 namespace PubActiveSubService.Controllers {
     [Route("api/[controller]")]
     [ApiController]
-    public class PingThroughController : ControllerBase {
+    public class TouchController : ControllerBase {
         private readonly IIntegrationProcessors PubActiveSubServiceProcessors;
 
-        public PingThroughController(IIntegrationProcessors pubActiveSubServiceProcessors) {
+        public TouchController(IIntegrationProcessors pubActiveSubServiceProcessors) {
             if (null == pubActiveSubServiceProcessors) throw new ArgumentNullException(nameof(pubActiveSubServiceProcessors));
             PubActiveSubServiceProcessors = pubActiveSubServiceProcessors;
         }
 
-        [HttpPost]
-        public string Post([FromBody] Models.PingThrough pingThrough) {
+        [HttpGet]
+        public string Get() {
             PubActiveSubServiceProcessors.SaveHostUrl($"{Request.Scheme}://{Request.Host.Value}");
-            return PubActiveSubServiceProcessors.Pingthrough(pingThrough.Url);
+            return PubActiveSubServiceProcessors.Touch();
         }
     }
 }

@@ -25,9 +25,9 @@ namespace PubActiveSubService {
 
         public void SaveHostUrl(string hostUrl) => HostUrl = hostUrl;
 
-        public string Ping() => DateTimeOffset.UtcNow.ToString();
+        public string Touch() => "Touched @ " + DateTimeOffset.UtcNow.ToString();
 
-        public string Pingthrough(string url) => PublisherClient.Get(url);
+        public string TouchThrough(string url) => PublisherClient.Get(url);
 
 
         public IEnumerable<TracedChannel> TraceChannels(ChannelSearch channelSearch) {

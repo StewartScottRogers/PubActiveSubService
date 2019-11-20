@@ -21,7 +21,7 @@ namespace PubActiveSubService.Controllers {
 
         [HttpGet]
         public string Get() {
-           return PubActiveSubServiceProcessors.Ping();
+           return PubActiveSubServiceProcessors.Touch();
         }
     }
 }

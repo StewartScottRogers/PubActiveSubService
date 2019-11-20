@@ -6,17 +6,12 @@ namespace PubActiveSubService.Controllers {
     [Route("api/[controller]")]
     [ApiController]
     public class ListChannelsController : ControllerBase {
-        private readonly IIntegrationProcessors PubActiveSubServiceProcessors;
-
-        public ListChannelsController(IIntegrationProcessors pubActiveSubServiceProcessors) {
-            if (null == pubActiveSubServiceProcessors) throw new ArgumentNullException(nameof(pubActiveSubServiceProcessors));
-            PubActiveSubServiceProcessors = pubActiveSubServiceProcessors;
-        }
+        public ListChannelsController(IIntegrationProcessors integrationProcessors):base(integrationProcessors) {}
 
         [HttpPost]
         public IEnumerable<Models.ListedChannel> Post([FromBody] Models.ChannelSearch channelSearch) {
-            PubActiveSubServiceProcessors.SaveHostUrl($"{Request.Scheme}://{Request.Host.Value}");
-            return PubActiveSubServiceProcessors.ListChannels(channelSearch);
+            RecordHostUrl();
+            return IntegrationProcessors.ListChannels(channelSearch);
         }
     }
 }

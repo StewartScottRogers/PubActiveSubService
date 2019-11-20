@@ -5,17 +5,12 @@ namespace PubActiveSubService.Controllers {
     [Route("api/[controller]")]
     [ApiController]
     public class SubscribeController : ControllerBase {
-        private readonly IIntegrationProcessors PubActiveSubServiceProcessors;
-
-        public SubscribeController(IIntegrationProcessors pubActiveSubServiceProcessors) {
-            if (null == pubActiveSubServiceProcessors) throw new ArgumentNullException(nameof(pubActiveSubServiceProcessors));
-            PubActiveSubServiceProcessors = pubActiveSubServiceProcessors;
-        }
+        public SubscribeController(IIntegrationProcessors integrationProcessors) : base(integrationProcessors) { }
 
         [HttpPost]
         public void Post([FromBody] Models.Subscribe subscribe) {
-            PubActiveSubServiceProcessors.SaveHostUrl($"{Request.Scheme}://{Request.Host.Value}");
-            PubActiveSubServiceProcessors.Subscribe(subscribe);
+            RecordHostUrl();
+            IntegrationProcessors.Subscribe(subscribe);
         }
     }
 }

@@ -5,17 +5,12 @@ namespace PubActiveSubService.Controllers {
     [Route("api/[controller]")]
     [ApiController]
     public class UnsubscribeController : ControllerBase {
-        private readonly IIntegrationProcessors PubActiveSubServiceProcessors;
-
-        public UnsubscribeController(IIntegrationProcessors pubActiveSubServiceProcessors) {
-            if (null == pubActiveSubServiceProcessors) throw new ArgumentNullException(nameof(pubActiveSubServiceProcessors));
-            PubActiveSubServiceProcessors = pubActiveSubServiceProcessors;
-        }
+        public UnsubscribeController(IIntegrationProcessors integrationProcessors) : base(integrationProcessors) { }
 
         [HttpPost]
         public void Post([FromBody] Models.Unsubscribe unsubscribe) {
-            PubActiveSubServiceProcessors.SaveHostUrl($"{Request.Scheme}://{Request.Host.Value}");
-            PubActiveSubServiceProcessors.Unsubscribe(unsubscribe);
+            RecordHostUrl();
+            IntegrationProcessors.Unsubscribe(unsubscribe);
         }
     }
 }

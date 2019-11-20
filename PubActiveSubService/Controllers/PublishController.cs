@@ -5,23 +5,19 @@ namespace PubActiveSubService.Controllers {
     [Route("api/[controller]")]
     [ApiController]
     public class PublishController : ControllerBase {
-        private readonly IIntegrationProcessors PubActiveSubServiceProcessors;
-
-        public PublishController(IIntegrationProcessors pubActiveSubServiceProcessors) {
-            if (null == pubActiveSubServiceProcessors) throw new ArgumentNullException(nameof(pubActiveSubServiceProcessors));
-            PubActiveSubServiceProcessors = pubActiveSubServiceProcessors;
-        }
+        public PublishController(IIntegrationProcessors integrationProcessors) : base(integrationProcessors) { }
 
         [HttpPost]
         public string Post([FromBody] Models.PublishPackage publishPackage) {
-            PubActiveSubServiceProcessors.SaveHostUrl($"{Request.Scheme}://{Request.Host.Value}");
-            return PubActiveSubServiceProcessors.Publish(publishPackage);
+            RecordHostUrl();
+            return IntegrationProcessors.Publish(publishPackage);
         }
 
         [HttpGet]
         [ApiExplorerSettings(IgnoreApi = true)]
         public string Get() {
-            return PubActiveSubServiceProcessors.Touch();
+            RecordHostUrl();
+            return IntegrationProcessors.Touch();
         }
     }
 }

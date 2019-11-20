@@ -5,17 +5,12 @@ namespace PubActiveSubService.Controllers {
     [Route("api/[controller]")]
     [ApiController]
     public class TouchController : ControllerBase {
-        private readonly IIntegrationProcessors PubActiveSubServiceProcessors;
-
-        public TouchController(IIntegrationProcessors pubActiveSubServiceProcessors) {
-            if (null == pubActiveSubServiceProcessors) throw new ArgumentNullException(nameof(pubActiveSubServiceProcessors));
-            PubActiveSubServiceProcessors = pubActiveSubServiceProcessors;
-        }
+        public TouchController(IIntegrationProcessors integrationProcessors) : base(integrationProcessors) { }
 
         [HttpGet]
         public string Get() {
-            PubActiveSubServiceProcessors.SaveHostUrl($"{Request.Scheme}://{Request.Host.Value}");
-            return PubActiveSubServiceProcessors.Touch();
+            RecordHostUrl();
+            return IntegrationProcessors.Touch();
         }
     }
 }

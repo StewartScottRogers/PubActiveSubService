@@ -6,22 +6,18 @@ namespace PubActiveSubService.Controllers {
     [ApiController]
     [ApiExplorerSettings(IgnoreApi = true)]
     public class PublishLoopbackController : ControllerBase {
-        private readonly IIntegrationProcessors PubActiveSubServiceProcessors;
-
-        public PublishLoopbackController(IIntegrationProcessors pubActiveSubServiceProcessors) {
-            if (null == pubActiveSubServiceProcessors) throw new ArgumentNullException(nameof(pubActiveSubServiceProcessors));
-            PubActiveSubServiceProcessors = pubActiveSubServiceProcessors;
-        }
+        public PublishLoopbackController(IIntegrationProcessors integrationProcessors) : base(integrationProcessors) { }
 
         [HttpPost]
         public string Post([FromBody] Models.PublishPackage publishPackage) {
-            PubActiveSubServiceProcessors.SaveHostUrl($"{Request.Scheme}://{Request.Host.Value}");
-            return PubActiveSubServiceProcessors.PublishLoopback(publishPackage);
+            RecordHostUrl();
+            return IntegrationProcessors.PublishLoopback(publishPackage);
         }
 
         [HttpGet]
         public string Get() {
-           return PubActiveSubServiceProcessors.Touch();
+            RecordHostUrl();
+            return IntegrationProcessors.Touch();
         }
     }
 }

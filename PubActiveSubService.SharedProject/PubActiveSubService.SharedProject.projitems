@@ -21,6 +21,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\Channel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\PingThrough.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Channels.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\NameValuePair.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Status.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Subscriber.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Unsubscribe.cs" />

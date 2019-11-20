@@ -9,6 +9,14 @@ public static class StringExtentions {
         return subscriberName.Trim().ToLower().ToValidFilePathing();
     }
 
+    public static string ToEnforcedUrlNamingStandards(this string url) {
+        url = url.Trim().ToLower();
+        if (url == "string")
+            url = string.Empty;
+
+        return url;
+    }
+
     public static string ToEnforceChannelSearchNamingConventions(this string channelSearch) {
         channelSearch = channelSearch.Trim().ToLower();
         if (channelSearch == "string")

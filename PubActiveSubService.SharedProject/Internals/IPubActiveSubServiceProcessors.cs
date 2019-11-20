@@ -15,6 +15,6 @@ namespace PubActiveSubService {
 
         string Publish(Models.PublishPackage publishPackage);
 
-        string PublishArchive(Models.PublishPackage publishPackage);
+        string PublishLoopback(Models.PublishPackage publishPackage);
     }
 }

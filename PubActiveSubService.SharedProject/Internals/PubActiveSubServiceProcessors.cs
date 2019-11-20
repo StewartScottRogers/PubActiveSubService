@@ -59,7 +59,7 @@ namespace PubActiveSubService {
             return "Empty Package! Nothing to publish.";
         }
 
-        public string PublishArchive(PublishPackage publishPackage) {
+        public string PublishLoopback(PublishPackage publishPackage) {
             return "";
         }
     }

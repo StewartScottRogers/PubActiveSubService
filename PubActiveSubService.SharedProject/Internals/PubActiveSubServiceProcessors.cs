@@ -29,7 +29,7 @@ namespace PubActiveSubService {
         public string Pingthrough(string url) => PublisherClient.Get(url);
 
 
-        public IEnumerable<TracedChannel> Trace(ChannelSearch channelSearch) {
+        public IEnumerable<TracedChannel> TraceChannels(ChannelSearch channelSearch) {  
 
 
             yield return new TracedChannel() { ChannelName = "Channel/One", Subscribers = new SubscriberStatus[] { new SubscriberStatus() { SubscriberName = "SubscriberOne", Status = new Status[] { new Status() { Name = "Connected.", Value = "OK" } } } } };       

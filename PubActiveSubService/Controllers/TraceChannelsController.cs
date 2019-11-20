@@ -14,9 +14,8 @@ namespace PubActiveSubService.Controllers {
             PubActiveSubServiceProcessors = pubActiveSubServiceProcessors;
         }
 
-        // POST: api/TraceChannels
         [HttpPost]
         public IEnumerable<Models.TracedChannel> Post([FromBody] Models.ChannelSearch channelSearch) =>
-            PubActiveSubServiceProcessors.Trace(channelSearch);
+            PubActiveSubServiceProcessors.TraceChannels(channelSearch);
     }
 }

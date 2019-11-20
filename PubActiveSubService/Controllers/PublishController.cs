@@ -2,6 +2,7 @@
 using System;
 
 namespace PubActiveSubService.Controllers {
+    [Route("api/[controller]")]
     [ApiController]
     public class PublishController : ControllerBase {
         private readonly IPubActiveSubServiceProcessors PubActiveSubServiceProcessors;
@@ -11,12 +12,15 @@ namespace PubActiveSubService.Controllers {
             PubActiveSubServiceProcessors = pubActiveSubServiceProcessors;
         }
 
-        // POST api/Publish
-        [Route("api/[controller]")]
         [HttpPost]
         public string Post([FromBody] Models.PublishPackage publishPackage) {
             PubActiveSubServiceProcessors.SaveHostUrl($"{Request.Scheme}://{Request.Host.Value}");
             return PubActiveSubServiceProcessors.Publish(publishPackage); ;
-        }       
+        }
+
+        [HttpGet]
+        public string Get() {
+            return PubActiveSubServiceProcessors.Ping();
+        }
     }
 }

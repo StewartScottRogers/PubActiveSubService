@@ -12,7 +12,6 @@ namespace PubActiveSubService.Controllers {
             PubActiveSubServiceProcessors = pubActiveSubServiceProcessors;
         }
 
-        // POST: api/Subscribe
         [HttpPost]
         public void Post([FromBody] Models.Subscribe subscribe) {
             PubActiveSubServiceProcessors.SaveHostUrl($"{Request.Scheme}://{Request.Host.Value}");

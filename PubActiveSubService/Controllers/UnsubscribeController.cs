@@ -12,7 +12,6 @@ namespace PubActiveSubService.Controllers {
             PubActiveSubServiceProcessors = pubActiveSubServiceProcessors;
         }
 
-        // POST: api/Unsubscribe
         [HttpPost]
         public void Post([FromBody] Models.Unsubscribe unsubscribe) {
             PubActiveSubServiceProcessors.SaveHostUrl($"{Request.Scheme}://{Request.Host.Value}");

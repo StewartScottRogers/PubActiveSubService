@@ -17,5 +17,10 @@ namespace PubActiveSubService.Controllers {
             PubActiveSubServiceProcessors.SaveHostUrl($"{Request.Scheme}://{Request.Host.Value}");
             return PubActiveSubServiceProcessors.PublishLoopback(publishPackage);
         }
+
+        [HttpGet]
+        public string Get() {
+           return PubActiveSubServiceProcessors.Ping();
+        }
     }
 }

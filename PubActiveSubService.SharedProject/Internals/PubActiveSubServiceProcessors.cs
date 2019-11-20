@@ -32,23 +32,20 @@ namespace PubActiveSubService {
 
         public IEnumerable<TracedChannel> TraceChannels(ChannelSearch channelSearch) {
             var listedChannels = ChannelPersisitance.ListChannels(channelSearch).ToArray();
-            foreach(var listedChannel in listedChannels) {
-                yield return new TracedChannel() { 
-                    ChannelName = listedChannel.ChannelName, 
-                    Subscribers = new SubscriberStatus[] { 
-                        new SubscriberStatus() { 
-                            SubscriberName = "SubscriberOne", 
-                            Status = new Status[] { 
-                                new Status() {
-                                    Name = "Connected.",
-                                    Value = "OK" 
-                                } 
-                            } 
-                        } 
-                    } 
-                };
+            foreach (var listedChannel in listedChannels) {
+                var tracedChannel = new TracedChannel();
+                tracedChannel.ChannelName = listedChannel.ChannelName;
+                foreach (var subscriber in listedChannel.Subscribers) {
+                    var subscriberStatus = new SubscriberStatus();
+                    subscriberStatus.SubscriberName = subscriber.SubscriberName;
+                    subscriberStatus.Status.Add(new Status() { Name = "Get", Value = PublisherClient.Get(subscriber.SubscriberPostUrl) });
+                    subscriberStatus.Url = subscriber.SubscriberPostUrl;
+                    tracedChannel.Subscribers.Add(subscriberStatus);
+                }
+                yield return tracedChannel;
             }
         }
+
 
         public IEnumerable<ListedChannel> ListChannels(ChannelSearch channelSearch) => ChannelPersisitance.ListChannels(channelSearch);
 

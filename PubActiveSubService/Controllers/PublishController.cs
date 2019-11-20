@@ -19,6 +19,7 @@ namespace PubActiveSubService.Controllers {
         }
 
         [HttpGet]
+        [ApiExplorerSettings(IgnoreApi = true)]
         public string Get() {
             return PubActiveSubServiceProcessors.Ping();
         }

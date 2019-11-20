@@ -4,6 +4,7 @@ using System;
 namespace PubActiveSubService.Controllers {
     [Route("api/[controller]")]
     [ApiController]
+    [ApiExplorerSettings(IgnoreApi = true)]
     public class PublishLoopbackController : ControllerBase {
         private readonly IPubActiveSubServiceProcessors PubActiveSubServiceProcessors;
 

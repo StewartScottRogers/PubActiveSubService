@@ -28,6 +28,7 @@ namespace PubActiveSubService {
                         Email = "Stewart.Rogers@POBox.com",
                         Url = "https://github.com/StewartScottRogers",
                     },
+
                     License = new License {
                         Name = "Free and open",
                         Url = "https://github.com/StewartScottRogers",

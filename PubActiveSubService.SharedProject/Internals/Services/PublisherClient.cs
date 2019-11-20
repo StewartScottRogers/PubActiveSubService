@@ -13,8 +13,8 @@ namespace PubActiveSubService.Internals.Services {
                     httpResponseMessage.EnsureSuccessStatusCode();
                     var responseBody = httpResponseMessage.Content.ReadAsStringAsync().Result;
                     stringBuilder.AppendLine(responseBody);
-                } catch (HttpRequestException httpRequestException) {
-                    stringBuilder.AppendLine($"Message :{httpRequestException.Message}");
+                } catch (System.Exception exception) {
+                    stringBuilder.AppendLine($"Message :{exception.Message}");
                 }
             }
             return stringBuilder.ToString();
@@ -34,7 +34,6 @@ namespace PubActiveSubService.Internals.Services {
                     } catch (System.Exception exception) {
                         stringBuilder.AppendLine($"Message :{exception.Message}");
                     }
-
                 }
             return stringBuilder.ToString();
         }

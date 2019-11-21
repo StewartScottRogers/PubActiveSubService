@@ -1,8 +1,13 @@
 ﻿using System;
 public static class CommandProcessorSet {
     public static void StandardIn(string parameters = "") {
-        Console.WriteLine(Constants.CommandPrompt + "======================================================================================");
-        Console.WriteLine(Constants.CommandPrompt + "     Set Instructions.....");
-        Console.WriteLine(Constants.CommandPrompt + "======================================================================================");
+        parameters = parameters.Trim();
+        if (parameters.Length <= 0) {
+            Console.WriteLine(Constants.CommandPrompt + @"     [Set without parameters reads the dictionary of name-value-pairs.]");
+            return;         
+        }
+        Console.WriteLine(Constants.CommandPrompt + @"     [Set with parameters saves a name-value-pair [Name:Value] to the dictionary.]");
     }
+
+  
 }

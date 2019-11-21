@@ -16,6 +16,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\NameValuePair.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\PingThrough.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\PublishPackage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\PublishResult.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Status.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Subscribe.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Subscriber.cs" />

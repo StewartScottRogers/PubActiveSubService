@@ -1,4 +1,5 @@
-﻿using PubActiveSubService.Internals.Interfaces;
+﻿using Newtonsoft.Json;
+using PubActiveSubService.Internals.Interfaces;
 using PubActiveSubService.Models;
 
 using System;
@@ -30,7 +31,7 @@ namespace PubActiveSubService {
 
         public string Touch() => "Touched @ " + DateTimeOffset.UtcNow.ToString();
 
-        public string TouchThrough(string url) => PublisherClient.Get(url);
+        public PublishResult TouchThrough(string url) => PublisherClient.Get(url);
 
 
         public IEnumerable<TracedChannel> TraceChannels(ChannelSearch channelSearch) {
@@ -41,7 +42,7 @@ namespace PubActiveSubService {
                 foreach (var subscriber in listedChannel.Subscribers) {
                     var subscriberStatus = new SubscriberStatus();
                     subscriberStatus.SubscriberName = subscriber.SubscriberName;
-                    subscriberStatus.Status.Add(new Status() { Name = "Get", Value = PublisherClient.Get(subscriber.SubscriberPostUrl) });
+                    subscriberStatus.Status.Add(new Status() { Name = "Get", Value = PublisherClient.Get(subscriber.SubscriberPostUrl).Result });
                     subscriberStatus.Url = subscriber.SubscriberPostUrl;
                     tracedChannel.Subscribers.Add(subscriberStatus);
                 }
@@ -58,24 +59,43 @@ namespace PubActiveSubService {
         public void Unsubscribe(Unsubscribe unsubscribe) => ChannelPersisitance.Unsubscribe(unsubscribe);
 
 
-        public string Publish(PublishPackage publishPackage) {
+        public PublishPackage[] Publish(PublishPackage publishPackage) {
             ChannelPersisitance.PostChannelName(publishPackage.ChannelName);
 
-            if (publishPackage.Package.Length > 0)
-                return PublisherClient.Post(
-                                              publishPackage,
-                                              ChannelPersisitance.LookupSubscriberUrlsByChanneNamel(
-                                                                                                      publishPackage.ChannelName,
-                                                                                                      $"{HostUrl}/api/PublishLoopback"
-                                          )
+            if (publishPackage.Package.Length > 0) {
+                var postResult = PublisherClient.Post(
+                                                                    publishPackage,
+                                                                    ChannelPersisitance.LookupSubscriberUrlsByChanneNamel(
+                                                                                                                            publishPackage.ChannelName,
+                                                                                                                            $"{HostUrl}/api/PublishLoopback"
+                                                                    )
+                                                            );
 
-                );
+                return new PublishPackage[]{
+                                                new PublishPackage() {
+                                                                        ChannelName = publishPackage.ChannelName,
+                                                                        PackageHeaders = publishPackage.PackageHeaders,
+                                                                        Package = JsonConvert.SerializeObject(postResult),
+                                                }
+            };
+            }
 
-            return "Empty Package! Nothing to publish.";
+            return new PublishPackage[]{
+                new PublishPackage() {
+                        ChannelName = publishPackage.ChannelName,
+                        PackageHeaders = publishPackage.PackageHeaders,
+                        Package = "Empty Package! Nothing to publish."
+                }
+            };
         }
 
-        public string PublishLoopback(PublishPackage publishPackage) {
-            return "";
-        }
+        public PublishPackage[] PublishLoopback(PublishPackage publishPackage) =>
+            new PublishPackage[] {
+                new PublishPackage() {
+                                        ChannelName=publishPackage.ChannelName,
+                                        PackageHeaders = new List<NameValuePair>(){ new NameValuePair() { Name = "loopbackheader", Value= Touch() } },
+                                        Package = "Loopback Result Package! Nothing was published."
+                }
+            };
     }
 }

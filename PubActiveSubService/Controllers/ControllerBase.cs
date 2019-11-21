@@ -11,11 +11,12 @@ namespace PubActiveSubService.Controllers {
             IntegrationProcessors = integrationProcessors;
         }
 
-        protected void RecordHostUrl() {
+        protected string RecordHostUrl() {
             if (HostUrl.Length <= 0) {
                 HostUrl = $"{Request.Scheme}://{Request.Host.Value}";
                 IntegrationProcessors.SaveHostUrl(HostUrl);
             }
+            return HostUrl;
         }
     }
 }

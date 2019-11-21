@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace PubActiveSubService {
     public interface IIntegrationProcessors {
+
+        string PopulateTestData(string hostUrl);
+
         void SaveHostUrl(string hostUrl);
 
         string Touch();

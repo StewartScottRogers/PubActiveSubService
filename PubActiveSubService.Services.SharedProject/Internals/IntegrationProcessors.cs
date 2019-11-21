@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using PubActiveSubService.Internals.Interfaces;
 using PubActiveSubService.Models;
+using PubActiveSubService.Internals.Services.Library;
 
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,16 @@ namespace PubActiveSubService {
             QueuePersisitance = queuePersisitance;
             ChannelPersisitance = channelPersisitance;
             AppSettingsReader = appSettingsReader;
+        }
+
+        public string PopulateTestData(string hostUrl) {
+            var testChannelConfiguration = AppSettingsReader.GetTestChannelConfiguration();
+            var modelSubscribers = DiagnosticChannelBuilder.GetBuiltInSubscribers(testChannelConfiguration);
+            foreach (var modelSubscriber in modelSubscribers) {
+                ChannelPersisitance.PostChannelName(modelSubscriber.ChannelName);
+                ChannelPersisitance.Subscribe(modelSubscriber, $"{hostUrl}/api/PublishLoopback");
+            }
+            return testChannelConfiguration;
         }
 
         public void SaveHostUrl(string hostUrl) => HostUrl = hostUrl;

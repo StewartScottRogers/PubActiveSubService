@@ -18,6 +18,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Internals\Services\AppSettingsReader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internals\Services\ChannelPersisitanceFileSystem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internals\Services\ChannelPersisitanceInMemory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internals\Services\Library\DiagnosticChannelBuilder.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internals\Services\PublisherClient.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internals\Services\QueuePersisitanceFileSystem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Library\ChannelFileInfo.cs" />

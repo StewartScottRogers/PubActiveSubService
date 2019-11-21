@@ -26,10 +26,11 @@ namespace PubActiveSubService.Internals.Services {
             var results = new Collection<PublishResult>();
 
             Parallel.ForEach(urls, (url) => {
-                lock (results) {
-                    results.Add(Post(t, url));
-                }
-            }
+                                                var publishResult = Post(t, url);
+                                                lock (results) {
+                                                    results.Add(publishResult);
+                                                }
+                                            }
             );
 
             return results.ToArray();

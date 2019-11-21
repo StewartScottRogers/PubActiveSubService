@@ -14,7 +14,6 @@ namespace PubActiveSubService.Internals.Services {
               .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
         }
 
-        public string GetBuiltInChannels() { return ConfigurationBuilder.Build()["BuiltInChannels"]; }
-        public string GetBuiltInSubscribers() { return ConfigurationBuilder.Build()["BuiltInSubscribers"]; }
+        public string GetTestChannelConfiguration() { return ConfigurationBuilder.Build()["TestChannelConfiguration"]; }
     }
 }

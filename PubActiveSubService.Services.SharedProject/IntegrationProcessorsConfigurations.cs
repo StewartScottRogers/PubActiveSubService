@@ -7,11 +7,10 @@ namespace PubActiveSubService {
         public static void AddIntegrationServer(this IServiceCollection services) {
             services.AddSingleton<IIntegrationProcessors, IntegrationProcessors>();
 
+            services.AddSingleton<IAppSettingsReader, AppSettingsReader>();
             services.AddSingleton<IPublisherClient, PublisherClient>();
-            services.AddSingleton<IQueuePersisitance, QueuePersisitance>();
-            services.AddSingleton<IChannelPersisitance, ChannelPersisitance>();
-
-            
+            services.AddSingleton<IQueuePersisitance, QueuePersisitanceFileSystem>();
+            services.AddSingleton<IChannelPersisitance, ChannelPersisitanceFileSystem>();
         }
     }
 }

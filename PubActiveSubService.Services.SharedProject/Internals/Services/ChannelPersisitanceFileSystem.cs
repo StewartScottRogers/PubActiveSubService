@@ -1,12 +1,20 @@
 ﻿using PubActiveSubService.Internals.Interfaces;
 using PubActiveSubService.Library;
-
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace PubActiveSubService.Internals.Services {
-    public class ChannelPersisitance : IChannelPersisitance {
+    public class ChannelPersisitanceFileSystem : IChannelPersisitance {
+        private readonly IAppSettingsReader AppSettingsReader;
+
+        public ChannelPersisitanceFileSystem(IAppSettingsReader appSettingsReader) {
+            if (null == appSettingsReader) throw new ArgumentNullException(nameof(appSettingsReader));
+
+            AppSettingsReader = appSettingsReader;
+        }
+
         public string[] LookupSubscriberUrlsByChanneNamel(string channelName, params string[] internalUrls) {
             lock (this) {
                 channelName = channelName.ToEnforcedChannelNamingConventions();

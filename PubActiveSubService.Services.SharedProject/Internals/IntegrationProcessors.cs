@@ -10,17 +10,20 @@ namespace PubActiveSubService {
         private readonly IPublisherClient PublisherClient;
         private readonly IQueuePersisitance QueuePersisitance;
         private readonly IChannelPersisitance ChannelPersisitance;
+        private readonly IAppSettingsReader AppSettingsReader;
 
         private string HostUrl = string.Empty;
 
-        public IntegrationProcessors(IPublisherClient publisherClient, IQueuePersisitance queuePersisitance, IChannelPersisitance channelPersisitance) {
+        public IntegrationProcessors(IPublisherClient publisherClient, IQueuePersisitance queuePersisitance, IChannelPersisitance channelPersisitance, IAppSettingsReader appSettingsReader) {
             if (null == publisherClient) throw new ArgumentNullException(nameof(publisherClient));
             if (null == queuePersisitance) throw new ArgumentNullException(nameof(queuePersisitance));
             if (null == channelPersisitance) throw new ArgumentNullException(nameof(channelPersisitance));
+            if (null == appSettingsReader) throw new ArgumentNullException(nameof(appSettingsReader));
 
             PublisherClient = publisherClient;
             QueuePersisitance = queuePersisitance;
             ChannelPersisitance = channelPersisitance;
+            AppSettingsReader = appSettingsReader;
         }
 
         public void SaveHostUrl(string hostUrl) => HostUrl = hostUrl;

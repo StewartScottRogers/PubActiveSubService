@@ -9,14 +9,17 @@
     <Import_RootNamespace>PubActiveSubService</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Internals\Interfaces\IAppSettingsReader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internals\Interfaces\IChannelPersisitance.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internals\Interfaces\IPublisherClient.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internals\Interfaces\IQueuePersisitance.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internals\IIntegrationProcessors.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internals\IntegrationProcessors.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Internals\Services\ChannelPersisitance.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internals\Services\AppSettingsReader.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internals\Services\ChannelPersisitanceFileSystem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internals\Services\ChannelPersisitanceInMemory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internals\Services\PublisherClient.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Internals\Services\QueuePersisitance.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internals\Services\QueuePersisitanceFileSystem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Library\ChannelFileInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Library\ObjectExtentions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Library\StringExtentions.cs" />

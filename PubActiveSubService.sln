@@ -21,6 +21,8 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "PubActiveSubService.Models.
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "PubActiveSubService.Services.SharedProject", "PubActiveSubService.Services.SharedProject\PubActiveSubService.Services.SharedProject.shproj", "{065B982F-ED16-4B43-ABEB-EE32A6154F47}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PubActiveSubService.Console", "PubActiveSubService.Console\PubActiveSubService.Console.csproj", "{290D83AC-DB9C-417E-87A0-9F2259FCF49D}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		PubActiveSubService.Services.SharedProject\PubActiveSubService.Services.SharedProject.projitems*{065b982f-ed16-4b43-abeb-ee32a6154f47}*SharedItemsImports = 13
@@ -47,6 +49,10 @@ Global
 		{B649FC66-8227-4791-831C-51473534F090}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B649FC66-8227-4791-831C-51473534F090}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B649FC66-8227-4791-831C-51473534F090}.Release|Any CPU.Build.0 = Release|Any CPU
+		{290D83AC-DB9C-417E-87A0-9F2259FCF49D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{290D83AC-DB9C-417E-87A0-9F2259FCF49D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{290D83AC-DB9C-417E-87A0-9F2259FCF49D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{290D83AC-DB9C-417E-87A0-9F2259FCF49D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

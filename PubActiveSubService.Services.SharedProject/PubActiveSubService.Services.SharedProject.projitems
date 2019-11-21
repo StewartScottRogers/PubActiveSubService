@@ -17,7 +17,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Internals\Services\ChannelPersisitance.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internals\Services\PublisherClient.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internals\Services\QueuePersisitance.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Library\ChannelBadNasFileInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Library\ChannelFileInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Library\ObjectExtentions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Library\StringExtentions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IntegrationProcessorsConfigurations.cs" />

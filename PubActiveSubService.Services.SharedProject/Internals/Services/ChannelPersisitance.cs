@@ -13,7 +13,7 @@ namespace PubActiveSubService.Internals.Services {
 
                 var collection = new Collection<string>();
 
-                var channels = ChannelBadNasFileInfo.Read();
+                var channels = ChannelFileInfo.Read();
                 foreach (var channel in channels.ChannelList)
                     if (channelName == channel.ChannelName)
                         foreach (var subscriber in channel.Subscribers)
@@ -33,13 +33,13 @@ namespace PubActiveSubService.Internals.Services {
             lock (this) {
                 channelName = channelName.ToEnforcedChannelNamingConventions();
 
-                var channels = ChannelBadNasFileInfo.Read();
+                var channels = ChannelFileInfo.Read();
                 foreach (var channel in channels.ChannelList)
                     if (channelName == channel.ChannelName)
                         return;
 
                 channels.ChannelList.Add(new Models.Channel() { ChannelName = channelName });
-                ChannelBadNasFileInfo.Write(channels);
+                ChannelFileInfo.Write(channels);
             }
         }
 
@@ -47,7 +47,7 @@ namespace PubActiveSubService.Internals.Services {
             lock (this) {
                 channelSearch.Search = channelSearch.Search.ToEnforceChannelSearchNamingConventions();
 
-                var channelArray = ChannelBadNasFileInfo.Read().ChannelList.ToArray();
+                var channelArray = ChannelFileInfo.Read().ChannelList.ToArray();
                 foreach (var channel in channelArray)
                     if (
                             channelSearch.Search == channel.ChannelName
@@ -67,7 +67,7 @@ namespace PubActiveSubService.Internals.Services {
                 subscribe.ChannelName = subscribe.ChannelName.ToEnforcedChannelNamingConventions();
                 subscribe.SubscriberName = subscribe.SubscriberName.ToEnforcedSubscriberNamingConventions();
                 
-                var channels = ChannelBadNasFileInfo.Read();
+                var channels = ChannelFileInfo.Read();
                 foreach (var channel in channels.ChannelList.ToArray())
                     if (subscribe.ChannelName == channel.ChannelName) {
                         foreach (var subscriber in channel.Subscribers) {
@@ -77,7 +77,7 @@ namespace PubActiveSubService.Internals.Services {
                                                             = subscribe.SubscriberPostUrl.Length > 0 ?
                                                                 subscribe.SubscriberPostUrl : defaultInternalUr.ToEnforcedUrlNamingStandards();
 
-                                ChannelBadNasFileInfo.Write(channels);
+                                ChannelFileInfo.Write(channels);
                                 return;
                             }
                         }
@@ -92,7 +92,7 @@ namespace PubActiveSubService.Internals.Services {
                                                     }
                                                );
 
-                        ChannelBadNasFileInfo.Write(channels);
+                        ChannelFileInfo.Write(channels);
                         return;
                     }
             }
@@ -103,13 +103,13 @@ namespace PubActiveSubService.Internals.Services {
                 var channelName = unsubscribe.ChannelName.ToEnforcedChannelNamingConventions();
                 var subscriberName = unsubscribe.SubscriberName.ToEnforcedSubscriberNamingConventions();
 
-                var channels = ChannelBadNasFileInfo.Read();
+                var channels = ChannelFileInfo.Read();
                 foreach (var channel in channels.ChannelList.ToArray())
                     if (channelName == channel.ChannelName) {
                         foreach (var subscriber in channel.Subscribers.ToArray()) {
                             if (subscriber.SubscriberName == subscriberName) {
                                 channel.Subscribers.Remove(subscriber);
-                                ChannelBadNasFileInfo.Write(channels);
+                                ChannelFileInfo.Write(channels);
                                 return;
                             }
                         }

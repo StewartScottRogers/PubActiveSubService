@@ -5,14 +5,14 @@ using System.IO;
 using System.Reflection;
 
 namespace PubActiveSubService.Library {
-    public static class ChannelBadNasFileInfo {
+    public static class ChannelFileInfo {
         private static readonly BadNasFileInfo BadNasFileInfo = null;
         private static readonly object SyncLock = new object();
         private static Models.Channels Channels = null;
 
-        static ChannelBadNasFileInfo() {
+        static ChannelFileInfo() {
             var directoryPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            var filePath = Path.Combine(directoryPath, "Channels.json");
+            var filePath = Path.Combine(directoryPath, "Console.Set.json");
             var fileInfo = new FileInfo(filePath);
             BadNasFileInfo = new BadNasFileInfo(fileInfo);
         }

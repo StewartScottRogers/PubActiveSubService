@@ -12,7 +12,7 @@ namespace PubActiveSubService.Library {
 
         static ChannelFileInfo() {
             var directoryPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            var filePath = Path.Combine(directoryPath, "Console.Set.json");
+            var filePath = Path.Combine(directoryPath, "Channels.json");
             var fileInfo = new FileInfo(filePath);
             BadNasFileInfo = new BadNasFileInfo(fileInfo);
         }

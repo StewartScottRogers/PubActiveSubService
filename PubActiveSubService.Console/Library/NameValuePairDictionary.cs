@@ -10,20 +10,26 @@ public static class NameValuePairDictionary {
     static NameValuePairDictionary() { LoadFile(); }
 
     public static void Post(string name, string value) {
-        name = name.Trim().ToLower();
-        value = value.Trim();
         lock (NameValuePairs) {
-            if (NameValuePairs.Exists(nameValuePair => nameValuePair.Name == name))
-                NameValuePairs.Find(nameValuePair => nameValuePair.Name == name).Value = value;
-            else
-                NameValuePairs.Add(new NameValuePair() { Name = name, Value = value });
+            name = name.Trim().ToLower();
+            value = value.Trim();
 
+            if (value.Length > 0) {
+                if (NameValuePairs.Exists(nameValuePair => nameValuePair.Name == name))
+                    NameValuePairs.Find(nameValuePair => nameValuePair.Name == name).Value = value;
+                else
+                    NameValuePairs.Add(new NameValuePair() { Name = name, Value = value });
+            } else {
+                if (NameValuePairs.Exists(nameValuePair => nameValuePair.Name == name))
+                    NameValuePairs.Remove(NameValuePairs.Find(nameValuePair => nameValuePair.Name == name));
+            }
             SaveFile();
         }
     }
+
     public static IEnumerable<String> Select(string name) {
-        name = name.Trim().ToLower();
         lock (NameValuePairs) {
+            name = name.Trim().ToLower();
             if (NameValuePairs.Exists(nameValuePair => nameValuePair.Name == name))
                 yield return NameValuePairs.Find(nameValuePair => nameValuePair.Name == name).Value;
         }
@@ -36,13 +42,9 @@ public static class NameValuePairDictionary {
         }
     }
 
-    public static void LoadFile() {
-        NameValuePairs = NameValuePairsFileInfo.Read();
-    }
+    private static void LoadFile() => NameValuePairs = NameValuePairsFileInfo.Read();
 
-    public static void SaveFile() {
-        NameValuePairsFileInfo.Write(NameValuePairs);
-    }
+    private static void SaveFile() => NameValuePairsFileInfo.Write(NameValuePairs);
 
     [Serializable]
     private class NameValuePair : INameValuePair {
@@ -51,22 +53,22 @@ public static class NameValuePairDictionary {
     }
 
     private static class NameValuePairsFileInfo {
-        private static readonly BadNasFileInfo BadNasFileInfo = null;
+        private static readonly BadNasFileInfo ReliableFileInfo = null;
         private static readonly object SyncLock = new object();
         private static List<NameValuePair> NameValuePairs = null;
 
         static NameValuePairsFileInfo() {
             var directoryPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            var filePath = Path.Combine(directoryPath, "Channels.json");
+            var filePath = Path.Combine(directoryPath, "NameValuePairs.json");
             var fileInfo = new FileInfo(filePath);
-            BadNasFileInfo = new BadNasFileInfo(fileInfo);
+            ReliableFileInfo = new BadNasFileInfo(fileInfo);
         }
 
         public static void Write(List<NameValuePair> nameValuePairs) {
             try {
                 lock (SyncLock) {
                     NameValuePairs = nameValuePairs.DeepClone();
-                    BadNasFileInfo.WriteAllText(JsonConvert.SerializeObject(NameValuePairs));
+                    ReliableFileInfo.WriteAllText(JsonConvert.SerializeObject(NameValuePairs));
                 }
             } catch (Exception exception) {
                 throw exception;
@@ -79,8 +81,8 @@ public static class NameValuePairDictionary {
                     if (null != NameValuePairs)
                         return NameValuePairs.DeepClone();
 
-                    if (BadNasFileInfo.Exists()) {
-                        var channelsJson = BadNasFileInfo.ReadAllText();
+                    if (ReliableFileInfo.Exists()) {
+                        var channelsJson = ReliableFileInfo.ReadAllText();
                         var channels = (List<NameValuePair>)JsonConvert.DeserializeObject<List<NameValuePair>>(channelsJson);
                         return channels;
                     }

@@ -6,7 +6,7 @@ public static class CommandProcessorTest {
     public static void StandardIn(string parameters = "") {
         try {
 
-            var channels = TestBuilder.GetTestChannelsAndSubscribers().ToArray();
+            var subscribes = TestBuilder.GetTestSubscribes().ToArray();
 
             parameters = parameters.Trim();
             if (parameters.Length <= 0) {

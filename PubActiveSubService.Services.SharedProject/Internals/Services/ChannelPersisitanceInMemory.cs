@@ -46,7 +46,7 @@ namespace PubActiveSubService.Internals.Services {
                                 SubscriberName = subscribe.SubscriberName.ToEnforcedSubscriberNamingConventions(),
                                 Enabled = true,
                                 SubscriberPostUrl = subscribe.SubscriberPostUrl.Length > 0 ?
-                                                                    subscribe.SubscriberPostUrl : defaultInternalUrl.ToEnforcedUrlNamingStandards()
+                                                        subscribe.SubscriberPostUrl : defaultInternalUrl.ToEnforcedUrlNamingStandards()
                             });
                     break;
                 }

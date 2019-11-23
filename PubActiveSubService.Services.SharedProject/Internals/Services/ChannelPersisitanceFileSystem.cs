@@ -75,16 +75,15 @@ namespace PubActiveSubService.Internals.Services {
                 subscribe.SubscriberPostUrl = subscribe.SubscriberPostUrl.ToEnforcedUrlNamingStandards();
                 subscribe.ChannelName = subscribe.ChannelName.ToEnforcedChannelNamingConventions();
                 subscribe.SubscriberName = subscribe.SubscriberName.ToEnforcedSubscriberNamingConventions();
-                
+
                 var channels = ChannelFileInfo.Read();
                 foreach (var channel in channels.ChannelList.ToArray())
                     if (subscribe.ChannelName == channel.ChannelName) {
                         foreach (var subscriber in channel.Subscribers) {
                             if (subscriber.SubscriberName == subscribe.SubscriberName) {
                                 subscriber.Enabled = subscribe.Enabled;
-                                subscriber.SubscriberPostUrl
-                                                            = subscribe.SubscriberPostUrl.Length > 0 ?
-                                                                subscribe.SubscriberPostUrl : defaultInternalUrl.ToEnforcedUrlNamingStandards();
+                                subscriber.SubscriberPostUrl = subscribe.SubscriberPostUrl.Length > 0 ?
+                                                                    subscribe.SubscriberPostUrl : defaultInternalUrl.ToEnforcedUrlNamingStandards();
 
                                 ChannelFileInfo.Write(channels);
                                 return;
@@ -95,7 +94,7 @@ namespace PubActiveSubService.Internals.Services {
                                                     new Models.Subscriber() {
                                                         SubscriberName = subscribe.SubscriberName,
                                                         Enabled = subscribe.Enabled,
-                                                        SubscriberPostUrl 
+                                                        SubscriberPostUrl
                                                             = subscribe.SubscriberPostUrl.Length > 0 ?
                                                                 subscribe.SubscriberPostUrl : defaultInternalUrl.ToEnforcedUrlNamingStandards()
                                                     }

@@ -22,6 +22,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Internals\Services\Library\ChannelSearchExtentions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internals\Services\Library\DiagnosticChannelBuilder.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internals\Services\Library\QueuedChannelCollection.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internals\Services\Library\ReaderWriterLockSlimExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internals\Services\PublisherClient.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internals\Services\QueuePersisitanceFileSystem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Library\ChannelFileInfo.cs" />

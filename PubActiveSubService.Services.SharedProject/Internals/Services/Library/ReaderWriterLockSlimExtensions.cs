@@ -4,20 +4,25 @@
         /// <summary>
         /// 
         ///    private static readonly ReaderWriterLockSlim ReaderWriterLockSlim = new ReaderWriterLockSlim()
-        /// 
-        ///    using (ReaderWriterLockSlim.ReadLock()) {
-        /// 
-        ///    }
         ///    
-        ///    using (ReaderWriterLockSlim.UpgadableReadLockToken()) {
+        ///         using (var readLock = ReaderWriterLockSlim.ReadLock()) {
         /// 
-        ///    }
+        ///         }
         ///    
-        ///    using (ReaderWriterLockSlim.WriteLock()) {
+        ///         using (var upgadableReadLock = ReaderWriterLockSlim.UpgadableReadLockToken()) {
+        ///    
+        ///             using (var writeLock = upgadableReadLock.WriteLock()) {
+        ///
+        ///             }
+        ///         }
+        ///    
+        ///         using (var writeLock = ReaderWriterLockSlim.WriteLock()) {
         /// 
-        ///    }
+        ///         }
         ///    
         /// </summary>
+
+
         private sealed class ReadLockToken : IDisposable {
             private ReaderWriterLockSlim ReaderWriterLockSlim;
 
@@ -72,11 +77,8 @@
 
         public static UpgadableRead UpgadableReadLock(this ReaderWriterLockSlim readerWriterLockSlim) => new UpgadableReadLockToken(readerWriterLockSlim);
 
-
         public static IDisposable WriteLock(this ReaderWriterLockSlim readerWriterLockSlim) => new WriteLockToken(readerWriterLockSlim);
 
-        public interface UpgadableRead : IDisposable {
-            IDisposable WriteLock();
-        }
+        public interface UpgadableRead : IDisposable { IDisposable WriteLock(); }
     }
 }

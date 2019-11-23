@@ -18,11 +18,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)Internals\Services\AppSettingsReader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internals\Services\ChannelPersisitanceFileSystem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internals\Services\ChannelPersisitanceInMemory.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Internals\Services\Library\ChannelMemmory.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Internals\Services\Library\MemoryChannelSearchExtentions.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Internals\Services\Library\SubscriberQueue.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internals\Services\LibraryInMemory\InMemoryChannel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internals\Services\LibraryInMemory\InMemoryChannelsExtentions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internals\Services\LibraryInMemory\InMemorySubscriber.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internals\Services\Library\DiagnosticChannelBuilder.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Internals\Services\Library\InMemoryChannels.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internals\Services\LibraryInMemory\InMemoryDatabase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internals\Services\Library\ReaderWriterLockSlimExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internals\Services\PublisherClient.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internals\Services\QueuePersisitanceInMemory.cs" />
@@ -31,5 +31,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Library\ObjectExtentions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Library\StringExtentions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IntegrationProcessorsConfigurations.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Internals\Services\LibraryInMemory\" />
   </ItemGroup>
 </Project>

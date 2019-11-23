@@ -1,5 +1,5 @@
 ﻿using PubActiveSubService.Internals.Interfaces;
-using PubActiveSubService.Internals.Services.Library;
+using PubActiveSubService.Internals.Services.LibraryInMemory;
 
 using System;
 using System.Collections.Generic;
@@ -18,46 +18,47 @@ namespace PubActiveSubService.Internals.Services {
         }
 
         public IEnumerable<Models.Channel> ListChannels(Models.ChannelSearch channelSearch) {
-            using (var ReadLock = InMemoryChannels.ReaderWriterLockSlim.ReadLock()) {
-                foreach (var channelQueue in InMemoryChannels.ChannelMemmoryCollection.Search(channelSearch.Search)) {
+            using (var ReadLock = InMemoryDatabase.ReaderWriterLockSlim.ReadLock()) {
+                foreach (var inMemoryChannel in InMemoryDatabase.InMemoryChannels.Search(channelSearch.Search)) {
                     var subscriberCollection = new Collection<Models.Subscriber>();
-                    foreach (var subscriber in channelQueue.Subscribers)
-                        subscriberCollection.Add(new Models.Subscriber() {  SubscriberName= subscriber.SubscriberName, Enabled= subscriber.Enabled, SubscriberPostUrl= subscriber.SubscriberPostUrl });
-                    yield return new Models.Channel() { ChannelName = channelQueue.ChannelName, Subscribers = subscriberCollection.ToList() };
-                }                    
+                    foreach (var inMemorySubscriber in inMemoryChannel.InMemorySubscribers)
+                        subscriberCollection.Add(new Models.Subscriber() { SubscriberName = inMemorySubscriber.SubscriberName, Enabled = inMemorySubscriber.Enabled, SubscriberPostUrl = inMemorySubscriber.SubscriberPostUrl });
+                    yield return new Models.Channel() { ChannelName = inMemoryChannel.ChannelName, Subscribers = subscriberCollection.ToList() };
+                }
             }
         }
 
         public string[] LookupSubscriberUrlsByChanneNamel(string channelName, params string[] defaultInternalUrls) {
-            using (var ReadLock = InMemoryChannels.ReaderWriterLockSlim.ReadLock()) {
-                return InMemoryChannels.ChannelMemmoryCollection.Search(channelName)
+            using (var ReadLock = InMemoryDatabase.ReaderWriterLockSlim.ReadLock()) {
+                return InMemoryDatabase.InMemoryChannels.Search(channelName)
                 .ToArray()
-                    .SelectMany(channel => channel.Subscribers)
-                        .Select(subscriber => subscriber.SubscriberPostUrl)
+                    .SelectMany(channel => channel.InMemorySubscribers)
+                        .Select(inMemorySubscriber => inMemorySubscriber.SubscriberPostUrl)
                             .Concat(defaultInternalUrls).ToArray();
             }
         }
 
         public void PostChannelName(string channelName) {
-            using (var upgadableReadLock = InMemoryChannels.ReaderWriterLockSlim.UpgadableReadLock()) {
-                if (InMemoryChannels.ChannelMemmoryCollection.Lookup(channelName).Count() <= 0)
+            using (var upgadableReadLock = InMemoryDatabase.ReaderWriterLockSlim.UpgadableReadLock()) {
+                if (InMemoryDatabase.InMemoryChannels.Lookup(channelName).Count() <= 0)
                     using (var writeLock = upgadableReadLock.WriteLock()) {
-                        InMemoryChannels.ChannelMemmoryCollection.Add(new ChannelMemmory() { ChannelName = channelName.Trim() });
+                        InMemoryDatabase.InMemoryChannels.Add(new InMemoryChannel() { ChannelName = channelName.Trim() });
                     }
             }
         }
 
         public void Subscribe(Models.Subscribe subscribe, string defaultInternalUrl) {
-            using (var upgadableReadLock = InMemoryChannels.ReaderWriterLockSlim.UpgadableReadLock()) {
-                foreach (var channel in InMemoryChannels.ChannelMemmoryCollection.Lookup(subscribe.ChannelName).ToArray()) {
+            using (var upgadableReadLock = InMemoryDatabase.ReaderWriterLockSlim.UpgadableReadLock()) {
+                foreach (var inMemoryChannel in InMemoryDatabase.InMemoryChannels.Lookup(subscribe.ChannelName).ToArray()) {
                     using (var writeLock = upgadableReadLock.WriteLock()) {
-                        channel.Subscribers.Add(
-                                new SubscriberQueue() {
-                                    SubscriberName = subscribe.SubscriberName.ToEnforcedSubscriberNamingConventions(),
-                                    Enabled = true,
-                                    SubscriberPostUrl = subscribe.SubscriberPostUrl.Length > 0 ?
-                                                            subscribe.SubscriberPostUrl : defaultInternalUrl.ToEnforcedUrlNamingStandards()
-                                });
+                        inMemoryChannel.InMemorySubscribers.Add(
+                                                                    new InMemorySubscriber() {
+                                                                        SubscriberName = subscribe.SubscriberName.ToEnforcedSubscriberNamingConventions(),
+                                                                        Enabled = true,
+                                                                        SubscriberPostUrl = subscribe.SubscriberPostUrl.Length > 0 ?
+                                                                                                subscribe.SubscriberPostUrl : defaultInternalUrl.ToEnforcedUrlNamingStandards()
+                                                                    }
+                                                               );
                     }
                     break;
                 }
@@ -65,12 +66,12 @@ namespace PubActiveSubService.Internals.Services {
         }
 
         public void Unsubscribe(Models.Unsubscribe unsubscribe) {
-            using (var writeLock = InMemoryChannels.ReaderWriterLockSlim.WriteLock()) {
-                foreach (var channel in InMemoryChannels.ChannelMemmoryCollection.Lookup(unsubscribe.ChannelName).ToArray())
-                    foreach (var subscriber in channel.Subscribers)
-                        if (subscriber.SubscriberName == unsubscribe.SubscriberName) {
-                            subscriber.Enabled = false;
-                            subscriber.PublishPackageQueue.Clear();
+            using (var writeLock = InMemoryDatabase.ReaderWriterLockSlim.WriteLock()) {
+                foreach (var inMemoryChannel in InMemoryDatabase.InMemoryChannels.Lookup(unsubscribe.ChannelName).ToArray())
+                    foreach (var inMemorySubscriber in inMemoryChannel.InMemorySubscribers)
+                        if (inMemorySubscriber.SubscriberName == unsubscribe.SubscriberName) {
+                            inMemorySubscriber.Enabled = false;
+                            inMemorySubscriber.PublishPackageQueue.Clear();
                         }
             }
         }

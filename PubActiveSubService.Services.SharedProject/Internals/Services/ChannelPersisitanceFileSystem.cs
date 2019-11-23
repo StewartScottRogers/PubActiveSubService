@@ -52,7 +52,7 @@ namespace PubActiveSubService.Internals.Services {
             }
         }
 
-        public IEnumerable<Models.ListedChannel> ListChannels(Models.ChannelSearch channelSearch) {
+        public IEnumerable<Models.Channel> ListChannels(Models.ChannelSearch channelSearch) {
             lock (this) {
                 channelSearch.Search = channelSearch.Search.ToEnforceChannelSearchNamingConventions();
 
@@ -63,14 +63,14 @@ namespace PubActiveSubService.Internals.Services {
                             || channelSearch.Search.Length <= 0
                             || channelSearch.Search.Trim() == "*"
                        )
-                        yield return new Models.ListedChannel() {
+                        yield return new Models.Channel() {
                             ChannelName = channel.ChannelName,
                             Subscribers = channel.Subscribers
                         };
             }
         }
 
-        public void Subscribe(Models.Subscribe subscribe, string defaultInternalUr) {
+        public void Subscribe(Models.Subscribe subscribe, string defaultInternalUrl) {
             lock (this) {
                 subscribe.SubscriberPostUrl = subscribe.SubscriberPostUrl.ToEnforcedUrlNamingStandards();
                 subscribe.ChannelName = subscribe.ChannelName.ToEnforcedChannelNamingConventions();
@@ -84,7 +84,7 @@ namespace PubActiveSubService.Internals.Services {
                                 subscriber.Enabled = subscribe.Enabled;
                                 subscriber.SubscriberPostUrl
                                                             = subscribe.SubscriberPostUrl.Length > 0 ?
-                                                                subscribe.SubscriberPostUrl : defaultInternalUr.ToEnforcedUrlNamingStandards();
+                                                                subscribe.SubscriberPostUrl : defaultInternalUrl.ToEnforcedUrlNamingStandards();
 
                                 ChannelFileInfo.Write(channels);
                                 return;
@@ -97,7 +97,7 @@ namespace PubActiveSubService.Internals.Services {
                                                         Enabled = subscribe.Enabled,
                                                         SubscriberPostUrl 
                                                             = subscribe.SubscriberPostUrl.Length > 0 ?
-                                                                subscribe.SubscriberPostUrl : defaultInternalUr.ToEnforcedUrlNamingStandards()
+                                                                subscribe.SubscriberPostUrl : defaultInternalUrl.ToEnforcedUrlNamingStandards()
                                                     }
                                                );
 

@@ -7,7 +7,7 @@ namespace PubActiveSubService {
         string TouchThrough(Uri uri, string urlTarget);
 
         IEnumerable<Models.TracedChannel> TraceChannels(Uri uri, Models.ChannelSearch channelSearch);
-        IEnumerable<Models.ListedChannel> ListChannels(Uri uri, Models.ChannelSearch channelSearch);
+        IEnumerable<Models.Channel> ListChannels(Uri uri, Models.ChannelSearch channelSearch);
 
         void Subscribe(Uri uri, Models.Subscribe subscribe);
         void Unsubscribe(Uri uri, Models.Unsubscribe unsubscribe);

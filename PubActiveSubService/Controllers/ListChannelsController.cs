@@ -9,7 +9,7 @@ namespace PubActiveSubService.Controllers {
         public ListChannelsController(IIntegrationProcessors integrationProcessors):base(integrationProcessors) {}
 
         [HttpPost]
-        public IEnumerable<Models.ListedChannel> Post([FromBody] Models.ChannelSearch channelSearch) {
+        public IEnumerable<Models.Channel> Post([FromBody] Models.ChannelSearch channelSearch) {
             RecordHostUrl();
             return IntegrationProcessors.ListChannels(channelSearch);
         }

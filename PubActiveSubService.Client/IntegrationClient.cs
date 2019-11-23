@@ -25,8 +25,8 @@ namespace PubActiveSubService {
         public string PublishLoopback(Uri uri, PublishPackage publishPackage)
            => PublisherClient.Post(publishPackage, uri);
 
-        public IEnumerable<ListedChannel> ListChannels(Uri uri, ChannelSearch channelSearch)
-           => PublisherClient.Post<IEnumerable<ListedChannel>, ChannelSearch>(channelSearch, uri);
+        public IEnumerable<Channel> ListChannels(Uri uri, ChannelSearch channelSearch)
+           => PublisherClient.Post<IEnumerable<Channel>, ChannelSearch>(channelSearch, uri);
 
         public void Subscribe(Uri uri, Subscribe subscribe)
             => PublisherClient.Post(subscribe, uri);

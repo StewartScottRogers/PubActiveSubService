@@ -1,4 +1,5 @@
 ﻿using PubActiveSubService.Internals.Interfaces;
+using PubActiveSubService.Internals.Services.Library;
 
 using System;
 using System.Collections.Generic;
@@ -6,10 +7,7 @@ using System.Linq;
 
 namespace PubActiveSubService.Internals.Services {
     public class ChannelPersisitanceInMemory : IChannelPersisitance {
-        private static readonly MemoryChannels TheMemoryChannels = new MemoryChannels();
-
         private readonly IAppSettingsReader AppSettingsReader;
-
 
         public ChannelPersisitanceInMemory(IAppSettingsReader appSettingsReader) {
             if (null == appSettingsReader) throw new ArgumentNullException(nameof(appSettingsReader));
@@ -17,57 +15,51 @@ namespace PubActiveSubService.Internals.Services {
             AppSettingsReader = appSettingsReader;
         }
 
-        public IEnumerable<Models.ListedChannel> ListChannels(Models.ChannelSearch channelSearch) => throw new NotImplementedException();
-
-        public string[] LookupSubscriberUrlsByChanneNamel(string channelName, params string[] internalUrls) => throw new NotImplementedException();
-
-        public void PostChannelName(string channelName) => TheMemoryChannels.PostChannelName(channelName);
-
-        public void Subscribe(Models.Subscribe subscribe, string defaultInternalUrl) => throw new NotImplementedException();
-
-        public void Unsubscribe(Models.Unsubscribe unsubscribe) => throw new NotImplementedException();
-
-        #region Private classes
-        private class MemoryChannels {
-            private readonly Dictionary<string, MemoryChannel> Dictionary = new Dictionary<string, MemoryChannel>();
-            public void PostChannelName(string channelName) {
-                if (Dictionary.ContainsKey(channelName))
-                    return;
-
-                var MemoryChannel = new MemoryChannel() { ChannelName = channelName };
-                while (!Dictionary.TryAdd(MemoryChannel.ChannelName, MemoryChannel)) { }
+        public IEnumerable<Models.Channel> ListChannels(Models.ChannelSearch channelSearch) {
+            lock (this) {
+                return QueuedChannelCollectionManager.QueuedChannelCollection.Search(channelSearch.Search);
             }
+        }
 
-            public IEnumerable<MemoryChannel> ListChannels(string search) {
-                foreach (var key in Dictionary.Keys.ToArray()) {
-                    MemoryChannel memoryChannel;
-                    while (!Dictionary.TryGetValue(key, out memoryChannel)) { }
-                    yield return memoryChannel;
+        public string[] LookupSubscriberUrlsByChanneNamel(string channelName, params string[] defaultInternalUrls) {
+            lock (this) {
+                return QueuedChannelCollectionManager.QueuedChannelCollection.Search(channelName)
+                .ToArray()
+                    .SelectMany(channel => channel.Subscribers)
+                        .Select(subscriber => subscriber.SubscriberPostUrl)
+                            .Concat(defaultInternalUrls).ToArray();
+            }
+        }
+
+        public void PostChannelName(string channelName) {
+            lock (this) {
+                if (QueuedChannelCollectionManager.QueuedChannelCollection.Lookup(channelName).Count() <= 0)
+                    QueuedChannelCollectionManager.QueuedChannelCollection.Add(new ChannelQueue() { ChannelName = channelName.Trim() });
+            }
+        }
+
+        public void Subscribe(Models.Subscribe subscribe, string defaultInternalUrl) {
+            lock (this) {
+                foreach (var channel in QueuedChannelCollectionManager.QueuedChannelCollection.Lookup(subscribe.ChannelName).ToArray()) {
+                    channel.Subscribers.Add(
+                            new Models.Subscriber() {
+                                SubscriberName = subscribe.SubscriberName.ToEnforcedSubscriberNamingConventions(),
+                                Enabled = true,
+                                SubscriberPostUrl = subscribe.SubscriberPostUrl.Length > 0 ?
+                                                                    subscribe.SubscriberPostUrl : defaultInternalUrl.ToEnforcedUrlNamingStandards()
+                            });
+                    break;
                 }
-                yield break;
             }
         }
 
-        private class MemoryChannel {
-            private readonly Dictionary<string, MemorySubscriber> Dictionary = new Dictionary<string, MemorySubscriber>();
-            public string ChannelName { get; set; } = string.Empty;
-
-            public IEnumerable<MemorySubscriber> ListSubscribers(string subscriberName) {
-                foreach (var key in Dictionary.Keys.ToArray()) {
-                    MemorySubscriber memorySubscriber;
-                    while (!Dictionary.TryGetValue(key, out memorySubscriber)) { }
-                    yield return memorySubscriber;
-                }
-                yield break; ;
+        public void Unsubscribe(Models.Unsubscribe unsubscribe) {
+            lock (this) {
+                foreach (var channel in QueuedChannelCollectionManager.QueuedChannelCollection.Lookup(unsubscribe.ChannelName).ToArray())
+                    foreach (var subscriber in channel.Subscribers)
+                        if (subscriber.SubscriberName == unsubscribe.SubscriberName)
+                            subscriber.Enabled = false;
             }
         }
-
-        private class MemorySubscriber {
-            private readonly Queue<Models.PublishPackage> PublishPackageQueue = new Queue<Models.PublishPackage>();
-            public string SubscriberName { get; set; } = string.Empty;
-            public bool Enabled { get; set; } = false;
-            public string SubscriberPostUrl { get; set; } = string.Empty;
-        }
-        #endregion
     }
 }

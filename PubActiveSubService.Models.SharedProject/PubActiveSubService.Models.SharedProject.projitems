@@ -12,7 +12,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\Channel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Channels.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\ChannelSearch.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\ListedChannel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\NameValuePair.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\PingThrough.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\PublishPackage.cs" />

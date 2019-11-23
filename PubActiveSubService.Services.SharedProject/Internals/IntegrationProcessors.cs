@@ -62,7 +62,7 @@ namespace PubActiveSubService {
         }
 
 
-        public IEnumerable<ListedChannel> ListChannels(ChannelSearch channelSearch) => ChannelPersisitance.ListChannels(channelSearch);
+        public IEnumerable<Channel> ListChannels(ChannelSearch channelSearch) => ChannelPersisitance.ListChannels(channelSearch);
 
 
         public void Subscribe(Subscribe subscribe) => ChannelPersisitance.Subscribe(subscribe, $"{HostUrl}/api/PublishLoopback");

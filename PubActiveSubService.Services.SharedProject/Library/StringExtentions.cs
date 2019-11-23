@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 
 public static class StringExtentions {
-    public static string ToEnforcedChannelNamingConventions(this string channelName) {
+    public static string ToEnforcedChannelNamingConventions(this string channelName) { 
         return channelName.Trim().ToLower().ToValidFilePathing();
     }
 

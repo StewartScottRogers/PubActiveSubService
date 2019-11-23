@@ -12,7 +12,7 @@ namespace PubActiveSubService {
         PublishResult TouchThrough(string url);
 
         IEnumerable<Models.TracedChannel> TraceChannels(Models.ChannelSearch channelSearch);
-        IEnumerable<Models.ListedChannel> ListChannels(Models.ChannelSearch channelSearch);
+        IEnumerable<Models.Channel> ListChannels(Models.ChannelSearch channelSearch);
 
         void Subscribe(Models.Subscribe subscribe);
         void Unsubscribe(Models.Unsubscribe unsubscribe);

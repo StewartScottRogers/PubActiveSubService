@@ -4,9 +4,11 @@ using PubActiveSubService.Internals.Services.Library;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 
 namespace PubActiveSubService.Internals.Services {
     public class ChannelPersisitanceInMemory : IChannelPersisitance {
+        private static readonly ReaderWriterLockSlim ReaderWriterLockSlim = new ReaderWriterLockSlim();
         private readonly IAppSettingsReader AppSettingsReader;
 
         public ChannelPersisitanceInMemory(IAppSettingsReader appSettingsReader) {
@@ -16,13 +18,13 @@ namespace PubActiveSubService.Internals.Services {
         }
 
         public IEnumerable<Models.Channel> ListChannels(Models.ChannelSearch channelSearch) {
-            lock (this) {
+            using (var ReadLock = ReaderWriterLockSlim.ReadLock()) {
                 return QueuedChannelCollectionManager.QueuedChannelCollection.Search(channelSearch.Search);
             }
         }
 
         public string[] LookupSubscriberUrlsByChanneNamel(string channelName, params string[] defaultInternalUrls) {
-            lock (this) {
+            using (var ReadLock = ReaderWriterLockSlim.ReadLock()) {
                 return QueuedChannelCollectionManager.QueuedChannelCollection.Search(channelName)
                 .ToArray()
                     .SelectMany(channel => channel.Subscribers)
@@ -32,29 +34,33 @@ namespace PubActiveSubService.Internals.Services {
         }
 
         public void PostChannelName(string channelName) {
-            lock (this) {
+            using (var upgadableReadLock = ReaderWriterLockSlim.UpgadableReadLock()) {
                 if (QueuedChannelCollectionManager.QueuedChannelCollection.Lookup(channelName).Count() <= 0)
-                    QueuedChannelCollectionManager.QueuedChannelCollection.Add(new ChannelQueue() { ChannelName = channelName.Trim() });
+                    using (var writeLock = upgadableReadLock.WriteLock()) {
+                        QueuedChannelCollectionManager.QueuedChannelCollection.Add(new ChannelQueue() { ChannelName = channelName.Trim() });
+                    }
             }
         }
 
         public void Subscribe(Models.Subscribe subscribe, string defaultInternalUrl) {
-            lock (this) {
+            using (var upgadableReadLock = ReaderWriterLockSlim.UpgadableReadLock()) {
                 foreach (var channel in QueuedChannelCollectionManager.QueuedChannelCollection.Lookup(subscribe.ChannelName).ToArray()) {
-                    channel.Subscribers.Add(
-                            new Models.Subscriber() {
-                                SubscriberName = subscribe.SubscriberName.ToEnforcedSubscriberNamingConventions(),
-                                Enabled = true,
-                                SubscriberPostUrl = subscribe.SubscriberPostUrl.Length > 0 ?
-                                                        subscribe.SubscriberPostUrl : defaultInternalUrl.ToEnforcedUrlNamingStandards()
-                            });
+                    using (var writeLock = upgadableReadLock.WriteLock()) {
+                        channel.Subscribers.Add(
+                                new Models.Subscriber() {
+                                    SubscriberName = subscribe.SubscriberName.ToEnforcedSubscriberNamingConventions(),
+                                    Enabled = true,
+                                    SubscriberPostUrl = subscribe.SubscriberPostUrl.Length > 0 ?
+                                                            subscribe.SubscriberPostUrl : defaultInternalUrl.ToEnforcedUrlNamingStandards()
+                                });
+                    }
                     break;
                 }
             }
         }
 
         public void Unsubscribe(Models.Unsubscribe unsubscribe) {
-            lock (this) {
+            using (var writeLock = ReaderWriterLockSlim.WriteLock()) {
                 foreach (var channel in QueuedChannelCollectionManager.QueuedChannelCollection.Lookup(unsubscribe.ChannelName).ToArray())
                     foreach (var subscriber in channel.Subscribers)
                         if (subscriber.SubscriberName == unsubscribe.SubscriberName)

@@ -2,17 +2,21 @@
     internal static class ReaderWriterLockSlimExtensions {
 
         /// <summary>
-        ///    using (TheReaderWriterLockSlim.ReadLock()) {
+        /// 
+        ///    private static readonly ReaderWriterLockSlim ReaderWriterLockSlim = new ReaderWriterLockSlim()
+        /// 
+        ///    using (ReaderWriterLockSlim.ReadLock()) {
         /// 
         ///    }
         ///    
-        ///    using (TheReaderWriterLockSlim.UpgadableReadLockToken()) {
+        ///    using (ReaderWriterLockSlim.UpgadableReadLockToken()) {
         /// 
         ///    }
         ///    
-        ///    using (TheReaderWriterLockSlim.WriteLock()) {
+        ///    using (ReaderWriterLockSlim.WriteLock()) {
         /// 
         ///    }
+        ///    
         /// </summary>
         private sealed class ReadLockToken : IDisposable {
             private ReaderWriterLockSlim ReaderWriterLockSlim;

@@ -5,9 +5,11 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading;
 
 namespace PubActiveSubService.Internals.Services {
     public class ChannelPersisitanceFileSystem : IChannelPersisitance {
+        private static readonly ReaderWriterLockSlim ReaderWriterLockSlim = new ReaderWriterLockSlim();
         private readonly IAppSettingsReader AppSettingsReader;
 
         public ChannelPersisitanceFileSystem(IAppSettingsReader appSettingsReader) {
@@ -17,7 +19,7 @@ namespace PubActiveSubService.Internals.Services {
         }
 
         public string[] LookupSubscriberUrlsByChanneNamel(string channelName, params string[] internalUrls) {
-            lock (this) {
+            using (var ReadLock = ReaderWriterLockSlim.ReadLock()) {
                 channelName = channelName.ToEnforcedChannelNamingConventions();
 
                 var collection = new Collection<string>();
@@ -38,22 +40,8 @@ namespace PubActiveSubService.Internals.Services {
             }
         }
 
-        public void PostChannelName(string channelName) {
-            lock (this) {
-                channelName = channelName.ToEnforcedChannelNamingConventions();
-
-                var channels = ChannelFileInfo.Read();
-                foreach (var channel in channels.ChannelList)
-                    if (channelName == channel.ChannelName)
-                        return;
-
-                channels.ChannelList.Add(new Models.Channel() { ChannelName = channelName });
-                ChannelFileInfo.Write(channels);
-            }
-        }
-
         public IEnumerable<Models.Channel> ListChannels(Models.ChannelSearch channelSearch) {
-            lock (this) {
+            using (var ReadLock = ReaderWriterLockSlim.ReadLock()) {
                 channelSearch.Search = channelSearch.Search.ToEnforceChannelSearchNamingConventions();
 
                 var channelArray = ChannelFileInfo.Read().ChannelList.ToArray();
@@ -70,8 +58,26 @@ namespace PubActiveSubService.Internals.Services {
             }
         }
 
+        public void PostChannelName(string channelName) {
+            using (var upgadableReadLock = ReaderWriterLockSlim.UpgadableReadLock()) {
+                channelName = channelName.ToEnforcedChannelNamingConventions();
+
+                var channels = ChannelFileInfo.Read();
+                foreach (var channel in channels.ChannelList)
+                    if (channelName == channel.ChannelName)
+                        return;
+
+                channels.ChannelList.Add(new Models.Channel() { ChannelName = channelName });
+                using (var WriteLock = upgadableReadLock.WriteLock()) {
+                    ChannelFileInfo.Write(channels);
+                }
+            }
+        }
+
+
+
         public void Subscribe(Models.Subscribe subscribe, string defaultInternalUrl) {
-            lock (this) {
+            using (var upgadableReadLock = ReaderWriterLockSlim.UpgadableReadLock()) {
                 subscribe.SubscriberPostUrl = subscribe.SubscriberPostUrl.ToEnforcedUrlNamingStandards();
                 subscribe.ChannelName = subscribe.ChannelName.ToEnforcedChannelNamingConventions();
                 subscribe.SubscriberName = subscribe.SubscriberName.ToEnforcedSubscriberNamingConventions();
@@ -100,14 +106,16 @@ namespace PubActiveSubService.Internals.Services {
                                                     }
                                                );
 
-                        ChannelFileInfo.Write(channels);
+                        using (var WriteLock = upgadableReadLock.WriteLock()) {
+                            ChannelFileInfo.Write(channels);
+                        }
                         return;
                     }
             }
         }
 
         public void Unsubscribe(Models.Unsubscribe unsubscribe) {
-            lock (this) {
+            using (var upgadableReadLock = ReaderWriterLockSlim.UpgadableReadLock()) {
                 var channelName = unsubscribe.ChannelName.ToEnforcedChannelNamingConventions();
                 var subscriberName = unsubscribe.SubscriberName.ToEnforcedSubscriberNamingConventions();
 
@@ -117,7 +125,9 @@ namespace PubActiveSubService.Internals.Services {
                         foreach (var subscriber in channel.Subscribers.ToArray()) {
                             if (subscriber.SubscriberName == subscriberName) {
                                 channel.Subscribers.Remove(subscriber);
-                                ChannelFileInfo.Write(channels);
+                                using (var WriteLock = upgadableReadLock.WriteLock()) {
+                                    ChannelFileInfo.Write(channels);
+                                }
                                 return;
                             }
                         }

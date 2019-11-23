@@ -2,5 +2,6 @@
     Unknown,
     Exit,
     Help,
-    Set
+    Set,
+    Test
 }

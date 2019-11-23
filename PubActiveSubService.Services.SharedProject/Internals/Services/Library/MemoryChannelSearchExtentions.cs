@@ -2,8 +2,8 @@
 using System.Linq;
 
 namespace PubActiveSubService.Internals.Services.Library {
-    public static class ChannelSearchExtentions {
-        public static IEnumerable<Models.Channel> Search(this IEnumerable<Models.Channel> Channels, string search) {
+    public static class MemoryChannelSearchExtentions {
+        public static IEnumerable<ChannelMemmory> Search(this IEnumerable<ChannelMemmory> Channels, string search) {
             search = search.ToEnforceChannelSearchNamingConventions();
 
             if (search.Length <= 0) {
@@ -26,7 +26,7 @@ namespace PubActiveSubService.Internals.Services.Library {
             yield break;
         }
 
-        public static IEnumerable<Models.Channel> Lookup(this IEnumerable<Models.Channel> Channels, string channelName) {
+        public static IEnumerable<ChannelMemmory> Lookup(this IEnumerable<ChannelMemmory> Channels, string channelName) {
             if (channelName.Trim().EndsWith("*"))
                 yield break;
 

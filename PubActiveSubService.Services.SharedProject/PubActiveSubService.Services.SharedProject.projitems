@@ -18,12 +18,14 @@
     <Compile Include="$(MSBuildThisFileDirectory)Internals\Services\AppSettingsReader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internals\Services\ChannelPersisitanceFileSystem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internals\Services\ChannelPersisitanceInMemory.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Internals\Services\Library\ChannelQueue.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Internals\Services\Library\ChannelSearchExtentions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internals\Services\Library\ChannelMemmory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internals\Services\Library\MemoryChannelSearchExtentions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internals\Services\Library\SubscriberQueue.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internals\Services\Library\DiagnosticChannelBuilder.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Internals\Services\Library\QueuedChannelCollection.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internals\Services\Library\InMemoryChannels.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internals\Services\Library\ReaderWriterLockSlimExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internals\Services\PublisherClient.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internals\Services\QueuePersisitanceInMemory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internals\Services\QueuePersisitanceFileSystem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Library\ChannelFileInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Library\ObjectExtentions.cs" />

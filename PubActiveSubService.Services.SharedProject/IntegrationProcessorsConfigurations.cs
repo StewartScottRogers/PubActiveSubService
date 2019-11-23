@@ -9,8 +9,10 @@ namespace PubActiveSubService {
 
             services.AddSingleton<IAppSettingsReader, AppSettingsReader>();
             services.AddSingleton<IPublisherClient, PublisherClient>();
-            services.AddSingleton<IQueuePersisitance, QueuePersisitanceFileSystem>();
-            services.AddSingleton<IChannelPersisitance, ChannelPersisitanceFileSystem>();
+            //services.AddSingleton<IQueuePersisitance, QueuePersisitanceFileSystem>();
+            services.AddSingleton<IQueuePersisitance, QueuePersisitanceInMemory>();
+            //services.AddSingleton<IChannelPersisitance, ChannelPersisitanceFileSystem>();
+            services.AddSingleton<IChannelPersisitance, ChannelPersisitanceInMemory>();
         }
     }
 }

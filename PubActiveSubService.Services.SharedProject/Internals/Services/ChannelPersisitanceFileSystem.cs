@@ -29,8 +29,8 @@ namespace PubActiveSubService.Internals.Services {
                     if (channelName == channel.ChannelName)
                         foreach (var subscriber in channel.Subscribers)
                             if (subscriber.Enabled)
-                                if (subscriber.SubscriberPostUrl.Length > 0)
-                                    collection.Add(subscriber.SubscriberPostUrl);
+                                if (subscriber.RestUrl.Length > 0)
+                                    collection.Add(subscriber.RestUrl);
 
                 foreach (var internalUrl in internalUrls)
                     if (internalUrl.Length > 0)
@@ -40,16 +40,16 @@ namespace PubActiveSubService.Internals.Services {
             }
         }
 
-        public IEnumerable<Models.Channel> ListChannels(Models.ChannelSearch channelSearch) {
+        public IEnumerable<Models.Channel> ListChannels(Models.Search search) {
             using (var ReadLock = ReaderWriterLockSlim.ReadLock()) {
-                channelSearch.Search = channelSearch.Search.ToEnforceChannelSearchNamingConventions();
+                search.SearchPattern = search.SearchPattern.ToEnforceChannelSearchPatternConventions();
 
                 var channelArray = ChannelFileInfo.Read().ChannelList.ToArray();
                 foreach (var channel in channelArray)
                     if (
-                            channelSearch.Search == channel.ChannelName
-                            || channelSearch.Search.Length <= 0
-                            || channelSearch.Search.Trim() == "*"
+                            search.SearchPattern == channel.ChannelName
+                            || search.SearchPattern.Length <= 0
+                            || search.SearchPattern.Trim() == "*"
                        )
                         yield return new Models.Channel() {
                             ChannelName = channel.ChannelName,
@@ -78,7 +78,7 @@ namespace PubActiveSubService.Internals.Services {
 
         public void Subscribe(Models.Subscribe subscribe, string defaultInternalUrl) {
             using (var upgadableReadLock = ReaderWriterLockSlim.UpgadableReadLock()) {
-                subscribe.SubscriberPostUrl = subscribe.SubscriberPostUrl.ToEnforcedUrlNamingStandards();
+                subscribe.RestUrl = subscribe.RestUrl.ToEnforcedUrlNamingStandards();
                 subscribe.ChannelName = subscribe.ChannelName.ToEnforcedChannelNamingConventions();
                 subscribe.SubscriberName = subscribe.SubscriberName.ToEnforcedSubscriberNamingConventions();
 
@@ -88,8 +88,8 @@ namespace PubActiveSubService.Internals.Services {
                         foreach (var subscriber in channel.Subscribers) {
                             if (subscriber.SubscriberName == subscribe.SubscriberName) {
                                 subscriber.Enabled = subscribe.Enabled;
-                                subscriber.SubscriberPostUrl = subscribe.SubscriberPostUrl.Length > 0 ?
-                                                                    subscribe.SubscriberPostUrl : defaultInternalUrl.ToEnforcedUrlNamingStandards();
+                                subscriber.RestUrl = subscribe.RestUrl.Length > 0 ?
+                                                                    subscribe.RestUrl : defaultInternalUrl.ToEnforcedUrlNamingStandards();
 
                                 ChannelFileInfo.Write(channels);
                                 return;
@@ -100,9 +100,9 @@ namespace PubActiveSubService.Internals.Services {
                                                     new Models.Subscriber() {
                                                         SubscriberName = subscribe.SubscriberName,
                                                         Enabled = subscribe.Enabled,
-                                                        SubscriberPostUrl
-                                                            = subscribe.SubscriberPostUrl.Length > 0 ?
-                                                                subscribe.SubscriberPostUrl : defaultInternalUrl.ToEnforcedUrlNamingStandards()
+                                                        RestUrl
+                                                            = subscribe.RestUrl.Length > 0 ?
+                                                                subscribe.RestUrl : defaultInternalUrl.ToEnforcedUrlNamingStandards()
                                                     }
                                                );
 

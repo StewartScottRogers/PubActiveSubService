@@ -4,7 +4,7 @@ namespace PubActiveSubService.Models {
     [System.Serializable]
     public class SubscriberStatus {
         public string SubscriberName { get; set; } = string.Empty;
-        public string Url { get; set; } = string.Empty;
-        public List<Status> Status { get; set; } = new List<Status>();
+        public string RestUrl { get; set; } = string.Empty;
+        public List<NameValuePair> Status { get; set; } = new List<NameValuePair>();
     }
 }

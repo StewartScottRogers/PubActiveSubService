@@ -17,12 +17,12 @@ namespace PubActiveSubService.Internals.Services {
             AppSettingsReader = appSettingsReader;
         }
 
-        public IEnumerable<Models.Channel> ListChannels(Models.ChannelSearch channelSearch) {
+        public IEnumerable<Models.Channel> ListChannels(Models.Search search) {
             using (var ReadLock = InMemoryDatabase.ReaderWriterLockSlim.ReadLock()) {
-                foreach (var inMemoryChannel in InMemoryDatabase.InMemoryChannels.Search(channelSearch.Search)) {
+                foreach (var inMemoryChannel in InMemoryDatabase.InMemoryChannels.Search(search.SearchPattern)) {
                     var subscriberCollection = new Collection<Models.Subscriber>();
                     foreach (var inMemorySubscriber in inMemoryChannel.InMemorySubscribers)
-                        subscriberCollection.Add(new Models.Subscriber() { SubscriberName = inMemorySubscriber.SubscriberName, Enabled = inMemorySubscriber.Enabled, SubscriberPostUrl = inMemorySubscriber.SubscriberPostUrl });
+                        subscriberCollection.Add(new Models.Subscriber() { SubscriberName = inMemorySubscriber.SubscriberName, Enabled = inMemorySubscriber.Enabled, RestUrl = inMemorySubscriber.RestUrl });
                     yield return new Models.Channel() { ChannelName = inMemoryChannel.ChannelName, Subscribers = subscriberCollection.ToList() };
                 }
             }
@@ -33,7 +33,7 @@ namespace PubActiveSubService.Internals.Services {
                 return InMemoryDatabase.InMemoryChannels.Search(channelName)
                 .ToArray()
                     .SelectMany(channel => channel.InMemorySubscribers)
-                        .Select(inMemorySubscriber => inMemorySubscriber.SubscriberPostUrl)
+                        .Select(inMemorySubscriber => inMemorySubscriber.RestUrl)
                             .Concat(defaultInternalUrls).ToArray();
             }
         }
@@ -55,8 +55,8 @@ namespace PubActiveSubService.Internals.Services {
                                                                     new InMemorySubscriber() {
                                                                         SubscriberName = subscribe.SubscriberName.ToEnforcedSubscriberNamingConventions(),
                                                                         Enabled = true,
-                                                                        SubscriberPostUrl = subscribe.SubscriberPostUrl.Length > 0 ?
-                                                                                                subscribe.SubscriberPostUrl : defaultInternalUrl.ToEnforcedUrlNamingStandards()
+                                                                        RestUrl = subscribe.RestUrl.Length > 0 ?
+                                                                                                subscribe.RestUrl : defaultInternalUrl.ToEnforcedUrlNamingStandards()
                                                                     }
                                                                );
                     }

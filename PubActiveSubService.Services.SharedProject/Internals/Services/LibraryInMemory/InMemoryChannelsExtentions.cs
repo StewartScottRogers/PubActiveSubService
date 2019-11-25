@@ -4,7 +4,7 @@ using System.Linq;
 namespace PubActiveSubService.Internals.Services.LibraryInMemory {
     public static class InMemoryChannelsExtentions {
         public static IEnumerable<InMemoryChannel> Search(this IEnumerable<InMemoryChannel> InMemoryChannels, string search) {
-            search = search.ToEnforceChannelSearchNamingConventions();
+            search = search.ToEnforceChannelSearchPatternConventions();
 
             if (search.Length <= 0) {
                 foreach (var InMemoryChannel in InMemoryChannels)

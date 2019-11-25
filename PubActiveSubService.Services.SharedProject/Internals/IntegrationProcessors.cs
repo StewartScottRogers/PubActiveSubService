@@ -1,8 +1,7 @@
 ﻿using Newtonsoft.Json;
 using PubActiveSubService.Internals.Interfaces;
-using PubActiveSubService.Models;
 using PubActiveSubService.Internals.Services.Library;
-
+using PubActiveSubService.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,16 +44,16 @@ namespace PubActiveSubService {
         public Results TouchThrough(string url) => PublisherClient.Get(url);
 
 
-        public IEnumerable<ChannelStatus> TraceChannels(ChannelSearch channelSearch) {
-            var listedChannels = ChannelPersisitance.ListChannels(channelSearch).ToArray();
+        public IEnumerable<ChannelStatus> TraceChannels(Search search) {
+            var listedChannels = ChannelPersisitance.ListChannels(search).ToArray();
             foreach (var listedChannel in listedChannels) {
                 var channelStatus = new ChannelStatus();
                 channelStatus.ChannelName = listedChannel.ChannelName;
                 foreach (var subscriber in listedChannel.Subscribers) {
                     var subscriberStatus = new SubscriberStatus();
                     subscriberStatus.SubscriberName = subscriber.SubscriberName;
-                    subscriberStatus.Status.Add(new Status() { Name = "Get", Value = PublisherClient.Get(subscriber.SubscriberPostUrl).Result });
-                    subscriberStatus.Url = subscriber.SubscriberPostUrl;
+                    subscriberStatus.Status.Add(new NameValuePair() { Name = "Get", Value = PublisherClient.Get(subscriber.RestUrl).Result });
+                    subscriberStatus.RestUrl = subscriber.RestUrl;
                     channelStatus.SubscriberStatuses.Add(subscriberStatus);
                 }
                 yield return channelStatus;
@@ -62,7 +61,7 @@ namespace PubActiveSubService {
         }
 
 
-        public IEnumerable<Channel> ListChannels(ChannelSearch channelSearch) => ChannelPersisitance.ListChannels(channelSearch);
+        public IEnumerable<Channel> ListChannels(Search search) => ChannelPersisitance.ListChannels(search);
 
 
         public void Subscribe(Subscribe subscribe) => ChannelPersisitance.Subscribe(subscribe, $"{HostUrl}/api/PublishLoopback");

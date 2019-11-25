@@ -17,7 +17,7 @@ public static class StringExtentions {
         return url;
     }
 
-    public static string ToEnforceChannelSearchNamingConventions(this string channelSearch) {
+    public static string ToEnforceChannelSearchPatternConventions(this string channelSearch) {
         channelSearch = channelSearch.Trim().ToLower();
         if (channelSearch == "string")
             channelSearch = "*";

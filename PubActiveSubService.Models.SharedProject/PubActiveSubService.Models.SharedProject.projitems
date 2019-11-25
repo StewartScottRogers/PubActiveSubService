@@ -11,12 +11,11 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Models\Channel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Channels.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\ChannelSearch.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Search.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\NameValuePair.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\TouchThrough.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\RestUrl.cs" />
     <Compile Include="..\PubActiveSubService.Models.SharedProject\Models\Package.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Results.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\Status.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Subscribe.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Subscriber.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\SubscriberStatus.cs" />

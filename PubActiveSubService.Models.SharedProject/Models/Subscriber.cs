@@ -5,8 +5,8 @@
 
         public bool Enabled { get; set; } = false;
 
-        public string SubscriberPostUrl { get; set; } = string.Empty;
+        public string RestUrl { get; set; } = string.Empty;
 
-        public override string ToString() => $"{nameof(SubscriberName)}: '{SubscriberName}', {nameof(Enabled)}: '{Enabled}', {nameof(SubscriberPostUrl)}: '{SubscriberPostUrl}'.";
+        public override string ToString() => $"{nameof(SubscriberName)}: '{SubscriberName}', {nameof(Enabled)}: '{Enabled}', {nameof(RestUrl)}: '{RestUrl}'.";
     }
 }

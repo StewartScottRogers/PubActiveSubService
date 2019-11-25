@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+
 using System;
+using System.Net.Mime;
 
 namespace PubActiveSubService.Controllers {
     [Route("api/[controller]")]
@@ -8,9 +11,12 @@ namespace PubActiveSubService.Controllers {
         public TouchThroughController(IIntegrationProcessors integrationProcessors) : base(integrationProcessors) { }
 
         [HttpPost]
-        public Models.Results Post([FromBody] Models.TouchThrough touchThrough) {
+        [Consumes(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public Models.Results Post([FromBody] Models.RestUrl restUrl) {
             RecordHostUrl();
-            return IntegrationProcessors.TouchThrough(touchThrough.Url);
+            return IntegrationProcessors.TouchThrough(restUrl.Url);
         }
     }
 }

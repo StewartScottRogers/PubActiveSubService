@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+
 using System.Collections.Generic;
+using System.Net.Mime;
 
 namespace PubActiveSubService.Controllers {
     [Route("api/[controller]")]
@@ -8,9 +11,12 @@ namespace PubActiveSubService.Controllers {
         public TraceChannelsController(IIntegrationProcessors integrationProcessors) : base(integrationProcessors) { }
 
         [HttpPost]
-        public IEnumerable<Models.ChannelStatus> Post([FromBody] Models.ChannelSearch channelSearch) {
+        [Consumes(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(StatusCodes.Status202Accepted)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public IEnumerable<Models.ChannelStatus> Post([FromBody] Models.Search search) {
             RecordHostUrl();
-            return IntegrationProcessors.TraceChannels(channelSearch);
+            return IntegrationProcessors.TraceChannels(search);
         }
     }
 }

@@ -39,7 +39,7 @@ namespace Library {
                         var modelSubscriber = new PubActiveSubService.Models.Subscribe();
                         modelSubscriber.ChannelName = channelName;
                         modelSubscriber.SubscriberName = subscriberName;
-                        modelSubscriber.SubscriberPostUrl = subscriberPostUrl;
+                        modelSubscriber.RestUrl = subscriberPostUrl;
                         modelSubscriber.Enabled = (subscriberPostUrl.Length > 0);
                         modelSubscribes.Add(modelSubscriber);
                     }

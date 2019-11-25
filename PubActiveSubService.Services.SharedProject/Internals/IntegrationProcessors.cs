@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using PubActiveSubService.Internals.Interfaces;
 using PubActiveSubService.Internals.Services.Library;
-using PubActiveSubService.Models;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,18 +41,18 @@ namespace PubActiveSubService {
 
         public string Touch() => "Touched @ " + DateTimeOffset.UtcNow.ToString();
 
-        public Results TouchThrough(string url) => PublisherClient.Get(url);
+        public Models.Results TouchThrough(string url) => PublisherClient.Get(url);
 
 
-        public IEnumerable<ChannelStatus> TraceChannels(Search search) {
+        public IEnumerable<Models.ChannelStatus> TraceChannels(Models.Search search) {
             var listedChannels = ChannelPersisitance.ListChannels(search).ToArray();
             foreach (var listedChannel in listedChannels) {
-                var channelStatus = new ChannelStatus();
+                var channelStatus = new Models.ChannelStatus();
                 channelStatus.ChannelName = listedChannel.ChannelName;
                 foreach (var subscriber in listedChannel.Subscribers) {
-                    var subscriberStatus = new SubscriberStatus();
+                    var subscriberStatus = new Models.SubscriberStatus();
                     subscriberStatus.SubscriberName = subscriber.SubscriberName;
-                    subscriberStatus.Status.Add(new NameValuePair() { Name = "Get", Value = PublisherClient.Get(subscriber.RestUrl).Result });
+                    subscriberStatus.Status.Add(new Models.NameValuePair() { Name = "Get", Value = PublisherClient.Get(subscriber.RestUrl).Result });
                     subscriberStatus.RestUrl = subscriber.RestUrl;
                     channelStatus.SubscriberStatuses.Add(subscriberStatus);
                 }
@@ -61,15 +61,15 @@ namespace PubActiveSubService {
         }
 
 
-        public IEnumerable<Channel> ListChannels(Search search) => ChannelPersisitance.ListChannels(search);
+        public IEnumerable<Models.Channel> ListChannels(Models.Search search) => ChannelPersisitance.ListChannels(search);
 
 
-        public void Subscribe(Subscribe subscribe) => ChannelPersisitance.Subscribe(subscribe, $"{HostUrl}/api/PublishLoopback");
+        public void Subscribe(Models.Subscribe subscribe) => ChannelPersisitance.Subscribe(subscribe, $"{HostUrl}/api/PublishLoopback");
 
-        public void Unsubscribe(Unsubscribe unsubscribe) => ChannelPersisitance.Unsubscribe(unsubscribe);
+        public void Unsubscribe(Models.SubscriberBinding subscriberBinding) => ChannelPersisitance.Unsubscribe(subscriberBinding);
 
 
-        public Package[] Publish(Package package) {
+        public Models.Package[] Publish(Models.Package package) {
             ChannelPersisitance.PostChannelName(package.ChannelName);
 
             if (package.Message.Length > 0) {
@@ -81,8 +81,8 @@ namespace PubActiveSubService {
                                                                     )
                                                             );
 
-                return new Package[]{
-                                                new Package() {
+                return new Models.Package[]{
+                                                new Models.Package() {
                                                                         ChannelName = package.ChannelName,
                                                                         MessageHeaders = package.MessageHeaders,
                                                                         Message = JsonConvert.SerializeObject(postResult),
@@ -90,8 +90,8 @@ namespace PubActiveSubService {
             };
             }
 
-            return new Package[]{
-                new Package() {
+            return new Models.Package[]{
+                new Models.Package() {
                         ChannelName = package.ChannelName,
                         MessageHeaders = package.MessageHeaders,
                         Message = "Empty Package! Nothing to publish."
@@ -99,11 +99,11 @@ namespace PubActiveSubService {
             };
         }
 
-        public Package[] PublishLoopback(Package package) =>
-            new Package[] {
-                new Package() {
+        public Models.Package[] PublishLoopback(Models.Package package) =>
+            new Models.Package[] {
+                new Models.Package() {
                                         ChannelName=package.ChannelName,
-                                        MessageHeaders = new List<NameValuePair>(){ new NameValuePair() { Name = "loopbackheader", Value= Touch() } },
+                                        MessageHeaders = new List<Models.NameValuePair>(){ new Models.NameValuePair() { Name = "loopbackheader", Value= Touch() } },
                                         Message = "Loopback Result Package! Nothing was published."
                 }
             };

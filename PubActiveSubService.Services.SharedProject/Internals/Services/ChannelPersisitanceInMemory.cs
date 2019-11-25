@@ -65,11 +65,11 @@ namespace PubActiveSubService.Internals.Services {
             }
         }
 
-        public void Unsubscribe(Models.Unsubscribe unsubscribe) {
+        public void Unsubscribe(Models.SubscriberBinding subscriberBinding) {
             using (var writeLock = InMemoryDatabase.ReaderWriterLockSlim.WriteLock()) {
-                foreach (var inMemoryChannel in InMemoryDatabase.InMemoryChannels.Lookup(unsubscribe.ChannelName).ToArray())
+                foreach (var inMemoryChannel in InMemoryDatabase.InMemoryChannels.Lookup(subscriberBinding.ChannelName).ToArray())
                     foreach (var inMemorySubscriber in inMemoryChannel.InMemorySubscribers)
-                        if (inMemorySubscriber.SubscriberName == unsubscribe.SubscriberName) {
+                        if (inMemorySubscriber.SubscriberName == subscriberBinding.SubscriberName) {
                             inMemorySubscriber.Enabled = false;
                             inMemorySubscriber.PackageQueue.Clear();
                         }

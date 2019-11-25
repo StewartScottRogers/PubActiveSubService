@@ -10,7 +10,7 @@ namespace PubActiveSubService {
         IEnumerable<Models.Channel> ListChannels(Uri uri, Models.Search search);
 
         void Subscribe(Uri uri, Models.Subscribe subscribe);
-        void Unsubscribe(Uri uri, Models.Unsubscribe unsubscribe);
+        void Unsubscribe(Uri uri, Models.SubscriberBinding subscriberBinding);
 
         string Publish(Uri uri, Models.Package package);
 

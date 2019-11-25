@@ -114,10 +114,10 @@ namespace PubActiveSubService.Internals.Services {
             }
         }
 
-        public void Unsubscribe(Models.Unsubscribe unsubscribe) {
+        public void Unsubscribe(Models.SubscriberBinding subscriberBinding) {
             using (var upgadableReadLock = ReaderWriterLockSlim.UpgadableReadLock()) {
-                var channelName = unsubscribe.ChannelName.ToEnforcedChannelNamingConventions();
-                var subscriberName = unsubscribe.SubscriberName.ToEnforcedSubscriberNamingConventions();
+                var channelName = subscriberBinding.ChannelName.ToEnforcedChannelNamingConventions();
+                var subscriberName = subscriberBinding.SubscriberName.ToEnforcedSubscriberNamingConventions();
 
                 var channels = ChannelFileInfo.Read();
                 foreach (var channel in channels.ChannelList.ToArray())

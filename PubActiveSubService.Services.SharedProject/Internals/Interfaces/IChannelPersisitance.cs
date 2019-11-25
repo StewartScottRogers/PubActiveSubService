@@ -6,6 +6,6 @@ namespace PubActiveSubService.Internals.Interfaces {
         void PostChannelName(string channelName);
         IEnumerable<Models.Channel> ListChannels(Models.Search search);
         void Subscribe(Models.Subscribe subscribe, string defaultInternalUrl);
-        void Unsubscribe(Models.Unsubscribe unsubscribe);
+        void Unsubscribe(Models.SubscriberBinding subscriberBinding);
     }
 }

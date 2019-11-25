@@ -1,7 +1,5 @@
 ﻿using Newtonsoft.Json;
 
-using PubActiveSubService.Models;
-
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -16,23 +14,23 @@ namespace PubActiveSubService {
         public string TouchThrough(Uri uri, string urlTarget)
             => PublisherClient.Post(urlTarget, uri);
 
-        public IEnumerable<ChannelStatus> TraceChannels(Uri uri, Search search)
-            => PublisherClient.Post<IEnumerable<ChannelStatus>, Search>(search, uri);
+        public IEnumerable<Models.ChannelStatus> TraceChannels(Uri uri, Models.Search search)
+            => PublisherClient.Post<IEnumerable<Models.ChannelStatus>, Models.Search>(search, uri);
 
-        public string Publish(Uri uri, Package package)
+        public string Publish(Uri uri, Models.Package package)
             => PublisherClient.Post(package, uri);
 
-        public string PublishLoopback(Uri uri, Package package)
+        public string PublishLoopback(Uri uri, Models.Package package)
            => PublisherClient.Post(package, uri);
 
-        public IEnumerable<Channel> ListChannels(Uri uri, Search search)
-           => PublisherClient.Post<IEnumerable<Channel>, Search>(search, uri);
+        public IEnumerable<Models.Channel> ListChannels(Uri uri, Models.Search search)
+           => PublisherClient.Post<IEnumerable<Models.Channel>, Models.Search>(search, uri);
 
-        public void Subscribe(Uri uri, Subscribe subscribe)
+        public void Subscribe(Uri uri, Models.Subscribe subscribe)
             => PublisherClient.Post(subscribe, uri);
 
-        public void Unsubscribe(Uri uri, Unsubscribe unsubscribe)
-            => PublisherClient.Post(unsubscribe, uri);
+        public void Unsubscribe(Uri uri, Models.SubscriberBinding subscriberBinding)
+            => PublisherClient.Post(subscriberBinding, uri);
 
         #region Private Classes
         private static class PublisherClient {

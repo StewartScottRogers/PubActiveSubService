@@ -15,7 +15,7 @@ namespace PubActiveSubService {
         IEnumerable<Models.Channel> ListChannels(Models.Search search);
 
         void Subscribe(Models.Subscribe subscribe);
-        void Unsubscribe(Models.Unsubscribe unsubscribe);
+        void Unsubscribe(Models.SubscriberBinding subscriberBinding);
 
         Package[] Publish(Models.Package package);
 

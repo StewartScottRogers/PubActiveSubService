@@ -20,6 +20,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\Subscriber.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\SubscriberStatus.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\ChannelStatus.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\Unsubscribe.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\SubscriberBinding.cs" />
   </ItemGroup>
 </Project>

@@ -14,9 +14,9 @@ namespace PubActiveSubService.Controllers {
         [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status202Accepted)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public void Post([FromBody] Models.Unsubscribe unsubscribe) {
+        public void Post([FromBody] Models.SubscriberBinding subscriberBinding) {
             RecordHostUrl();
-            IntegrationProcessors.Unsubscribe(unsubscribe);
+            IntegrationProcessors.Unsubscribe(subscriberBinding);
         }
     }
 }

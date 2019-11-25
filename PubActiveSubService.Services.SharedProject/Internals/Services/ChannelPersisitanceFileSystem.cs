@@ -24,8 +24,8 @@ namespace PubActiveSubService.Internals.Services {
 
                 var collection = new Collection<string>();
 
-                var channels = ChannelFileInfo.Read();
-                foreach (var channel in channels.ChannelList)
+                var channels = ChannelFileSystem.Read();
+                foreach (var channel in channels.Channels)
                     if (channelName == channel.ChannelName)
                         foreach (var subscriber in channel.Subscribers)
                             if (subscriber.Enabled)
@@ -44,7 +44,7 @@ namespace PubActiveSubService.Internals.Services {
             using (var ReadLock = ReaderWriterLockSlim.ReadLock()) {
                 search.SearchPattern = search.SearchPattern.ToEnforceChannelSearchPatternConventions();
 
-                var channelArray = ChannelFileInfo.Read().ChannelList.ToArray();
+                var channelArray = ChannelFileSystem.Read().Channels.ToArray();
                 foreach (var channel in channelArray)
                     if (
                             search.SearchPattern == channel.ChannelName
@@ -62,14 +62,14 @@ namespace PubActiveSubService.Internals.Services {
             using (var upgadableReadLock = ReaderWriterLockSlim.UpgadableReadLock()) {
                 channelName = channelName.ToEnforcedChannelNamingConventions();
 
-                var channels = ChannelFileInfo.Read();
-                foreach (var channel in channels.ChannelList)
+                var channels = ChannelFileSystem.Read();
+                foreach (var channel in channels.Channels)
                     if (channelName == channel.ChannelName)
                         return;
 
-                channels.ChannelList.Add(new Models.Channel() { ChannelName = channelName });
+                channels.Channels.Add(new Models.Channel() { ChannelName = channelName });
                 using (var WriteLock = upgadableReadLock.WriteLock()) {
-                    ChannelFileInfo.Write(channels);
+                    ChannelFileSystem.Write(channels);
                 }
             }
         }
@@ -82,8 +82,8 @@ namespace PubActiveSubService.Internals.Services {
                 subscribe.ChannelName = subscribe.ChannelName.ToEnforcedChannelNamingConventions();
                 subscribe.SubscriberName = subscribe.SubscriberName.ToEnforcedSubscriberNamingConventions();
 
-                var channels = ChannelFileInfo.Read();
-                foreach (var channel in channels.ChannelList.ToArray())
+                var channels = ChannelFileSystem.Read();
+                foreach (var channel in channels.Channels.ToArray())
                     if (subscribe.ChannelName == channel.ChannelName) {
                         foreach (var subscriber in channel.Subscribers) {
                             if (subscriber.SubscriberName == subscribe.SubscriberName) {
@@ -91,7 +91,7 @@ namespace PubActiveSubService.Internals.Services {
                                 subscriber.RestUrl = subscribe.RestUrl.Length > 0 ?
                                                                     subscribe.RestUrl : defaultInternalUrl.ToEnforcedUrlNamingStandards();
 
-                                ChannelFileInfo.Write(channels);
+                                ChannelFileSystem.Write(channels);
                                 return;
                             }
                         }
@@ -107,7 +107,7 @@ namespace PubActiveSubService.Internals.Services {
                                                );
 
                         using (var WriteLock = upgadableReadLock.WriteLock()) {
-                            ChannelFileInfo.Write(channels);
+                            ChannelFileSystem.Write(channels);
                         }
                         return;
                     }
@@ -119,14 +119,14 @@ namespace PubActiveSubService.Internals.Services {
                 var channelName = subscriberBinding.ChannelName.ToEnforcedChannelNamingConventions();
                 var subscriberName = subscriberBinding.SubscriberName.ToEnforcedSubscriberNamingConventions();
 
-                var channels = ChannelFileInfo.Read();
-                foreach (var channel in channels.ChannelList.ToArray())
+                var channels = ChannelFileSystem.Read();
+                foreach (var channel in channels.Channels.ToArray())
                     if (channelName == channel.ChannelName) {
                         foreach (var subscriber in channel.Subscribers.ToArray()) {
                             if (subscriber.SubscriberName == subscriberName) {
                                 channel.Subscribers.Remove(subscriber);
                                 using (var WriteLock = upgadableReadLock.WriteLock()) {
-                                    ChannelFileInfo.Write(channels);
+                                    ChannelFileSystem.Write(channels);
                                 }
                                 return;
                             }

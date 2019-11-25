@@ -5,41 +5,41 @@ using System.IO;
 using System.Reflection;
 
 namespace PubActiveSubService.Library {
-    public static class ChannelFileInfo {
+    public static class ChannelFileSystem {
         private static readonly BadNasFileInfo BadNasFileInfo = null;
         private static readonly object SyncLock = new object();
-        private static Models.Channels Channels = null;
+        private static ChannelsFileSystem ChannelsFileSystem = null;
 
-        static ChannelFileInfo() {
+        static ChannelFileSystem() {
             var directoryPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             var filePath = Path.Combine(directoryPath, "Channels.json");
             var fileInfo = new FileInfo(filePath);
             BadNasFileInfo = new BadNasFileInfo(fileInfo);
         }
 
-        public static void Write(Models.Channels channels) {
+        public static void Write(ChannelsFileSystem channelsFileSystem) {
             try {
                 lock (SyncLock) {
-                    Channels = channels.DeepClone();
-                    BadNasFileInfo.WriteAllText(JsonConvert.SerializeObject(Channels));
+                    ChannelsFileSystem = channelsFileSystem.DeepClone();
+                    BadNasFileInfo.WriteAllText(JsonConvert.SerializeObject(ChannelsFileSystem));
                 }
             } catch (Exception exception) {
                 throw exception;
             }
         }
 
-        public static Models.Channels Read() {
+        public static ChannelsFileSystem Read() {
             try {
                 lock (SyncLock) {
-                    if (null != Channels)
-                        return Channels.DeepClone(); 
+                    if (null != ChannelsFileSystem)
+                        return ChannelsFileSystem.DeepClone();
 
                     if (BadNasFileInfo.Exists()) {
                         var channelsJson = BadNasFileInfo.ReadAllText();
-                        var channels = (Models.Channels)JsonConvert.DeserializeObject<Models.Channels>(channelsJson);
+                        var channels = (ChannelsFileSystem)JsonConvert.DeserializeObject<ChannelsFileSystem>(channelsJson);
                         return channels;
                     }
-                    return new Models.Channels();
+                    return new ChannelsFileSystem();
                 }
             } catch (Exception exception) {
                 throw exception;

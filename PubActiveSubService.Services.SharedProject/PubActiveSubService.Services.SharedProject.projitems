@@ -27,7 +27,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Internals\Services\PublisherClient.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internals\Services\QueuePersisitanceInMemory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internals\Services\QueuePersisitanceFileSystem.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Library\ChannelFileInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Library\ChannelFileSystem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Library\ChannelsFileSystem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Library\ObjectExtentions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Library\StringExtentions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IntegrationProcessorsConfigurations.cs" />

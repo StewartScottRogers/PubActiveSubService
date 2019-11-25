@@ -10,7 +10,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Models\Channel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\Channels.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Search.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\NameValuePair.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\RestUrl.cs" />

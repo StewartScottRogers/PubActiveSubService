@@ -71,7 +71,7 @@ namespace PubActiveSubService.Internals.Services {
                     foreach (var inMemorySubscriber in inMemoryChannel.InMemorySubscribers)
                         if (inMemorySubscriber.SubscriberName == unsubscribe.SubscriberName) {
                             inMemorySubscriber.Enabled = false;
-                            inMemorySubscriber.PublishPackageQueue.Clear();
+                            inMemorySubscriber.PackageQueue.Clear();
                         }
             }
         }

@@ -2,6 +2,6 @@
 
 namespace PubActiveSubService.Internals.Services.LibraryInMemory {
     public class InMemorySubscriber : Models.Subscriber {
-        public readonly Queue<Models.PublishPackage> PublishPackageQueue = new Queue<Models.PublishPackage>();
+        public readonly Queue<Models.Package> PackageQueue = new Queue<Models.Package>();
     }
 }

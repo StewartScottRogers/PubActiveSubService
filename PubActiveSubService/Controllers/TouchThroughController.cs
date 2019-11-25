@@ -8,9 +8,9 @@ namespace PubActiveSubService.Controllers {
         public TouchThroughController(IIntegrationProcessors integrationProcessors) : base(integrationProcessors) { }
 
         [HttpPost]
-        public Models.PublishResult Post([FromBody] Models.PingThrough pingThrough) {
+        public Models.Results Post([FromBody] Models.TouchThrough touchThrough) {
             RecordHostUrl();
-            return IntegrationProcessors.TouchThrough(pingThrough.Url);
+            return IntegrationProcessors.TouchThrough(touchThrough.Url);
         }
     }
 }

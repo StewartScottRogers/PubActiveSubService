@@ -2,9 +2,9 @@
 
 namespace PubActiveSubService.Models {
     [System.Serializable]
-    public class TracedChannel {
+    public class ChannelStatus {
         public string ChannelName { get; set; } = string.Empty;
 
-        public List<SubscriberStatus> Subscribers { get; set; } = new List<SubscriberStatus>();
+        public List<SubscriberStatus> SubscriberStatuses { get; set; } = new List<SubscriberStatus>();
     }
 }

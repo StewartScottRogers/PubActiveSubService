@@ -9,16 +9,16 @@ namespace PubActiveSubService {
         void SaveHostUrl(string hostUrl);
 
         string Touch();
-        PublishResult TouchThrough(string url);
+        Results TouchThrough(string url);
 
-        IEnumerable<Models.TracedChannel> TraceChannels(Models.ChannelSearch channelSearch);
+        IEnumerable<Models.ChannelStatus> TraceChannels(Models.ChannelSearch channelSearch);
         IEnumerable<Models.Channel> ListChannels(Models.ChannelSearch channelSearch);
 
         void Subscribe(Models.Subscribe subscribe);
         void Unsubscribe(Models.Unsubscribe unsubscribe);
 
-        PublishPackage[] Publish(Models.PublishPackage publishPackage);
+        Package[] Publish(Models.Package package);
 
-        PublishPackage[] PublishLoopback(Models.PublishPackage publishPackage);
+        Package[] PublishLoopback(Models.Package package);
     }
 }

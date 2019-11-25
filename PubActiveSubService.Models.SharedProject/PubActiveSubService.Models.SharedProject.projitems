@@ -13,14 +13,14 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\Channels.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\ChannelSearch.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\NameValuePair.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\PingThrough.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\PublishPackage.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\PublishResult.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\TouchThrough.cs" />
+    <Compile Include="..\PubActiveSubService.Models.SharedProject\Models\Package.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Results.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Status.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Subscribe.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Subscriber.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\SubscriberStatus.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\TracedChannel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\ChannelStatus.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Unsubscribe.cs" />
   </ItemGroup>
 </Project>

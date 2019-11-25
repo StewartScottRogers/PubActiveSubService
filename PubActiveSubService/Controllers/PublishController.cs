@@ -8,9 +8,9 @@ namespace PubActiveSubService.Controllers {
         public PublishController(IIntegrationProcessors integrationProcessors) : base(integrationProcessors) { }
 
         [HttpPost]
-        public Models.PublishPackage[] Post([FromBody] Models.PublishPackage publishPackage) {
+        public Models.Package[] Post([FromBody] Models.Package package) {
             RecordHostUrl();
-            return IntegrationProcessors.Publish(publishPackage);
+            return IntegrationProcessors.Publish(package);
         }
 
         [HttpGet]

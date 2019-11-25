@@ -1,6 +1,6 @@
 ﻿namespace PubActiveSubService.Models {
     [System.Serializable]
-    public class PingThrough {
+    public class TouchThrough {
         public string Url { get; set; } = string.Empty;
     }
 }

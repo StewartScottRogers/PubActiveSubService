@@ -42,22 +42,22 @@ namespace PubActiveSubService {
 
         public string Touch() => "Touched @ " + DateTimeOffset.UtcNow.ToString();
 
-        public PublishResult TouchThrough(string url) => PublisherClient.Get(url);
+        public Results TouchThrough(string url) => PublisherClient.Get(url);
 
 
-        public IEnumerable<TracedChannel> TraceChannels(ChannelSearch channelSearch) {
+        public IEnumerable<ChannelStatus> TraceChannels(ChannelSearch channelSearch) {
             var listedChannels = ChannelPersisitance.ListChannels(channelSearch).ToArray();
             foreach (var listedChannel in listedChannels) {
-                var tracedChannel = new TracedChannel();
-                tracedChannel.ChannelName = listedChannel.ChannelName;
+                var channelStatus = new ChannelStatus();
+                channelStatus.ChannelName = listedChannel.ChannelName;
                 foreach (var subscriber in listedChannel.Subscribers) {
                     var subscriberStatus = new SubscriberStatus();
                     subscriberStatus.SubscriberName = subscriber.SubscriberName;
                     subscriberStatus.Status.Add(new Status() { Name = "Get", Value = PublisherClient.Get(subscriber.SubscriberPostUrl).Result });
                     subscriberStatus.Url = subscriber.SubscriberPostUrl;
-                    tracedChannel.Subscribers.Add(subscriberStatus);
+                    channelStatus.SubscriberStatuses.Add(subscriberStatus);
                 }
-                yield return tracedChannel;
+                yield return channelStatus;
             }
         }
 
@@ -70,42 +70,42 @@ namespace PubActiveSubService {
         public void Unsubscribe(Unsubscribe unsubscribe) => ChannelPersisitance.Unsubscribe(unsubscribe);
 
 
-        public PublishPackage[] Publish(PublishPackage publishPackage) {
-            ChannelPersisitance.PostChannelName(publishPackage.ChannelName);
+        public Package[] Publish(Package package) {
+            ChannelPersisitance.PostChannelName(package.ChannelName);
 
-            if (publishPackage.Package.Length > 0) {
+            if (package.Message.Length > 0) {
                 var postResult = PublisherClient.Post(
-                                                                    publishPackage,
+                                                                    package,
                                                                     ChannelPersisitance.LookupSubscriberUrlsByChanneNamel(
-                                                                                                                            publishPackage.ChannelName,
+                                                                                                                            package.ChannelName,
                                                                                                                             $"{HostUrl}/api/PublishLoopback"
                                                                     )
                                                             );
 
-                return new PublishPackage[]{
-                                                new PublishPackage() {
-                                                                        ChannelName = publishPackage.ChannelName,
-                                                                        PackageHeaders = publishPackage.PackageHeaders,
-                                                                        Package = JsonConvert.SerializeObject(postResult),
+                return new Package[]{
+                                                new Package() {
+                                                                        ChannelName = package.ChannelName,
+                                                                        MessageHeaders = package.MessageHeaders,
+                                                                        Message = JsonConvert.SerializeObject(postResult),
                                                 }
             };
             }
 
-            return new PublishPackage[]{
-                new PublishPackage() {
-                        ChannelName = publishPackage.ChannelName,
-                        PackageHeaders = publishPackage.PackageHeaders,
-                        Package = "Empty Package! Nothing to publish."
+            return new Package[]{
+                new Package() {
+                        ChannelName = package.ChannelName,
+                        MessageHeaders = package.MessageHeaders,
+                        Message = "Empty Package! Nothing to publish."
                 }
             };
         }
 
-        public PublishPackage[] PublishLoopback(PublishPackage publishPackage) =>
-            new PublishPackage[] {
-                new PublishPackage() {
-                                        ChannelName=publishPackage.ChannelName,
-                                        PackageHeaders = new List<NameValuePair>(){ new NameValuePair() { Name = "loopbackheader", Value= Touch() } },
-                                        Package = "Loopback Result Package! Nothing was published."
+        public Package[] PublishLoopback(Package package) =>
+            new Package[] {
+                new Package() {
+                                        ChannelName=package.ChannelName,
+                                        MessageHeaders = new List<NameValuePair>(){ new NameValuePair() { Name = "loopbackheader", Value= Touch() } },
+                                        Message = "Loopback Result Package! Nothing was published."
                 }
             };
     }

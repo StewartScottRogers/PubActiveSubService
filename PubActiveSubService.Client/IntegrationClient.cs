@@ -16,14 +16,14 @@ namespace PubActiveSubService {
         public string TouchThrough(Uri uri, string urlTarget)
             => PublisherClient.Post(urlTarget, uri);
 
-        public IEnumerable<TracedChannel> TraceChannels(Uri uri, ChannelSearch channelSearch)
-            => PublisherClient.Post<IEnumerable<TracedChannel>, ChannelSearch>(channelSearch, uri);
+        public IEnumerable<ChannelStatus> TraceChannels(Uri uri, ChannelSearch channelSearch)
+            => PublisherClient.Post<IEnumerable<ChannelStatus>, ChannelSearch>(channelSearch, uri);
 
-        public string Publish(Uri uri, PublishPackage publishPackage)
-            => PublisherClient.Post(publishPackage, uri);
+        public string Publish(Uri uri, Package package)
+            => PublisherClient.Post(package, uri);
 
-        public string PublishLoopback(Uri uri, PublishPackage publishPackage)
-           => PublisherClient.Post(publishPackage, uri);
+        public string PublishLoopback(Uri uri, Package package)
+           => PublisherClient.Post(package, uri);
 
         public IEnumerable<Channel> ListChannels(Uri uri, ChannelSearch channelSearch)
            => PublisherClient.Post<IEnumerable<Channel>, ChannelSearch>(channelSearch, uri);

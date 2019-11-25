@@ -8,7 +8,7 @@ namespace PubActiveSubService.Controllers {
         public TraceChannelsController(IIntegrationProcessors integrationProcessors) : base(integrationProcessors) { }
 
         [HttpPost]
-        public IEnumerable<Models.TracedChannel> Post([FromBody] Models.ChannelSearch channelSearch) {
+        public IEnumerable<Models.ChannelStatus> Post([FromBody] Models.ChannelSearch channelSearch) {
             RecordHostUrl();
             return IntegrationProcessors.TraceChannels(channelSearch);
         }

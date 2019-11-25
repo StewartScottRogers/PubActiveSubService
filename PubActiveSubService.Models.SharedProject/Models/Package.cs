@@ -2,7 +2,7 @@
 
 namespace PubActiveSubService.Models {
     [System.Serializable]
-    public class PublishPackage {
+    public class Package {
         public string ChannelName { get; set; } = string.Empty;
 
 

@@ -9,9 +9,9 @@ namespace PubActiveSubService.Controllers {
         public PublishLoopbackController(IIntegrationProcessors integrationProcessors) : base(integrationProcessors) { }
 
         [HttpPost]
-        public Models.PublishPackage[] Post([FromBody] Models.PublishPackage publishPackage) {
+        public Models.Package[] Post([FromBody] Models.Package package) {
             RecordHostUrl();
-            return IntegrationProcessors.PublishLoopback(publishPackage);
+            return IntegrationProcessors.PublishLoopback(package);
         }
 
         [HttpGet]
